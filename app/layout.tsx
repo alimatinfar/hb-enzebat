@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import allFontsClassName from "@/constances/localFonts/allFontsClassName";
+import {LAYOUT_MAX_WIDTH} from "@/constances/layout/mainLayoutExports";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,9 +26,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <body
+      style={{
+        backgroundImage: `url('/background.svg')`,
+        backgroundRepeat: 'repeat',
+        // zIndex: 10,
+        backgroundColor: '#F2F1ED'
+      }}
+      className={`
+        ${allFontsClassName} antialiased font-kook rtl text-foreground ${LAYOUT_MAX_WIDTH}
+      `}
+    >
         {children}
       </body>
     </html>
