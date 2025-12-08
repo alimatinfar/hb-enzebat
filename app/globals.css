@@ -9,8 +9,7 @@
 @theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-primary: #D0208A;
-  --color-reservation-primary: #710014;
+  --color-primary: #710014;
 
   --color-black-1: #222433;
   --color-black-2: #31344A;
@@ -18,6 +17,10 @@
   --color-black-4: #1E1E2ACC;
 
   --color-gray-1: #798794;
+  --color-gray-2: #F2F1ED;
+  --color-gray-3: #EBEAE6;
+  --color-gray-4: #D4D4D4;
+  --color-gray-5: #9E9E9E;
 }
 
 @layer base {

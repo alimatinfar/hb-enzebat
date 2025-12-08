@@ -1,8 +1,10 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import type {Metadata} from "next";
+import {Geist, Geist_Mono} from "next/font/google";
 import "./globals.css";
 import allFontsClassName from "@/constances/localFonts/allFontsClassName";
 import {LAYOUT_MAX_WIDTH} from "@/constances/layout/mainLayoutExports";
+import CustomToastContainer from "@/components/others/CustomToast/CustomToastContainer";
+import ReactQueryProvider from "@/components/ClientComponents/ReactQueryProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,8 +22,8 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children,
-}: Readonly<{
+                                     children,
+                                   }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
@@ -31,14 +33,17 @@ export default function RootLayout({
         backgroundImage: `url('/background.svg')`,
         backgroundRepeat: 'repeat',
         // zIndex: 10,
-        backgroundColor: '#F2F1ED'
       }}
       className={`
-        ${allFontsClassName} antialiased font-kook rtl text-foreground ${LAYOUT_MAX_WIDTH}
+        ${allFontsClassName} antialiased bg-gray-2 font-kook rtl text-foreground ${LAYOUT_MAX_WIDTH}
       `}
     >
-        {children}
-      </body>
+    <CustomToastContainer/>
+
+    <ReactQueryProvider>
+      {children}
+    </ReactQueryProvider>
+    </body>
     </html>
   );
 }

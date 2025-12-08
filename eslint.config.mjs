@@ -13,6 +13,13 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
   ]),
+  {
+    rules: {
+      "@typescript-eslint/no-explicit-any": "off",      // ⬅ خاموش کردن any
+      "react-hooks/immutability": "off",
+      "@typescript-eslint/no-wrapper-object-types": "off",
+    },
+  },
 ]);
 
 export default eslintConfig;
