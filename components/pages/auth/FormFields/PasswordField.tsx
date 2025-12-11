@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import StringFormField from "@/components/Form/FormLayout/StringFormField";
 import EyeOpenOutlineIcon from "@/components/svg/EyeOpenOutlineIcon";
 import EyeCloseOutlineIcon from "@/components/svg/EyeCloseOutlineIcon";
@@ -11,11 +11,16 @@ function PasswordField() {
 
   const [eyeOpen, setEyeOpen] = useState<boolean>(false)
 
+  const toggleEyeOpen = useCallback(() => {
+    setEyeOpen(prev => !prev)
+  }, [setEyeOpen])
+
   return (
     <StringFormField
       fieldName={passwordFieldName} fieldLabel={passwordFieldLabel}
       inputProps={{
-        endAdornment: eyeOpen ? <EyeOpenOutlineIcon /> : <EyeCloseOutlineIcon />,
+        endAdornment: eyeOpen ? <EyeOpenOutlineIcon className='w-full h-full' /> : <EyeCloseOutlineIcon className='w-full h-full' />,
+        endAdornmentOnClick: toggleEyeOpen,
         placeholder: passwordFieldLabel,
         maxLength: 25,
         type: eyeOpen ? 'text' : 'password',

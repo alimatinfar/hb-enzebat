@@ -1,6 +1,7 @@
 import React from "react";
+import {IconPropsType} from "@/types/IconPropsType";
 
-function EyeCloseOutlineIcon() {
+function EyeCloseOutlineIcon({className, textColor}: IconPropsType) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -8,10 +9,11 @@ function EyeCloseOutlineIcon() {
       height="24"
       fill="none"
       viewBox="0 0 24 24"
+      {...className && {className}}
     >
       <g clipPath="url(#clip0_366_12847)">
         <path
-          className='stroke-current text-black/30'
+          className={`stroke-current duration-200 ${textColor || 'text-black/30'}`}
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth="1.5"

@@ -40,7 +40,7 @@ function InputEndAdornment(
           className={`w-6 h-6 overflow-hidden p-0.5 rounded-lg 
           ${
             (disabled || !endAdornmentOnClick) ? '' :
-            `cursor-pointer ${endAdornmentClassName?.bgHover || 'hover:bg-gray-100'}`
+            `cursor-pointer duration-200 ${endAdornmentClassName?.bgHover || 'hover:bg-gray-300'}`
           }
           `}
           {...!disabled && {onClick: onClickHandler}}

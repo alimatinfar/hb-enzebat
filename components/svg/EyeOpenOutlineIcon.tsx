@@ -1,6 +1,7 @@
 import React from "react";
+import {IconPropsType} from "@/types/IconPropsType";
 
-function EyeOpenOutlineIcon({}) {
+function EyeOpenOutlineIcon({className, textColor}: IconPropsType) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -8,9 +9,10 @@ function EyeOpenOutlineIcon({}) {
       height="24"
       fill="none"
       viewBox="0 0 24 24"
+      {...className && {className}}
     >
       <g
-        className='stroke-current text-black/30'
+        className={`stroke-current duration-200 ${textColor || 'text-black/30'}`}
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="1.5"
