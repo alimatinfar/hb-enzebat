@@ -1,55 +1,49 @@
 'use client'
 
-import React, {useCallback, useEffect} from 'react';
+import React, {useCallback} from 'react';
 import useReactHookFormWrapper from "@/components/Form/FormLayout/ReactHookFormWrapper/hooks/useReactHookFormWrapper";
 import LoginLayout from "@/components/layouts/LoginLayout";
 import {useRouter} from "next/navigation";
 import useMutateData from "@/request/hooks/useMutateData";
 import APIES from "@/request/constances/apies";
 import {NextSuccessResponseProps} from "@/utils/backend/response/NextSuccessResponse";
-import UserNameField, {userNameFieldName, UserNameFieldType} from "@/components/pages/auth/FormFields/UserNameField";
+import MobileField, {MobileFieldType, mobileFieldName} from "@/components/pages/auth/FormFields/MobileField";
 import PasswordField, {passwordFieldName, PasswordFieldType} from "@/components/pages/auth/FormFields/PasswordField";
+import ROUTER_LINKS from "@/constances/routerLinks";
 
 type FormDataType = {
-  [userNameFieldName]: UserNameFieldType;
+  [mobileFieldName]: MobileFieldType;
   [passwordFieldName]: PasswordFieldType;
 }
 
 type BodyDataType = {
   mobile: string;
+  password: string;
 }
 
 export default function LoginPage() {
 
   const {mutate, isPending} = useMutateData<NextSuccessResponseProps<any>, BodyDataType>({
     axiosConfig: {
-      url: APIES.RESERVATION_SEND_OTP, method: 'POST'
+      url: APIES.LOGIN, method: 'POST'
     },
   })
 
   const router = useRouter()
 
   const onSubmitHandler = useCallback(function (formData: FormDataType) {
-    // router.push(ROUTER_LINKS.OTP)
+    const data: BodyDataType = {
+      mobile: formData[mobileFieldName],
+      password: formData[passwordFieldName]
+    }
 
-    // const mobile = formData[mobileNumberFieldName]
-    // const data: BodyDataType = {
-    //   mobile
-    // }
-    //
-    // const goToOTPPage = () => router.push(ROUTER_LINKS.RESERVATION_OTP)
-    //
-    // mutate(data, {
-    //   onSuccess: async (response) => {
-    //     SS.set(SS_KEYS.MOBILE, mobile)
-    //     // await toastPromise().then((toast: any) => toast.success(response.message))
-    //     goToOTPPage()
-    //   },
-    //   onError: async (error: any) => {
-    //     if (getErrorStatus(error) === 429) goToOTPPage()
-    //   }
-    // })
-  }, [])
+    mutate(data, {
+      onSuccess: async (response) => {
+        router.push(ROUTER_LINKS.TEACHER_PANEL_HOME)
+        console.log({response})
+      },
+    })
+  }, [mutate])
 
   const {
     formMethods, onSubmit
@@ -62,7 +56,7 @@ export default function LoginPage() {
       title='ورود' subTitle='سلام!' description='برای ورود لطفا نام کاربری و رمز عبور خود را وارد نمایید'
       btnTitle='ادامه' formMethods={formMethods} onSubmit={onSubmit} loading={isPending}
     >
-      <UserNameField/>
+      <MobileField/>
 
       <PasswordField />
     </LoginLayout>

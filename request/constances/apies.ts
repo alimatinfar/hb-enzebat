@@ -3,30 +3,7 @@ const ADMIN_RESERVATION_BASE_URL = `${RESERVATION_BASE_URL}/admin`
 
 const APIES = {
   //authentication
-  SEND_OTP: 'send-otp',
-  VERIFY_OTP: 'verify-otp',
-  PROFILE: 'profile',
-
-  // dashboard
-  CLOTHING_LIST: 'clothing/list',
-  CLOTHING_FILTERS: 'clothing/filters',
-  CLOTHING_DETAIL: 'clothing',
-
-  STORE_LIST: 'store/list',
-
-  SAVE_MOBILE: 'save-mobile',
-
-  //reservation
-  RESERVATION_SEND_OTP: `${RESERVATION_BASE_URL}/send-otp`,
-  RESERVATION_ADD: `${RESERVATION_BASE_URL}/add`,
-  RESERVATION_CHECK_STATUS: `${RESERVATION_BASE_URL}/check`,
-  RESERVATION_UPLOAD_PAYMENT_IMAGE: `${RESERVATION_BASE_URL}/upload-payment-image`,
-
-  ADMIN_RESERVATION_LIST: `${ADMIN_RESERVATION_BASE_URL}/list`,
-  ADMIN_RESERVATION_REJECT_INFO: `${ADMIN_RESERVATION_BASE_URL}/reject-info`,
-  ADMIN_RESERVATION_REJECT_PAYMENT: `${ADMIN_RESERVATION_BASE_URL}/reject-payment`,
-  ADMIN_RESERVATION_APPROVE: `${ADMIN_RESERVATION_BASE_URL}/approve`,
-  ADMIN_RESERVATION_START_PAYMENT: `${ADMIN_RESERVATION_BASE_URL}/start-payment`,
+  LOGIN: '/auth/login',
 }
 
 export default APIES
