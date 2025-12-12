@@ -1,4 +1,4 @@
-import Ls from "../../utils/customLocalStorage";
+import Ls from "@/utils/customLocalStorage";
 import {useEffect} from "react";
 
 

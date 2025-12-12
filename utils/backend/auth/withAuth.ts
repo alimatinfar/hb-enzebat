@@ -1,5 +1,5 @@
 import { handleAuth } from "./handleAuth";
-import {User} from "@prisma/client";
+import {User} from "@/app/generated/prisma/client";
 
 
 export function withAuth(

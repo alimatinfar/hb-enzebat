@@ -1,5 +1,5 @@
 import {handleAuth} from "./handleAuth";
-import {User} from "@prisma/client"
+import {User} from "@/app/generated/prisma/client";
 import prisma from "@/lib/prisma";
 import NextErrorResponse from "@/utils/backend/response/NextErrorResponse";
 
@@ -15,8 +15,9 @@ export function withRoleAuth(
       });
 
       if (!user) return NextErrorResponse({error: 'کاربر یافت نشد', status: 404})
-      console.log({user, roles: user.roles})
+
       // بررسی نقش
+      //@ts-ignore
       if (!user.roles.some((userRole: string) => !roles.includes(userRole))) {
         return NextErrorResponse({error: "دسترسی غیرمجاز", status: 403})
       }

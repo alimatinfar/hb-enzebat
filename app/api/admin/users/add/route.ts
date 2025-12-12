@@ -2,7 +2,8 @@ import { withRoleAuth } from "@/utils/backend/auth/withRoleAuth";
 import NextErrorResponse from "@/utils/backend/response/NextErrorResponse";
 import NextSuccessResponse from "@/utils/backend/response/NextSuccessResponse";
 import prisma from "@/lib/prisma";
-import { Role } from "@prisma/client";
+import { Role } from "@/app/generated/prisma/client";
+
 
 const uniqueUsernameErrorMessage = "این نام کاربری قبلاً ثبت شده است"
 

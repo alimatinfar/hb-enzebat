@@ -5,7 +5,7 @@ import {LAYOUT_MAX_WIDTH, TOP_BAR_HEIGHT} from "@/constances/layout/mainLayoutEx
 import ArrowBack from "@/components/svg/ArrowBack";
 import IconClickable from "@/components/others/Icon/IconClickable";
 import LogoutIcon from "@/components/svg/LogoutIcon";
-import useLogout from "@/utils/authentication/hooks/useLogout";
+import useLogout from "@/request/hooks/useLogout";
 import {useRouter} from "next/navigation";
 
 export type TopBarProps = {

@@ -1,6 +1,6 @@
 import { verifyToken } from "./verifyToken";
 import NextErrorResponse from "@/utils/backend/response/NextErrorResponse";
-import {User} from "@prisma/client";
+import {User} from "@/app/generated/prisma/client";
 
 /**
  * بررسی اولیه‌ی JWT و اجرای handler در صورت معتبر بودن
