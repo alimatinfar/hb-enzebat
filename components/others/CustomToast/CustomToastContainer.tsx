@@ -13,7 +13,6 @@ export default function CustomToastContainer({className}: Props) {
       rtl={true}
       position="top-center"
       closeOnClick
-      theme='dark'
     />
   )
 }

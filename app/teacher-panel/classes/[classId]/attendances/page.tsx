@@ -15,7 +15,7 @@ import RenderLogic from "@/components/others/RenderLogic/RenderLogic";
 import KeyValue from "@/components/others/KeyValue/KeyValue";
 import Button from "@/components/Form/Button/Button";
 import BottomFixedButton from "@/components/Form/Button/inherited/BottomFixedButton";
-import getJalaliFormattedDate from "@/utils/date/getJalaliFormattedDate";
+import getJalaliFormattedDate from "@/components/Form/DatePicker/utils/getJalaliFormattedDate";
 import Link from "next/link";
 import ROUTER_LINKS from "@/constances/routerLinks";
 import useGetQueryParam from "@/hooks/useGetQueryParam";
