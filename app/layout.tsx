@@ -1,7 +1,7 @@
 import type {Metadata} from "next";
 import "./globals.css";
 import allFontsClassName from "@/constances/localFonts/allFontsClassName";
-import {LAYOUT_MAX_WIDTH, LAYOUT_PADDING_X, LAYOUT_PADDING_Y} from "@/constances/layout/mainLayoutExports";
+import {LAYOUT_MAX_WIDTH} from "@/constances/layout/mainLayoutExports";
 import CustomToastContainer from "@/components/others/CustomToast/CustomToastContainer";
 import ReactQueryProvider from "@/components/ClientComponents/ReactQueryProvider";
 import React from "react";

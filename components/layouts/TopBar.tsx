@@ -7,6 +7,7 @@ import IconClickable from "@/components/others/Icon/IconClickable";
 import LogoutIcon from "@/components/svg/LogoutIcon";
 import useLogout from "@/request/hooks/useLogout";
 import {useRouter} from "next/navigation";
+import ZIndexes from "@/constances/zIndexes";
 
 export type TopBarProps = {
   hasBack?: boolean;
@@ -30,7 +31,10 @@ function TopBar(
       style={{
         backgroundImage: `url(/login-top-background.png)`,
       }}
-      className={`grid grid-cols-6 bg-primary ${TOP_BAR_HEIGHT} rounded-b-xl fixed top-0 ${LAYOUT_MAX_WIDTH} mx-auto w-full px-4`}>
+      className={`
+        grid grid-cols-6 bg-primary rounded-b-xl fixed top-0 mx-auto w-full px-4 
+        ${LAYOUT_MAX_WIDTH} ${TOP_BAR_HEIGHT} ${ZIndexes.topBar}
+      `}>
       <div className='flex items-center'>
         {hasBack && (
           <IconClickable primaryMode onClick={onBackRoute}>
