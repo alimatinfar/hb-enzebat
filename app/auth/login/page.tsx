@@ -10,6 +10,7 @@ import {NextSuccessResponseProps} from "@/utils/backend/response/NextSuccessResp
 import MobileField, {MobileFieldType, mobileFieldName} from "@/components/pages/auth/FormFields/MobileField";
 import PasswordField, {passwordFieldName, PasswordFieldType} from "@/components/pages/auth/FormFields/PasswordField";
 import ROUTER_LINKS from "@/constances/routerLinks";
+import setToken from "@/utils/authentication/setToken";
 
 type FormDataType = {
   [mobileFieldName]: MobileFieldType;
@@ -40,7 +41,7 @@ export default function LoginPage() {
     mutate(data, {
       onSuccess: async (response) => {
         router.push(ROUTER_LINKS.TEACHER_PANEL_HOME)
-        console.log({response})
+        setToken(response?.token)
       },
     })
   }, [mutate])

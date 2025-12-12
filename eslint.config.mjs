@@ -18,6 +18,7 @@ const eslintConfig = defineConfig([
       "@typescript-eslint/no-explicit-any": "off",      // ⬅ خاموش کردن any
       "react-hooks/immutability": "off",
       "@typescript-eslint/no-wrapper-object-types": "off",
+      "react-hooks/static-components": "off",
     },
   },
 ]);

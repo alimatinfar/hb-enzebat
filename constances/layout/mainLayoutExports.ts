@@ -1,2 +1,5 @@
 export const LAYOUT_MAX_WIDTH = 'max-w-lg mx-auto'
 export const LAYOUT_PADDING_X = 'px-5'
+export const LAYOUT_PADDING_Y = 'py-5'
+export const TOP_BAR_HEIGHT = 'h-22'
+export const CONTENT_PADDING_TOP = 'pt-22'

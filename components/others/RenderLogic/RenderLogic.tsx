@@ -1,11 +1,13 @@
-import React, {JSX, Suspense, useCallback} from "react";
+import React, {JSX, useCallback} from "react";
 import EmptyState from "./EmptyState";
 import Loading from "../Loading/Loading";
 import {ReactNode} from "react";
-import ErrorState from "./ErrorState";
+import {getResponseErrorMessage} from "@/request/utils/getResponse";
+import RenderLogicDefaultContainer from "@/components/others/RenderLogic/RenderLogicDefaultContainer";
+import FilterEmptyState from "@/components/svg/RenderLogic/FilterEmptyState";
 
-type Props = {
-  error?:string,
+export type RenderLogicProps = {
+  error?: Error | null | string,
   isLoading?: boolean,
   loadingElement?: JSX.Element,
   children: JSX.Element,
@@ -13,45 +15,48 @@ type Props = {
   isEmpty?: boolean,
   emptyText?: string,
   emptyElement?: any,
-  containerHeightAndPaddingClass?: string,
+  renderLogicDefaultContainerMinHeight?: string,
+  hasFilter?: boolean,
 }
 
 function RenderLogic(
   {
     error, isLoading, loadingElement, children, isEmpty, emptyText, errorComponent,
-    emptyElement, containerHeightAndPaddingClass
-  }: Props
+    emptyElement, renderLogicDefaultContainerMinHeight, hasFilter
+  }: RenderLogicProps
 ) {
 
-  const RenderLogicDefaultContainer = useCallback(function ({children}:{children: ReactNode}) {
+  const CustomRenderLogicDefaultContainer = useCallback(({children}: { children: ReactNode }) => {
     return (
-      <Suspense fallback={<Loading size='md' />}>
-        <div className={`
-          flex-1 w-full h-full flex items-center justify-center ${containerHeightAndPaddingClass || 'min-h-[300px]'}
-        `}>
-          {children}
-        </div>
-      </Suspense>
+      <RenderLogicDefaultContainer minHeight={renderLogicDefaultContainerMinHeight}>
+        {children}
+      </RenderLogicDefaultContainer>
     )
-  }, [containerHeightAndPaddingClass])
+  }, [renderLogicDefaultContainerMinHeight]);
 
   if (error) {
-    return errorComponent ?? (
-      <RenderLogicDefaultContainer>
-        <ErrorState title={error || 'خطا در دریافت اطلاعات'} />
-      </RenderLogicDefaultContainer>
+    return (
+      <CustomRenderLogicDefaultContainer>
+        {errorComponent || (
+          <span className='text-red-500'>
+            {getResponseErrorMessage(error) || 'دریافت اطلاعات با خطا مواجه شد'}
+          </span>
+        )}
+      </CustomRenderLogicDefaultContainer>
     )
   } else if (isLoading) {
-    return loadingElement || (
-      <RenderLogicDefaultContainer>
-        <Loading/>
-      </RenderLogicDefaultContainer>
+    return (
+      <CustomRenderLogicDefaultContainer>
+        {loadingElement || <Loading/>}
+      </CustomRenderLogicDefaultContainer>
     )
   } else if (isEmpty) {
-    return emptyElement || (
-      <RenderLogicDefaultContainer>
-        <EmptyState title={emptyText || 'موردی یافت نشد'}/>
-      </RenderLogicDefaultContainer>
+    return (
+      <CustomRenderLogicDefaultContainer>
+        {hasFilter ? (
+          <EmptyState icon={<FilterEmptyState/>}/>
+        ) : emptyElement || <EmptyState title={emptyText}/>}
+      </CustomRenderLogicDefaultContainer>
     )
   } else {
     return children

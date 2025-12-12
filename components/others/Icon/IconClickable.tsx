@@ -9,15 +9,19 @@ type Props = {
   isButton?: boolean;
   wrapperRef?: RefObject<HTMLDivElement>;
   hoverClass?: string;
+  primaryMode?: boolean;
 };
 
 function IconClickable(
-  {children, className, onClick, rounded = "rounded-lg", wrapperRef, hoverClass}: Props
+  {children, className, onClick, rounded = "rounded-lg", wrapperRef, hoverClass, primaryMode}: Props
 ) {
   return (
     <div
       {...(onClick && {onClick})} {...wrapperRef && {ref: wrapperRef}}
-      className={`${className || ""} p-1.5 cursor-pointer ${rounded} duration-200 ${hoverClass || 'hover:bg-gray-100'}`}
+      className={`
+        ${className || ""} p-1.5 cursor-pointer ${rounded} duration-200 
+        ${hoverClass || primaryMode ? 'hover:bg-primary' : 'hover:bg-gray-300'}
+      `}
     >
       {children}
     </div>

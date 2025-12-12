@@ -1,20 +1,11 @@
 import type {Metadata} from "next";
-import {Geist, Geist_Mono} from "next/font/google";
 import "./globals.css";
 import allFontsClassName from "@/constances/localFonts/allFontsClassName";
-import {LAYOUT_MAX_WIDTH} from "@/constances/layout/mainLayoutExports";
+import {LAYOUT_MAX_WIDTH, LAYOUT_PADDING_X, LAYOUT_PADDING_Y} from "@/constances/layout/mainLayoutExports";
 import CustomToastContainer from "@/components/others/CustomToast/CustomToastContainer";
 import ReactQueryProvider from "@/components/ClientComponents/ReactQueryProvider";
+import React from "react";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -41,7 +32,17 @@ export default function RootLayout({
     <CustomToastContainer/>
 
     <ReactQueryProvider>
-      {children}
+      <div className={`
+        flex flex-col absolute inset-0 h-full w-full z-10 ${LAYOUT_MAX_WIDTH}
+      `}>
+
+
+        <div className={`
+         h-full w-full
+      `}>
+          {children}
+        </div>
+      </div>
     </ReactQueryProvider>
     </body>
     </html>
