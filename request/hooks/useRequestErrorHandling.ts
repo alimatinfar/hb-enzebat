@@ -32,7 +32,7 @@ function useRequestErrorHandling() {
 
     if (errorStatusCode === 401) {
       logoutHandler()
-      return toast.error?.('توکن شما منضی شده است', {toastId: 'logout-error'})
+      // return toast.error?.('توکن شما منضی شده است', {toastId: 'logout-error'})
     }
     if (errorStatusCode === 403) {
       logoutHandler()

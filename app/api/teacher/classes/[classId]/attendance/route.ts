@@ -15,21 +15,33 @@ export const GET = withRoleAuth(["TEACHER"], async (req, user) => {
     return NextErrorResponse({ error: "اجازه دسترسی ندارید", status: 403 });
   }
 
-  // گرفتن لیست حضور و غیاب همراه با کاربران حاضر
+  // تعداد کل دانش‌آموزان کلاس
+  const totalStudents = await prisma.user.count({
+    where: {
+      studentClasses: {
+        some: { id: classId }
+      }
+    }
+  });
+
+  // گرفتن لیست attendance با شمارش حاضرین
   const attendanceList = await prisma.attendance.findMany({
     where: { classId },
     include: {
-      presents: {
-        select: {
-          id: true,
-          firstName: true,
-          lastName: true,
-          mobile: true
-        }
+      _count: {
+        select: { presents: true }
       }
     },
-    orderBy: { date: "desc" } // اختیاری: مرتب سازی از جدیدترین
+    orderBy: { date: "desc" }
   });
 
-  return NextSuccessResponse({ data: { attendanceList } });
+  // فرمت خروجی
+  const formatted = attendanceList.map(a => ({
+    id: a.id,
+    date: a.date,
+    presentCount: a._count.presents,
+    totalStudents
+  }));
+
+  return NextSuccessResponse({ data: { attendanceList: formatted, class: cls } });
 });

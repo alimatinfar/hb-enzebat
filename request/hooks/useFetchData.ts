@@ -24,14 +24,14 @@ const useFetchData = <T>(
       const {axiosInstance} = await import("../axiosInstance");
       const {data} = await axiosInstance(axiosConfig);
 
-      return data as NextSuccessResponseProps<T>;
+      return data as T;
     } catch (error) {
       requestErrorHandling(error, disableThrowErrorToast).then()
       return Promise.reject(error)
     }
   };
 
-  return useQuery<NextSuccessResponseProps<T>, Error>({
+  return useQuery<T, Error>({
     queryKey: queryKey ? (Array.isArray(queryKey) ? queryKey : [queryKey]) : [
       axiosConfig.url, ...axiosConfig.params ? [axiosConfig.params] : []
     ],

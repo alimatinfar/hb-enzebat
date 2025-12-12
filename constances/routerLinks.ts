@@ -1,13 +1,15 @@
 
 const AUTH_URL = '/auth'
 const TEACHER_PANEL_URL = '/teacher-panel'
+const TEACHER_PANEL_CLASSES = `${TEACHER_PANEL_URL}/classes`
 
 const ROUTER_LINKS = {
   //auth routes
   LOGIN: `${AUTH_URL}/login`,
 
   //teacher panel routes
-  TEACHER_PANEL_HOME: `${TEACHER_PANEL_URL}`,
-}
+  TEACHER_PANEL_CLASSES,
+  TEACHER_PANEL_CLASSES_ATTENDANCES: (classId: string) => `${TEACHER_PANEL_CLASSES}/${classId}/attendances`,
+} as const
 
 export default ROUTER_LINKS;

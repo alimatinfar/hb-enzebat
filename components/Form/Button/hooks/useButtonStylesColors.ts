@@ -7,7 +7,7 @@ type Props = Partial<ButtonProps>
 function useButtonStylesColors({readOnly, longPress}: Props) {
 
   const defaultButtonClass = `
-   text-white border-black-2/80 bg-gray-2 enabled:hover:bg-gray-100 disabled:text-gray-300 shadow-xs
+   border-gray-300 bg-white enabled:hover:bg-gray-100 disabled:text-gray-300 shadow-xs
   `
 
   const buttonStylesColors: Record<ButtonColorsType, PartialRecord<ButtonVariantsType, string>> = {

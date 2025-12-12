@@ -40,7 +40,7 @@ export default function LoginPage() {
 
     mutate(data, {
       onSuccess: async (response) => {
-        router.push(ROUTER_LINKS.TEACHER_PANEL_HOME)
+        router.push(ROUTER_LINKS.TEACHER_PANEL_CLASSES)
         setToken(response?.token)
       },
     })
