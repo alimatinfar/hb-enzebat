@@ -46,12 +46,12 @@ const Button = (
           </div>
         )}
         <div dir='rtl'
-             className={`${loading ? 'opacity-0 scale-90' : ''} relative flex items-center space-x-1.5`}>
+             className={`${loading ? 'opacity-0 scale-90' : ''} relative flex items-center justify-center space-x-1.5`}>
           <ButtonIconWrapper>
             {rightIcon}
           </ButtonIconWrapper>
 
-          <div className={justIcon ? 'flex items-center justify-center w-5 h-5 overflow-hidden' : 'w-full'}>
+          <div className={justIcon ? 'flex items-center justify-center w-5 h-5 overflow-hidden' : ''}>
             {children}
           </div>
 

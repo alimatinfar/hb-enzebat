@@ -13,6 +13,7 @@ import Link from "next/link";
 import ROUTER_LINKS from "@/constances/routerLinks";
 import getUrlWithParams from "@/utils/getUrlWithParams";
 import QUERY_PARAMS from "@/constances/queryParams";
+import BookIcon from "@/components/svg/BookIcon";
 
 function TeacherPanelHomePage() {
 
@@ -47,9 +48,12 @@ function TeacherPanelHomePage() {
                 href={getUrlWithParams(linkUrl, linkParams)}
               >
                 <Card key={index} className='flex items-center justify-between space-x-2' isClickable>
-                <span className='font-medium text-xl'>
-                  {item?.name}
-                </span>
+                  <div className='flex items-center space-x-1'>
+                    <BookIcon />
+                    <span className='font-medium text-xl'>
+                      {item?.name}
+                    </span>
+                  </div>
 
                   <ArrowIcon className='rotate-90' />
                 </Card>

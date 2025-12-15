@@ -1,12 +1,12 @@
 import React from "react";
 import {IconPropsType} from "@/types/IconPropsType";
 
-function DeleteIcon({textColor, className}: IconPropsType) {
+function DeleteIcon({textColor, className, height, width}: IconPropsType) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
+      width={width || "24"}
+      height={height || "24"}
       fill="none"
       viewBox="0 0 24 24"
       {...className && {className}}

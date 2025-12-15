@@ -21,6 +21,8 @@ import ROUTER_LINKS from "@/constances/routerLinks";
 import useGetQueryParam from "@/hooks/useGetQueryParam";
 import QUERY_PARAMS from "@/constances/queryParams";
 import getUrlWithParams from "@/utils/getUrlWithParams";
+import EditIcon from "@/components/svg/EditIcon";
+import AddCircleIcon from "@/components/svg/AddCircleIcon";
 
 
 function TeacherPanelClassDetailPage() {
@@ -71,7 +73,7 @@ function TeacherPanelClassDetailPage() {
 
               <Link href={ROUTER_LINKS.TEACHER_PANEL_CLASSES_ATTENDANCE_DETAIL(String(classId), String(item.id))}>
                 <Button
-                  variant='link'
+                  variant='link' rightIcon={<EditIcon textColor='text-primary' />}
                 >
                   مشاهده و ویرایش
                 </Button>
@@ -82,7 +84,9 @@ function TeacherPanelClassDetailPage() {
       </RenderLogic>
 
       <Link href={addAttendanceLinkUrl}>
-        <BottomFixedButton>
+        <BottomFixedButton
+          rightIcon={<AddCircleIcon />}
+        >
           افزودن جلسه
         </BottomFixedButton>
       </Link>

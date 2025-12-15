@@ -8,6 +8,8 @@ import useAttendanceForm from "@/components/pages/teacher-panel/AttendanceForm/h
 import Card from "@/components/others/Card/Card";
 import CheckBox from "@/components/Form/CheckBox/CheckBox";
 import BottomFixedButton from "@/components/Form/Button/inherited/BottomFixedButton";
+import AddCircleIcon from "@/components/svg/AddCircleIcon";
+import EditIcon from "@/components/svg/EditIcon";
 
 
 export type AttendanceFormProps = {
@@ -68,6 +70,7 @@ function AttendanceForm(
 
           <BottomFixedButton
             loading={formLoading} type='submit'
+            rightIcon={editMode ? <EditIcon textColor='text-white' /> : <AddCircleIcon />}
           >
             {editMode ? 'ویرایش' : 'ثبت'} جلسه
           </BottomFixedButton>

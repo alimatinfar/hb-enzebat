@@ -51,8 +51,8 @@ function AttendanceDetailPage() {
 
           <div>
             <Button
-              variant='link' size='md' fullWidth onClick={openModalHandler}
-              rightIcon={<DeleteIcon textColor='text-primary'/>}
+              variant='link' size='sm' fullWidth onClick={openModalHandler}
+              rightIcon={<DeleteIcon width='20' height='20' textColor='text-primary'/>}
             >
               حذف
             </Button>
