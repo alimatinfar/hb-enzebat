@@ -10,7 +10,14 @@ export const GET = withRoleAuth(["TEACHER"], async (req, user) => {
     where: { id: attendanceId },
     include: {
       class: true,
-      presents: true
+      presents: {
+        select: {
+          id: true,
+          mobile: true,
+          firstName: true,
+          lastName: true,
+        }
+      }
     }
   });
 

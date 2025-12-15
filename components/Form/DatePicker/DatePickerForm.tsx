@@ -7,7 +7,7 @@ import useGetRequiredErrorMessage
   from "@/components/Form/FormLayout/ReactHookFormWrapper/hooks/useGetRequiredErrorMessage";
 import useGetFormErrorMessage from "@/components/Form/FormLayout/ReactHookFormWrapper/hooks/useGetFormErrorMessage";
 
-type Props = {
+export type DatePickerFormProps = {
   datePickerProps?: any;
   customDatePickerProps?: Partial<CustomDatePickerProps>;
   onSelect?: (value: string | string[]) => void;
@@ -18,7 +18,7 @@ type Props = {
 function DatePickerForm(
   {
     fieldName, fieldLabel, rules, inputProps, datePickerProps, customDatePickerProps, onSelect, defaultValue, hasFormattedOnChange
-  }: Props
+  }: DatePickerFormProps
 ) {
 
   const getErrorMessage = useGetFormErrorMessage();
