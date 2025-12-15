@@ -18,14 +18,14 @@ function PageTitle({children, hasBack}: Props) {
   }, [router])
 
   return (
-    <div className='flex items-center space-x-2 mb-4 pb-4 border-b border-gray-5'>
+    <div className='flex items-center space-x-2 mb-4 pb-4 border-b border-gray-5 w-full'>
       {hasBack && (
         <BackIconClickable onBackRoute={onBackRoute} />
       )}
 
-      <h1 className='font-semibold text-2xl'>
+      <div className='font-semibold text-2xl flex-1'>
         {children}
-      </h1>
+      </div>
     </div>
   )
 }

@@ -1,6 +1,7 @@
 import React from "react";
+import {IconPropsType} from "@/types/IconPropsType";
 
-function DeleteIcon() {
+function DeleteIcon({textColor, className}: IconPropsType) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -8,9 +9,10 @@ function DeleteIcon() {
       height="24"
       fill="none"
       viewBox="0 0 24 24"
+      {...className && {className}}
     >
       <path
-        stroke="#6B7280"
+        className={`stroke-current duration-200 ${textColor || 'text-gray-500'}`}
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="1.5"

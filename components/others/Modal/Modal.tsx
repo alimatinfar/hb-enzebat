@@ -1,85 +1,96 @@
- import React from "react";
-import {Types} from "@/types/types";
- import CloseIcon from "@/components/svg/CloseIcon";
+import React, {ReactNode} from "react";
+import CloseIcon from "../../svg/CloseIcon";
 import {useEffect} from "react";
 import useDisplayWithAnimation from "../DisplayWithAnimation/hooks/useDisplayWithAnimation";
 import ArrowBack from "../../svg/ArrowBack";
-import zIndexes from "@/constances/zIndexes";
- import IconClickable from "../Icon/IconClickable";
+import Z_INDEXES from "@/constances/zIndexes";
+import ModalPortalComponent from "@/components/others/PortalComponent/ModalPortalComponent";
+
 
 export type ModalProps = {
-  children?: Types["children"];
+  children?: ReactNode;
   open: boolean;
   onClose: () => void;
-  title: string;
+  title?: string;
   description?: string;
   width?: string;
   height?: string;
   backAction?: () => void;
   keepOpenOnClickAway?: boolean;
+  wrapperClass?: string;
   childrenWrapperClass?: string;
 };
 
 function Modal(
   {
-    children, open, onClose, title, description, width, height, backAction, keepOpenOnClickAway, childrenWrapperClass
+    children, open, onClose, title, description, width, height, backAction, keepOpenOnClickAway, childrenWrapperClass,
+    wrapperClass
   }: ModalProps
 ) {
+
   const {showWithAnimation, shouldBeRemoved} = useDisplayWithAnimation({
     show: open,
   });
 
   useEffect(() => {
     if (showWithAnimation) {
-      document.body.classList.add("overflow-hidden");
+      document.documentElement.classList.add("overflow-hidden");
     } else {
-      document.body.classList.remove("overflow-hidden");
+      document.documentElement.classList.remove("overflow-hidden");
     }
+
+    return () => document.documentElement.classList.remove("overflow-hidden");
   }, [showWithAnimation, shouldBeRemoved]);
 
   return shouldBeRemoved ? null : (
-    <>
+    <ModalPortalComponent>
       <div
         onClick={keepOpenOnClickAway ? undefined : onClose}
-        className={`fixed w-screen h-screen top-0 right-0 duration-200 ${zIndexes.modalBackDrop}
-        bg-[rgba(255, 255, 255, 0.60)] backdrop-blur-sm
+        className={`fixed w-screen h-screen top-0 right-0 duration-200 ${Z_INDEXES.modalBackDrop}
+        
         ${
           showWithAnimation
-            ? "bg-opacity-30"
+            ? "backdrop-background"
             : "opacity-0 pointer-events-none"
         }`}
       ></div>
 
       <div
-        className={`hide-scroll fixed inset-0 m-auto bg-white duration-200 ${zIndexes.modal} p-6 flex flex-col
-        shadow-xl
+        className={`hide-scroll fixed bottom-0 right-0 left-0 md:inset-0 m-auto bg-white  duration-200 ${Z_INDEXES.modal} 
+        shadow-[0px_-2px_4px_-2px_rgba(16,24,40,0.06),0px_-4px_8px_-2px_rgba(16,24,40,0.1)]
+         overflow-hidden p-4 md:p-6 flex flex-col ${wrapperClass || ''}
         ${showWithAnimation ? "" : "opacity-0 pointer-events-none scale-[0.98]"}
-        ${width || "w-[430px]"} ${
+        ${width || "w-dvw md:w-[430px]"} ${
           height || "h-min"
-        } rounded-2xl border border-gray-300 max-h-[80dvh]`}
+        } rounded-t-2xl md:rounded-2xl border border-transparent max-h-[80dvh]`}
       >
-        <div className="flex items-center justify-between mb-6">
-          <div className="font-bold text-lg text-gray-900 flex items-center">
-            {backAction && (
-              <IconClickable onClick={backAction} className="cursor-pointer ml-2">
-                <ArrowBack/>
-              </IconClickable>
-            )}
-            <span>{title}</span>
-          </div>
+        {title && (
+          <div className="flex items-center justify-between mb-6">
 
-          <IconClickable
-            onClick={onClose}
-          >
-            <div className='h-6 w-6'>
-              <CloseIcon/>
+            <div className={`font-bold text-lg text-black flex`}>
+              {backAction && (
+                <span onClick={backAction} className="cursor-pointer ml-2">
+                  <ArrowBack/>
+                </span>
+              )}
+              <span>{title}</span>
             </div>
-          </IconClickable>
-        </div>
 
-        <div className={`flex-1 overflow-y-auto scroll-thin overflow-hidden ${childrenWrapperClass || ''}`}>
+            <button
+              type='button'
+              onClick={onClose}
+              className={`p-1 rounded-md duration-200 hover:bg-gray-100`}
+            >
+              <div className='h-6 w-6'>
+                <CloseIcon/>
+              </div>
+            </button>
+          </div>
+        )}
+
+        <div className={`overflow-y-auto scroll-thin overflow-x-hidden ${childrenWrapperClass || ''}`}>
           {description && (
-            <p className='mb-6 text-justify'>
+            <p className={`mb-6 text-justify text-black text-lg`}>
               {description}
             </p>
           )}
@@ -87,7 +98,7 @@ function Modal(
           {children || ''}
         </div>
       </div>
-    </>
+    </ModalPortalComponent>
   );
 }
 

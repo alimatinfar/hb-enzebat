@@ -13,6 +13,7 @@ const APIES = {
   TEACHER_PANEL_CLASS_ATTENDANCES_ADD: (classId: string) => `${TEACHER_PANEL_CLASS_ATTENDANCES(classId)}/add`,
   TEACHER_PANEL_CLASS_ATTENDANCE_INFO: (classId: string, attendanceId: string) => `${TEACHER_PANEL_CLASS_ATTENDANCE_INFO(classId, attendanceId)}`,
   TEACHER_PANEL_CLASS_ATTENDANCE_EDIT: (classId: string, attendanceId: string) => `${TEACHER_PANEL_CLASS_ATTENDANCE_INFO(classId, attendanceId)}/edit`,
+  TEACHER_PANEL_CLASS_ATTENDANCE_DELETE: (classId: string, attendanceId: string) => `${TEACHER_PANEL_CLASS_ATTENDANCE_INFO(classId, attendanceId)}/delete`,
 }
 
 export default APIES

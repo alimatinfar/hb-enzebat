@@ -44,6 +44,7 @@ export default function RootLayout({
         </div>
       </div>
     </ReactQueryProvider>
+    <div id="modal-portal-root"></div>
     </body>
     </html>
   );

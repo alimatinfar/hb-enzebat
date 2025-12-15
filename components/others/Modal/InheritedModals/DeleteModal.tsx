@@ -14,7 +14,7 @@ function DeleteModal({onConfirmHandler, loading, ...props}: DeleteModalProps) {
       {props.children && props.children}
 
       <div className='flex items-center gap-x-4 mt-4'>
-        <Button color='white' onClick={onConfirmHandler} loading={loading}>
+        <Button color='white' onClick={onConfirmHandler} loading={loading} variant='default'>
           بله
         </Button>
         <Button color='red' variant='default' onClick={props.onClose}>
