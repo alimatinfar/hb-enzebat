@@ -69,11 +69,13 @@ function TeacherPanelClassDetailPage() {
                 title='تعداد حاضرین به کل' value={`${item.presentCount} از ${item.totalStudents}`}
               />
 
-              <Button
-                variant='link'
-              >
-                مشاهده و ویرایش
-              </Button>
+              <Link href={ROUTER_LINKS.TEACHER_PANEL_CLASSES_ATTENDANCE_DETAIL(String(classId), String(item.id))}>
+                <Button
+                  variant='link'
+                >
+                  مشاهده و ویرایش
+                </Button>
+              </Link>
             </Card>
           ))}
         </div>

@@ -12,7 +12,7 @@ const axiosInstance = axios.create({
 })
 
 axiosInstance.interceptors.request.use(async (request: any) => {
-  // request.headers["x-apikey"] = [process.env.apiKey];
+  // request.headers["x-apikey"] = [process..env.apiKey];
   request.baseURL = `/api/`
 
   const token = getToken();
