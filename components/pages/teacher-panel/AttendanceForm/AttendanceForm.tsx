@@ -40,7 +40,7 @@ function AttendanceForm(
 
           <div className='flex flex-col space-y-4 mt-2 pt-2 border-t border-gray-300'>
             <p className='text-gray-500'>
-              حاضرین را انتخاب کنید
+              حاضرین را انتخاب کنید ({presents.length})
             </p>
 
             <RenderLogic
