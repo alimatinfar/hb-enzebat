@@ -35,7 +35,8 @@ function TeacherPanelHomePage() {
       </PageTitle>
 
       <RenderLogic
-        error={error} isLoading={isFetching}
+        error={error} isLoading={isFetching} isEmpty={classes.length === 0}
+        emptyText='کلاسی برای شما تعریف نشده است'
       >
         <div className='space-y-4'>
           {classes.map((item, index) => {
