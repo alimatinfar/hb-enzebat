@@ -13,11 +13,13 @@ export const GET = withRoleAuth(["TEACHER"], async (req, user) => {
       presents: {
         select: {
           id: true,
-          mobile: true,
-          firstName: true,
-          lastName: true,
         }
-      }
+      },
+      excusedAbsences: {
+        select: {
+          id: true,
+        }
+      },
     }
   });
 

@@ -28,17 +28,22 @@ function useAttendanceForm(
 
   const {
     studentsList, studentsLoading, studentsError, togglePresentHandler, presents,
+    excusedAbsences, excusedAbsencesModalShouldBeRemoved,
+    excusedAbsencesOpen, openExcusedAbsencesModalHandler, closeExcusedAbsencesModal, toggleExcusedAbsencesHandler
   } = useAttendanceFormPresents({editMode, attendanceInfo})
 
   const {
-    formMethods, onSubmit, formLoading
+    formMethods, onSubmit, formLoading, finalSubmitHandler
   } = useAttendanceFormSubmit({
-    editMode, presents, defaultDateValue: attendanceInfo?.date || ''
+    editMode, presents, defaultDateValue: attendanceInfo?.date || '', openExcusedAbsencesModalHandler,
+    excusedAbsences
   })
 
   return {
     formMethods, onSubmit, studentsList, presents, togglePresentHandler, studentsLoading, studentsError,
-    formLoading, attendanceInfoLoading, attendanceInfoError
+    formLoading, attendanceInfoLoading, attendanceInfoError, excusedAbsences,
+    excusedAbsencesModalShouldBeRemoved, excusedAbsencesOpen,
+    closeExcusedAbsencesModal, toggleExcusedAbsencesHandler, finalSubmitHandler
   }
 }
 

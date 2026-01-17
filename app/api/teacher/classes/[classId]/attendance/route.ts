@@ -29,7 +29,7 @@ export const GET = withRoleAuth(["TEACHER"], async (req, user) => {
     where: { classId },
     include: {
       _count: {
-        select: { presents: true }
+        select: { presents: true, excusedAbsences: true }
       }
     },
     orderBy: { date: "desc" }
@@ -40,6 +40,7 @@ export const GET = withRoleAuth(["TEACHER"], async (req, user) => {
     id: a.id,
     date: a.date,
     presentCount: a._count.presents,
+    excusedAbsencesCount: a._count.excusedAbsences,
     totalStudents
   }));
 

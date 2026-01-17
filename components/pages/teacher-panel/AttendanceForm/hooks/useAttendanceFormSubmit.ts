@@ -23,15 +23,18 @@ type FormDataType = {
 type BodyDataType = {
   date?: string;
   presents: TeacherPanelStudentType['id'][];
+  excusedAbsences: TeacherPanelStudentType['id'][];
 }
 
 type Props = {
   presents: TeacherPanelStudentType['id'][];
+  excusedAbsences: TeacherPanelStudentType['id'][];
   defaultDateValue: CustomDatePickerProps['value'];
+  openExcusedAbsencesModalHandler: () => void;
 } & Pick<AttendanceFormProps, 'editMode'>
 
 function useAttendanceFormSubmit(
-  {editMode, presents, defaultDateValue}:Props
+  {editMode, presents, excusedAbsences, defaultDateValue, openExcusedAbsencesModalHandler}:Props
 ) {
 
   const {classId, attendanceId} = useParams()
@@ -51,20 +54,7 @@ function useAttendanceFormSubmit(
   const router = useRouter()
 
   const onSubmitHandler = useCallback(async function (formData: FormDataType) {
-    const toast: any = await toastPromise()
-    if (presents.length === 0) return toast.error(' حاضرین را انتخاب نمایید', {toastId: 'select-presents'})
-
-    const data: BodyDataType = {
-      ...editMode ? {} : {date: String(getMiladiFormattedDate(formData[attendanceDateFieldName] || ''))},
-      presents
-    }
-
-    mutate(data, {
-      onSuccess: async () => {
-        toast.success(`جلسه با موفقیت ${editMode ? 'ویرایش' : 'ثبت'} شد`)
-        router.back()
-      },
-    })
+    openExcusedAbsencesModalHandler()
   }, [mutate, presents])
 
   const {
@@ -73,7 +63,27 @@ function useAttendanceFormSubmit(
     onSubmitHandler
   })
 
-  const {setValue} = formMethods
+  const {setValue, getValues} = formMethods
+
+  const finalSubmitHandler = useCallback(async function () {
+    const formData: FormDataType = getValues()
+
+    const toast: any = await toastPromise()
+    if (presents.length === 0) return toast.error(' حاضرین را انتخاب نمایید', {toastId: 'select-presents'})
+
+    const data: BodyDataType = {
+      ...editMode ? {} : {date: String(getMiladiFormattedDate(formData[attendanceDateFieldName] || ''))},
+      presents,
+      excusedAbsences,
+    }
+
+    mutate(data, {
+      onSuccess: async () => {
+        toast.success(`جلسه با موفقیت ${editMode ? 'ویرایش' : 'ثبت'} شد`)
+        router.back()
+      },
+    })
+  }, [mutate, presents, excusedAbsences, getValues])
 
   useEffect(function () {
     if (!defaultDateValue) return
@@ -81,7 +91,7 @@ function useAttendanceFormSubmit(
   }, [defaultDateValue, setValue])
 
   return {
-    formMethods, onSubmit, formLoading
+    formMethods, onSubmit, formLoading, finalSubmitHandler
   }
 }
 

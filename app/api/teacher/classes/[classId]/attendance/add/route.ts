@@ -6,9 +6,9 @@ import prisma from "@/lib/prisma";
 export const POST = withRoleAuth(["TEACHER"], async (req, user) => {
   const classId = Number(req.url.split("/").at(-3));
   const body = await req.json();
-  const { date, presents } = body;
-
-  if (!date || !Array.isArray(presents)) {
+  const { date, presents, excusedAbsences } = body;
+  console.log({excusedAbsences})
+  if (!date || !Array.isArray(presents) || !Array.isArray(excusedAbsences)) {
     return NextErrorResponse({ error: "اطلاعات ناقص است", status: 422 });
   }
 
@@ -45,9 +45,10 @@ export const POST = withRoleAuth(["TEACHER"], async (req, user) => {
     data: {
       classId,
       date: attendanceDate,
-      presents: { connect: presents.map((id: number) => ({ id })) }
+      presents: { connect: presents.map((id: number) => ({ id })) },
+      excusedAbsences: { connect: excusedAbsences.map((id: number) => ({ id })) }
     },
-    include: { presents: true }
+    include: { presents: true, excusedAbsences: true }
   });
 
   return NextSuccessResponse({ data: attendance });

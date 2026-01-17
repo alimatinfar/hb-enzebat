@@ -6,9 +6,9 @@ import prisma from "@/lib/prisma";
 export const PUT = withRoleAuth(["TEACHER"], async (req, user) => {
   const attendanceId = Number(req.url.split("/").at(-2));
   const body = await req.json();
-  const { presents } = body;
+  const { presents, excusedAbsences } = body;
 
-  if (!Array.isArray(presents)) {
+  if (!Array.isArray(presents)  || !Array.isArray(excusedAbsences)) {
     return NextErrorResponse({ error: "اطلاعات ناقص است", status: 422 });
   }
 
@@ -29,9 +29,10 @@ export const PUT = withRoleAuth(["TEACHER"], async (req, user) => {
   const updatedAttendance = await prisma.attendance.update({
     where: { id: attendanceId },
     data: {
-      presents: { set: presents.map((id: number) => ({ id })) }
+      presents: { set: presents.map((id: number) => ({ id })) },
+      excusedAbsences: { set: excusedAbsences.map((id: number) => ({ id })) }
     },
-    include: { presents: true }
+    include: { presents: true, excusedAbsences: true }
   });
 
   return NextSuccessResponse({ data: updatedAttendance });

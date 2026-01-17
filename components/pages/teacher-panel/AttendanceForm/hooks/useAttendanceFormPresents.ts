@@ -8,6 +8,7 @@ import {
 import useFetchData from "@/request/hooks/useFetchData";
 import {useParams} from "next/navigation";
 import {AttendanceFormProps} from "@/components/pages/teacher-panel/AttendanceForm/AttendanceForm";
+import useModalOpenBoolean from "@/hooks/modal/useModalOpenBoolean";
 
 type Props = {
   attendanceInfo: TeacherPanelAttendanceInfoResponseType | undefined;
@@ -21,11 +22,33 @@ function useAttendanceFormPresents(
 
   const [presents, setPresents] = useState<TeacherPanelStudentType['id'][]>([])
 
+  const [excusedAbsences, setExcusedAbsences] = useState<TeacherPanelStudentType['id'][]>([])
+
+  const {
+    shouldBeRemoved: excusedAbsencesModalShouldBeRemoved,
+    open: excusedAbsencesOpen, openModalHandler: openExcusedAbsencesModalHandler,
+    closeModal: closeExcusedAbsencesModal,
+  } = useModalOpenBoolean(false)
+
+  const toggleExcusedAbsencesHandler = useCallback(function (studentId: TeacherPanelStudentType['id']) {
+    setExcusedAbsences(prev => {
+      if (prev.some(item => item === studentId)) {
+        return prev.filter(item => item !== studentId)
+      } else {
+        return [...prev, studentId]
+      }
+    })
+  }, [setPresents])
+
   const togglePresentHandler = useCallback(function (studentId: TeacherPanelStudentType['id']) {
     setPresents(prev => {
       if (prev.some(item => item === studentId)) {
         return prev.filter(item => item !== studentId)
       } else {
+        if (excusedAbsences.some(item => item === studentId)) {
+          setExcusedAbsences(prev => prev.filter(item => item !== studentId))
+        }
+
         return [...prev, studentId]
       }
     })
@@ -39,6 +62,7 @@ function useAttendanceFormPresents(
     },
     disableThrowErrorToast: true
   })
+
   const studentsList = useMemo(function () {
     return studentsData?.students || []
   }, [studentsData])
@@ -46,10 +70,13 @@ function useAttendanceFormPresents(
   useEffect(() => {
     if (!attendanceInfo || !editMode) return
     setPresents(attendanceInfo?.presents?.map(item => item.id))
+    setExcusedAbsences(attendanceInfo?.excusedAbsences?.map(item => item.id))
   }, [attendanceInfo]);
 
   return {
     studentsList, presents, togglePresentHandler, studentsLoading, studentsError,
+    excusedAbsences, excusedAbsencesModalShouldBeRemoved,
+    excusedAbsencesOpen, openExcusedAbsencesModalHandler, closeExcusedAbsencesModal, toggleExcusedAbsencesHandler
   }
 }
 

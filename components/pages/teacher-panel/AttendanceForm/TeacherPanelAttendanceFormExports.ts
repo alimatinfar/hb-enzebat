@@ -19,5 +19,6 @@ export type TeacherPanelAttendanceInfoResponseType = {
   classId: number;
   date: string;
   id: number;
-  presents: TeacherPanelStudentType[];
+  presents: {id: number}[];
+  excusedAbsences: {id: number}[];
 }

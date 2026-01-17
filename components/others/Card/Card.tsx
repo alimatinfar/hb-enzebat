@@ -2,20 +2,21 @@ import React from 'react';
 import {ChildrenAndClassNamePropsType} from "@/types/ChildrenAndClassNamePropsType";
 import {ButtonProps} from "@/components/Form/Button/ButtonTypes";
 
-type Props = {
+export type CardProps = {
   isClickable?: boolean;
   onClick?: ButtonProps['onClick'];
+  backgroundClass?: string;
 } & ChildrenAndClassNamePropsType
 
 function Card(
-  {children, className, isClickable, onClick}: Props
+  {children, className, isClickable, onClick, backgroundClass}: CardProps
 ) {
   return (
     <div
       {...onClick && {onClick}}
       className={`
-      ${className || ''} bg-gray-3 p-4 rounded-lg border border-gray-300 duration-200
-      ${isClickable && 'hover:border-gray-400 cursor-pointer select-none'}
+      ${className || ''} p-4 rounded-lg border border-gray-300 duration-200
+      ${isClickable && 'hover:border-gray-400 cursor-pointer select-none'} ${backgroundClass || 'bg-gray-3'}
     `}>
       {children}
     </div>

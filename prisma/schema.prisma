@@ -9,15 +9,16 @@ datasource db {
 }
 
 model User {
-  id             Int          @id @default(autoincrement())
-  mobile         String       @unique
-  password       String
-  firstName      String?
-  lastName       String?
-  roles          UserRole[]
-  teacherClasses Class[]      @relation("TeacherClasses")
-  studentClasses Class[]      @relation("StudentClasses")
-  attendances    Attendance[] @relation("AttendancePresents")
+  id              Int          @id @default(autoincrement())
+  mobile          String       @unique
+  password        String
+  firstName       String?
+  lastName        String?
+  roles           UserRole[]
+  teacherClasses  Class[]      @relation("TeacherClasses")
+  studentClasses  Class[]      @relation("StudentClasses")
+  attendances     Attendance[] @relation("AttendancePresents")
+  excusedAbsences Attendance[] @relation("AttendanceExcusedAbsences")
 }
 
 model UserRole {
@@ -43,9 +44,10 @@ model Class {
 }
 
 model Attendance {
-  id       Int      @id @default(autoincrement())
-  classId  Int
-  class    Class    @relation(fields: [classId], references: [id])
-  date     DateTime @default(now())
-  presents User[]   @relation("AttendancePresents")
+  id              Int      @id @default(autoincrement())
+  classId         Int
+  class           Class    @relation(fields: [classId], references: [id])
+  date            DateTime @default(now())
+  presents        User[]   @relation("AttendancePresents")
+  excusedAbsences User[]   @relation("AttendanceExcusedAbsences")
 }

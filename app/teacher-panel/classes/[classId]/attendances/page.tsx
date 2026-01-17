@@ -70,6 +70,8 @@ function TeacherPanelClassDetailPage() {
 
               <KeyValue
                 title='تعداد حاضرین به کل' value={`${item.presentCount} از ${item.totalStudents}`}
+              />              <KeyValue
+                title='تعداد غائبین موجه' value={`${item.excusedAbsencesCount} از ${(item.totalStudents - item.presentCount)}`}
               />
 
               <Link href={ROUTER_LINKS.TEACHER_PANEL_CLASSES_ATTENDANCE_DETAIL(String(classId), String(item.id))}>

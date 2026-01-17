@@ -2,6 +2,7 @@ import {TeacherClassType} from "@/components/pages/teacher-panel/classes/Teacher
 
 export type TeacherClassAttendanceType = {
   presentCount: number;
+  excusedAbsencesCount: number;
   totalStudents: number;
   date: string;
   id: number;
