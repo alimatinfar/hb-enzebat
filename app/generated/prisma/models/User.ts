@@ -220,6 +220,7 @@ export type UserWhereInput = {
   teacherClasses?: Prisma.ClassListRelationFilter
   studentClasses?: Prisma.ClassListRelationFilter
   attendances?: Prisma.AttendanceListRelationFilter
+  excusedAbsences?: Prisma.AttendanceListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -232,6 +233,7 @@ export type UserOrderByWithRelationInput = {
   teacherClasses?: Prisma.ClassOrderByRelationAggregateInput
   studentClasses?: Prisma.ClassOrderByRelationAggregateInput
   attendances?: Prisma.AttendanceOrderByRelationAggregateInput
+  excusedAbsences?: Prisma.AttendanceOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -247,6 +249,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   teacherClasses?: Prisma.ClassListRelationFilter
   studentClasses?: Prisma.ClassListRelationFilter
   attendances?: Prisma.AttendanceListRelationFilter
+  excusedAbsences?: Prisma.AttendanceListRelationFilter
 }, "id" | "mobile">
 
 export type UserOrderByWithAggregationInput = {
@@ -282,6 +285,7 @@ export type UserCreateInput = {
   teacherClasses?: Prisma.ClassCreateNestedManyWithoutTeacherInput
   studentClasses?: Prisma.ClassCreateNestedManyWithoutStudentsInput
   attendances?: Prisma.AttendanceCreateNestedManyWithoutPresentsInput
+  excusedAbsences?: Prisma.AttendanceCreateNestedManyWithoutExcusedAbsencesInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -294,6 +298,7 @@ export type UserUncheckedCreateInput = {
   teacherClasses?: Prisma.ClassUncheckedCreateNestedManyWithoutTeacherInput
   studentClasses?: Prisma.ClassUncheckedCreateNestedManyWithoutStudentsInput
   attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutPresentsInput
+  excusedAbsences?: Prisma.AttendanceUncheckedCreateNestedManyWithoutExcusedAbsencesInput
 }
 
 export type UserUpdateInput = {
@@ -305,6 +310,7 @@ export type UserUpdateInput = {
   teacherClasses?: Prisma.ClassUpdateManyWithoutTeacherNestedInput
   studentClasses?: Prisma.ClassUpdateManyWithoutStudentsNestedInput
   attendances?: Prisma.AttendanceUpdateManyWithoutPresentsNestedInput
+  excusedAbsences?: Prisma.AttendanceUpdateManyWithoutExcusedAbsencesNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -317,6 +323,7 @@ export type UserUncheckedUpdateInput = {
   teacherClasses?: Prisma.ClassUncheckedUpdateManyWithoutTeacherNestedInput
   studentClasses?: Prisma.ClassUncheckedUpdateManyWithoutStudentsNestedInput
   attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutPresentsNestedInput
+  excusedAbsences?: Prisma.AttendanceUncheckedUpdateManyWithoutExcusedAbsencesNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -477,9 +484,21 @@ export type UserCreateNestedManyWithoutAttendancesInput = {
   connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
 }
 
+export type UserCreateNestedManyWithoutExcusedAbsencesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutExcusedAbsencesInput, Prisma.UserUncheckedCreateWithoutExcusedAbsencesInput> | Prisma.UserCreateWithoutExcusedAbsencesInput[] | Prisma.UserUncheckedCreateWithoutExcusedAbsencesInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutExcusedAbsencesInput | Prisma.UserCreateOrConnectWithoutExcusedAbsencesInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
 export type UserUncheckedCreateNestedManyWithoutAttendancesInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutAttendancesInput, Prisma.UserUncheckedCreateWithoutAttendancesInput> | Prisma.UserCreateWithoutAttendancesInput[] | Prisma.UserUncheckedCreateWithoutAttendancesInput[]
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutAttendancesInput | Prisma.UserCreateOrConnectWithoutAttendancesInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUncheckedCreateNestedManyWithoutExcusedAbsencesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutExcusedAbsencesInput, Prisma.UserUncheckedCreateWithoutExcusedAbsencesInput> | Prisma.UserCreateWithoutExcusedAbsencesInput[] | Prisma.UserUncheckedCreateWithoutExcusedAbsencesInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutExcusedAbsencesInput | Prisma.UserCreateOrConnectWithoutExcusedAbsencesInput[]
   connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
 }
 
@@ -496,6 +515,19 @@ export type UserUpdateManyWithoutAttendancesNestedInput = {
   deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
 }
 
+export type UserUpdateManyWithoutExcusedAbsencesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutExcusedAbsencesInput, Prisma.UserUncheckedCreateWithoutExcusedAbsencesInput> | Prisma.UserCreateWithoutExcusedAbsencesInput[] | Prisma.UserUncheckedCreateWithoutExcusedAbsencesInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutExcusedAbsencesInput | Prisma.UserCreateOrConnectWithoutExcusedAbsencesInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutExcusedAbsencesInput | Prisma.UserUpsertWithWhereUniqueWithoutExcusedAbsencesInput[]
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutExcusedAbsencesInput | Prisma.UserUpdateWithWhereUniqueWithoutExcusedAbsencesInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutExcusedAbsencesInput | Prisma.UserUpdateManyWithWhereWithoutExcusedAbsencesInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
 export type UserUncheckedUpdateManyWithoutAttendancesNestedInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutAttendancesInput, Prisma.UserUncheckedCreateWithoutAttendancesInput> | Prisma.UserCreateWithoutAttendancesInput[] | Prisma.UserUncheckedCreateWithoutAttendancesInput[]
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutAttendancesInput | Prisma.UserCreateOrConnectWithoutAttendancesInput[]
@@ -509,6 +541,19 @@ export type UserUncheckedUpdateManyWithoutAttendancesNestedInput = {
   deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
 }
 
+export type UserUncheckedUpdateManyWithoutExcusedAbsencesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutExcusedAbsencesInput, Prisma.UserUncheckedCreateWithoutExcusedAbsencesInput> | Prisma.UserCreateWithoutExcusedAbsencesInput[] | Prisma.UserUncheckedCreateWithoutExcusedAbsencesInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutExcusedAbsencesInput | Prisma.UserCreateOrConnectWithoutExcusedAbsencesInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutExcusedAbsencesInput | Prisma.UserUpsertWithWhereUniqueWithoutExcusedAbsencesInput[]
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutExcusedAbsencesInput | Prisma.UserUpdateWithWhereUniqueWithoutExcusedAbsencesInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutExcusedAbsencesInput | Prisma.UserUpdateManyWithWhereWithoutExcusedAbsencesInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
 export type UserCreateWithoutRolesInput = {
   mobile: string
   password: string
@@ -517,6 +562,7 @@ export type UserCreateWithoutRolesInput = {
   teacherClasses?: Prisma.ClassCreateNestedManyWithoutTeacherInput
   studentClasses?: Prisma.ClassCreateNestedManyWithoutStudentsInput
   attendances?: Prisma.AttendanceCreateNestedManyWithoutPresentsInput
+  excusedAbsences?: Prisma.AttendanceCreateNestedManyWithoutExcusedAbsencesInput
 }
 
 export type UserUncheckedCreateWithoutRolesInput = {
@@ -528,6 +574,7 @@ export type UserUncheckedCreateWithoutRolesInput = {
   teacherClasses?: Prisma.ClassUncheckedCreateNestedManyWithoutTeacherInput
   studentClasses?: Prisma.ClassUncheckedCreateNestedManyWithoutStudentsInput
   attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutPresentsInput
+  excusedAbsences?: Prisma.AttendanceUncheckedCreateNestedManyWithoutExcusedAbsencesInput
 }
 
 export type UserCreateOrConnectWithoutRolesInput = {
@@ -554,6 +601,7 @@ export type UserUpdateWithoutRolesInput = {
   teacherClasses?: Prisma.ClassUpdateManyWithoutTeacherNestedInput
   studentClasses?: Prisma.ClassUpdateManyWithoutStudentsNestedInput
   attendances?: Prisma.AttendanceUpdateManyWithoutPresentsNestedInput
+  excusedAbsences?: Prisma.AttendanceUpdateManyWithoutExcusedAbsencesNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRolesInput = {
@@ -565,6 +613,7 @@ export type UserUncheckedUpdateWithoutRolesInput = {
   teacherClasses?: Prisma.ClassUncheckedUpdateManyWithoutTeacherNestedInput
   studentClasses?: Prisma.ClassUncheckedUpdateManyWithoutStudentsNestedInput
   attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutPresentsNestedInput
+  excusedAbsences?: Prisma.AttendanceUncheckedUpdateManyWithoutExcusedAbsencesNestedInput
 }
 
 export type UserCreateWithoutTeacherClassesInput = {
@@ -575,6 +624,7 @@ export type UserCreateWithoutTeacherClassesInput = {
   roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   studentClasses?: Prisma.ClassCreateNestedManyWithoutStudentsInput
   attendances?: Prisma.AttendanceCreateNestedManyWithoutPresentsInput
+  excusedAbsences?: Prisma.AttendanceCreateNestedManyWithoutExcusedAbsencesInput
 }
 
 export type UserUncheckedCreateWithoutTeacherClassesInput = {
@@ -586,6 +636,7 @@ export type UserUncheckedCreateWithoutTeacherClassesInput = {
   roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   studentClasses?: Prisma.ClassUncheckedCreateNestedManyWithoutStudentsInput
   attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutPresentsInput
+  excusedAbsences?: Prisma.AttendanceUncheckedCreateNestedManyWithoutExcusedAbsencesInput
 }
 
 export type UserCreateOrConnectWithoutTeacherClassesInput = {
@@ -601,6 +652,7 @@ export type UserCreateWithoutStudentClassesInput = {
   roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   teacherClasses?: Prisma.ClassCreateNestedManyWithoutTeacherInput
   attendances?: Prisma.AttendanceCreateNestedManyWithoutPresentsInput
+  excusedAbsences?: Prisma.AttendanceCreateNestedManyWithoutExcusedAbsencesInput
 }
 
 export type UserUncheckedCreateWithoutStudentClassesInput = {
@@ -612,6 +664,7 @@ export type UserUncheckedCreateWithoutStudentClassesInput = {
   roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   teacherClasses?: Prisma.ClassUncheckedCreateNestedManyWithoutTeacherInput
   attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutPresentsInput
+  excusedAbsences?: Prisma.AttendanceUncheckedCreateNestedManyWithoutExcusedAbsencesInput
 }
 
 export type UserCreateOrConnectWithoutStudentClassesInput = {
@@ -638,6 +691,7 @@ export type UserUpdateWithoutTeacherClassesInput = {
   roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   studentClasses?: Prisma.ClassUpdateManyWithoutStudentsNestedInput
   attendances?: Prisma.AttendanceUpdateManyWithoutPresentsNestedInput
+  excusedAbsences?: Prisma.AttendanceUpdateManyWithoutExcusedAbsencesNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTeacherClassesInput = {
@@ -649,6 +703,7 @@ export type UserUncheckedUpdateWithoutTeacherClassesInput = {
   roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   studentClasses?: Prisma.ClassUncheckedUpdateManyWithoutStudentsNestedInput
   attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutPresentsNestedInput
+  excusedAbsences?: Prisma.AttendanceUncheckedUpdateManyWithoutExcusedAbsencesNestedInput
 }
 
 export type UserUpsertWithWhereUniqueWithoutStudentClassesInput = {
@@ -686,6 +741,7 @@ export type UserCreateWithoutAttendancesInput = {
   roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
   teacherClasses?: Prisma.ClassCreateNestedManyWithoutTeacherInput
   studentClasses?: Prisma.ClassCreateNestedManyWithoutStudentsInput
+  excusedAbsences?: Prisma.AttendanceCreateNestedManyWithoutExcusedAbsencesInput
 }
 
 export type UserUncheckedCreateWithoutAttendancesInput = {
@@ -697,11 +753,40 @@ export type UserUncheckedCreateWithoutAttendancesInput = {
   roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   teacherClasses?: Prisma.ClassUncheckedCreateNestedManyWithoutTeacherInput
   studentClasses?: Prisma.ClassUncheckedCreateNestedManyWithoutStudentsInput
+  excusedAbsences?: Prisma.AttendanceUncheckedCreateNestedManyWithoutExcusedAbsencesInput
 }
 
 export type UserCreateOrConnectWithoutAttendancesInput = {
   where: Prisma.UserWhereUniqueInput
   create: Prisma.XOR<Prisma.UserCreateWithoutAttendancesInput, Prisma.UserUncheckedCreateWithoutAttendancesInput>
+}
+
+export type UserCreateWithoutExcusedAbsencesInput = {
+  mobile: string
+  password: string
+  firstName?: string | null
+  lastName?: string | null
+  roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  teacherClasses?: Prisma.ClassCreateNestedManyWithoutTeacherInput
+  studentClasses?: Prisma.ClassCreateNestedManyWithoutStudentsInput
+  attendances?: Prisma.AttendanceCreateNestedManyWithoutPresentsInput
+}
+
+export type UserUncheckedCreateWithoutExcusedAbsencesInput = {
+  id?: number
+  mobile: string
+  password: string
+  firstName?: string | null
+  lastName?: string | null
+  roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  teacherClasses?: Prisma.ClassUncheckedCreateNestedManyWithoutTeacherInput
+  studentClasses?: Prisma.ClassUncheckedCreateNestedManyWithoutStudentsInput
+  attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutPresentsInput
+}
+
+export type UserCreateOrConnectWithoutExcusedAbsencesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutExcusedAbsencesInput, Prisma.UserUncheckedCreateWithoutExcusedAbsencesInput>
 }
 
 export type UserUpsertWithWhereUniqueWithoutAttendancesInput = {
@@ -720,6 +805,22 @@ export type UserUpdateManyWithWhereWithoutAttendancesInput = {
   data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutAttendancesInput>
 }
 
+export type UserUpsertWithWhereUniqueWithoutExcusedAbsencesInput = {
+  where: Prisma.UserWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserUpdateWithoutExcusedAbsencesInput, Prisma.UserUncheckedUpdateWithoutExcusedAbsencesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutExcusedAbsencesInput, Prisma.UserUncheckedCreateWithoutExcusedAbsencesInput>
+}
+
+export type UserUpdateWithWhereUniqueWithoutExcusedAbsencesInput = {
+  where: Prisma.UserWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutExcusedAbsencesInput, Prisma.UserUncheckedUpdateWithoutExcusedAbsencesInput>
+}
+
+export type UserUpdateManyWithWhereWithoutExcusedAbsencesInput = {
+  where: Prisma.UserScalarWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutExcusedAbsencesInput>
+}
+
 export type UserUpdateWithoutStudentClassesInput = {
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
@@ -728,6 +829,7 @@ export type UserUpdateWithoutStudentClassesInput = {
   roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   teacherClasses?: Prisma.ClassUpdateManyWithoutTeacherNestedInput
   attendances?: Prisma.AttendanceUpdateManyWithoutPresentsNestedInput
+  excusedAbsences?: Prisma.AttendanceUpdateManyWithoutExcusedAbsencesNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStudentClassesInput = {
@@ -739,6 +841,7 @@ export type UserUncheckedUpdateWithoutStudentClassesInput = {
   roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   teacherClasses?: Prisma.ClassUncheckedUpdateManyWithoutTeacherNestedInput
   attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutPresentsNestedInput
+  excusedAbsences?: Prisma.AttendanceUncheckedUpdateManyWithoutExcusedAbsencesNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutStudentClassesInput = {
@@ -757,6 +860,7 @@ export type UserUpdateWithoutAttendancesInput = {
   roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
   teacherClasses?: Prisma.ClassUpdateManyWithoutTeacherNestedInput
   studentClasses?: Prisma.ClassUpdateManyWithoutStudentsNestedInput
+  excusedAbsences?: Prisma.AttendanceUpdateManyWithoutExcusedAbsencesNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAttendancesInput = {
@@ -768,9 +872,41 @@ export type UserUncheckedUpdateWithoutAttendancesInput = {
   roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   teacherClasses?: Prisma.ClassUncheckedUpdateManyWithoutTeacherNestedInput
   studentClasses?: Prisma.ClassUncheckedUpdateManyWithoutStudentsNestedInput
+  excusedAbsences?: Prisma.AttendanceUncheckedUpdateManyWithoutExcusedAbsencesNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutAttendancesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  mobile?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type UserUpdateWithoutExcusedAbsencesInput = {
+  mobile?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  teacherClasses?: Prisma.ClassUpdateManyWithoutTeacherNestedInput
+  studentClasses?: Prisma.ClassUpdateManyWithoutStudentsNestedInput
+  attendances?: Prisma.AttendanceUpdateManyWithoutPresentsNestedInput
+}
+
+export type UserUncheckedUpdateWithoutExcusedAbsencesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  mobile?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  teacherClasses?: Prisma.ClassUncheckedUpdateManyWithoutTeacherNestedInput
+  studentClasses?: Prisma.ClassUncheckedUpdateManyWithoutStudentsNestedInput
+  attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutPresentsNestedInput
+}
+
+export type UserUncheckedUpdateManyWithoutExcusedAbsencesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
@@ -788,6 +924,7 @@ export type UserCountOutputType = {
   teacherClasses: number
   studentClasses: number
   attendances: number
+  excusedAbsences: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -795,6 +932,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   teacherClasses?: boolean | UserCountOutputTypeCountTeacherClassesArgs
   studentClasses?: boolean | UserCountOutputTypeCountStudentClassesArgs
   attendances?: boolean | UserCountOutputTypeCountAttendancesArgs
+  excusedAbsences?: boolean | UserCountOutputTypeCountExcusedAbsencesArgs
 }
 
 /**
@@ -835,6 +973,13 @@ export type UserCountOutputTypeCountAttendancesArgs<ExtArgs extends runtime.Type
   where?: Prisma.AttendanceWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountExcusedAbsencesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AttendanceWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -846,6 +991,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   teacherClasses?: boolean | Prisma.User$teacherClassesArgs<ExtArgs>
   studentClasses?: boolean | Prisma.User$studentClassesArgs<ExtArgs>
   attendances?: boolean | Prisma.User$attendancesArgs<ExtArgs>
+  excusedAbsences?: boolean | Prisma.User$excusedAbsencesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -879,6 +1025,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   teacherClasses?: boolean | Prisma.User$teacherClassesArgs<ExtArgs>
   studentClasses?: boolean | Prisma.User$studentClassesArgs<ExtArgs>
   attendances?: boolean | Prisma.User$attendancesArgs<ExtArgs>
+  excusedAbsences?: boolean | Prisma.User$excusedAbsencesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -891,6 +1038,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     teacherClasses: Prisma.$ClassPayload<ExtArgs>[]
     studentClasses: Prisma.$ClassPayload<ExtArgs>[]
     attendances: Prisma.$AttendancePayload<ExtArgs>[]
+    excusedAbsences: Prisma.$AttendancePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1296,6 +1444,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   teacherClasses<T extends Prisma.User$teacherClassesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$teacherClassesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ClassPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   studentClasses<T extends Prisma.User$studentClassesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$studentClassesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ClassPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   attendances<T extends Prisma.User$attendancesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$attendancesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AttendancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  excusedAbsences<T extends Prisma.User$excusedAbsencesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$excusedAbsencesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AttendancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1793,6 +1942,30 @@ export type User$studentClassesArgs<ExtArgs extends runtime.Types.Extensions.Int
  * User.attendances
  */
 export type User$attendancesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Attendance
+   */
+  select?: Prisma.AttendanceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Attendance
+   */
+  omit?: Prisma.AttendanceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AttendanceInclude<ExtArgs> | null
+  where?: Prisma.AttendanceWhereInput
+  orderBy?: Prisma.AttendanceOrderByWithRelationInput | Prisma.AttendanceOrderByWithRelationInput[]
+  cursor?: Prisma.AttendanceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AttendanceScalarFieldEnum | Prisma.AttendanceScalarFieldEnum[]
+}
+
+/**
+ * User.excusedAbsences
+ */
+export type User$excusedAbsencesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the Attendance
    */

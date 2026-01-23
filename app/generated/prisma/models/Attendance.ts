@@ -206,6 +206,7 @@ export type AttendanceWhereInput = {
   date?: Prisma.DateTimeFilter<"Attendance"> | Date | string
   class?: Prisma.XOR<Prisma.ClassScalarRelationFilter, Prisma.ClassWhereInput>
   presents?: Prisma.UserListRelationFilter
+  excusedAbsences?: Prisma.UserListRelationFilter
 }
 
 export type AttendanceOrderByWithRelationInput = {
@@ -214,6 +215,7 @@ export type AttendanceOrderByWithRelationInput = {
   date?: Prisma.SortOrder
   class?: Prisma.ClassOrderByWithRelationInput
   presents?: Prisma.UserOrderByRelationAggregateInput
+  excusedAbsences?: Prisma.UserOrderByRelationAggregateInput
 }
 
 export type AttendanceWhereUniqueInput = Prisma.AtLeast<{
@@ -225,6 +227,7 @@ export type AttendanceWhereUniqueInput = Prisma.AtLeast<{
   date?: Prisma.DateTimeFilter<"Attendance"> | Date | string
   class?: Prisma.XOR<Prisma.ClassScalarRelationFilter, Prisma.ClassWhereInput>
   presents?: Prisma.UserListRelationFilter
+  excusedAbsences?: Prisma.UserListRelationFilter
 }, "id">
 
 export type AttendanceOrderByWithAggregationInput = {
@@ -251,6 +254,7 @@ export type AttendanceCreateInput = {
   date?: Date | string
   class: Prisma.ClassCreateNestedOneWithoutAttendanceInput
   presents?: Prisma.UserCreateNestedManyWithoutAttendancesInput
+  excusedAbsences?: Prisma.UserCreateNestedManyWithoutExcusedAbsencesInput
 }
 
 export type AttendanceUncheckedCreateInput = {
@@ -258,12 +262,14 @@ export type AttendanceUncheckedCreateInput = {
   classId: number
   date?: Date | string
   presents?: Prisma.UserUncheckedCreateNestedManyWithoutAttendancesInput
+  excusedAbsences?: Prisma.UserUncheckedCreateNestedManyWithoutExcusedAbsencesInput
 }
 
 export type AttendanceUpdateInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   class?: Prisma.ClassUpdateOneRequiredWithoutAttendanceNestedInput
   presents?: Prisma.UserUpdateManyWithoutAttendancesNestedInput
+  excusedAbsences?: Prisma.UserUpdateManyWithoutExcusedAbsencesNestedInput
 }
 
 export type AttendanceUncheckedUpdateInput = {
@@ -271,6 +277,7 @@ export type AttendanceUncheckedUpdateInput = {
   classId?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   presents?: Prisma.UserUncheckedUpdateManyWithoutAttendancesNestedInput
+  excusedAbsences?: Prisma.UserUncheckedUpdateManyWithoutExcusedAbsencesNestedInput
 }
 
 export type AttendanceCreateManyInput = {
@@ -333,9 +340,21 @@ export type AttendanceCreateNestedManyWithoutPresentsInput = {
   connect?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
 }
 
+export type AttendanceCreateNestedManyWithoutExcusedAbsencesInput = {
+  create?: Prisma.XOR<Prisma.AttendanceCreateWithoutExcusedAbsencesInput, Prisma.AttendanceUncheckedCreateWithoutExcusedAbsencesInput> | Prisma.AttendanceCreateWithoutExcusedAbsencesInput[] | Prisma.AttendanceUncheckedCreateWithoutExcusedAbsencesInput[]
+  connectOrCreate?: Prisma.AttendanceCreateOrConnectWithoutExcusedAbsencesInput | Prisma.AttendanceCreateOrConnectWithoutExcusedAbsencesInput[]
+  connect?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
+}
+
 export type AttendanceUncheckedCreateNestedManyWithoutPresentsInput = {
   create?: Prisma.XOR<Prisma.AttendanceCreateWithoutPresentsInput, Prisma.AttendanceUncheckedCreateWithoutPresentsInput> | Prisma.AttendanceCreateWithoutPresentsInput[] | Prisma.AttendanceUncheckedCreateWithoutPresentsInput[]
   connectOrCreate?: Prisma.AttendanceCreateOrConnectWithoutPresentsInput | Prisma.AttendanceCreateOrConnectWithoutPresentsInput[]
+  connect?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
+}
+
+export type AttendanceUncheckedCreateNestedManyWithoutExcusedAbsencesInput = {
+  create?: Prisma.XOR<Prisma.AttendanceCreateWithoutExcusedAbsencesInput, Prisma.AttendanceUncheckedCreateWithoutExcusedAbsencesInput> | Prisma.AttendanceCreateWithoutExcusedAbsencesInput[] | Prisma.AttendanceUncheckedCreateWithoutExcusedAbsencesInput[]
+  connectOrCreate?: Prisma.AttendanceCreateOrConnectWithoutExcusedAbsencesInput | Prisma.AttendanceCreateOrConnectWithoutExcusedAbsencesInput[]
   connect?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
 }
 
@@ -352,6 +371,19 @@ export type AttendanceUpdateManyWithoutPresentsNestedInput = {
   deleteMany?: Prisma.AttendanceScalarWhereInput | Prisma.AttendanceScalarWhereInput[]
 }
 
+export type AttendanceUpdateManyWithoutExcusedAbsencesNestedInput = {
+  create?: Prisma.XOR<Prisma.AttendanceCreateWithoutExcusedAbsencesInput, Prisma.AttendanceUncheckedCreateWithoutExcusedAbsencesInput> | Prisma.AttendanceCreateWithoutExcusedAbsencesInput[] | Prisma.AttendanceUncheckedCreateWithoutExcusedAbsencesInput[]
+  connectOrCreate?: Prisma.AttendanceCreateOrConnectWithoutExcusedAbsencesInput | Prisma.AttendanceCreateOrConnectWithoutExcusedAbsencesInput[]
+  upsert?: Prisma.AttendanceUpsertWithWhereUniqueWithoutExcusedAbsencesInput | Prisma.AttendanceUpsertWithWhereUniqueWithoutExcusedAbsencesInput[]
+  set?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
+  disconnect?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
+  delete?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
+  connect?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
+  update?: Prisma.AttendanceUpdateWithWhereUniqueWithoutExcusedAbsencesInput | Prisma.AttendanceUpdateWithWhereUniqueWithoutExcusedAbsencesInput[]
+  updateMany?: Prisma.AttendanceUpdateManyWithWhereWithoutExcusedAbsencesInput | Prisma.AttendanceUpdateManyWithWhereWithoutExcusedAbsencesInput[]
+  deleteMany?: Prisma.AttendanceScalarWhereInput | Prisma.AttendanceScalarWhereInput[]
+}
+
 export type AttendanceUncheckedUpdateManyWithoutPresentsNestedInput = {
   create?: Prisma.XOR<Prisma.AttendanceCreateWithoutPresentsInput, Prisma.AttendanceUncheckedCreateWithoutPresentsInput> | Prisma.AttendanceCreateWithoutPresentsInput[] | Prisma.AttendanceUncheckedCreateWithoutPresentsInput[]
   connectOrCreate?: Prisma.AttendanceCreateOrConnectWithoutPresentsInput | Prisma.AttendanceCreateOrConnectWithoutPresentsInput[]
@@ -362,6 +394,19 @@ export type AttendanceUncheckedUpdateManyWithoutPresentsNestedInput = {
   connect?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
   update?: Prisma.AttendanceUpdateWithWhereUniqueWithoutPresentsInput | Prisma.AttendanceUpdateWithWhereUniqueWithoutPresentsInput[]
   updateMany?: Prisma.AttendanceUpdateManyWithWhereWithoutPresentsInput | Prisma.AttendanceUpdateManyWithWhereWithoutPresentsInput[]
+  deleteMany?: Prisma.AttendanceScalarWhereInput | Prisma.AttendanceScalarWhereInput[]
+}
+
+export type AttendanceUncheckedUpdateManyWithoutExcusedAbsencesNestedInput = {
+  create?: Prisma.XOR<Prisma.AttendanceCreateWithoutExcusedAbsencesInput, Prisma.AttendanceUncheckedCreateWithoutExcusedAbsencesInput> | Prisma.AttendanceCreateWithoutExcusedAbsencesInput[] | Prisma.AttendanceUncheckedCreateWithoutExcusedAbsencesInput[]
+  connectOrCreate?: Prisma.AttendanceCreateOrConnectWithoutExcusedAbsencesInput | Prisma.AttendanceCreateOrConnectWithoutExcusedAbsencesInput[]
+  upsert?: Prisma.AttendanceUpsertWithWhereUniqueWithoutExcusedAbsencesInput | Prisma.AttendanceUpsertWithWhereUniqueWithoutExcusedAbsencesInput[]
+  set?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
+  disconnect?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
+  delete?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
+  connect?: Prisma.AttendanceWhereUniqueInput | Prisma.AttendanceWhereUniqueInput[]
+  update?: Prisma.AttendanceUpdateWithWhereUniqueWithoutExcusedAbsencesInput | Prisma.AttendanceUpdateWithWhereUniqueWithoutExcusedAbsencesInput[]
+  updateMany?: Prisma.AttendanceUpdateManyWithWhereWithoutExcusedAbsencesInput | Prisma.AttendanceUpdateManyWithWhereWithoutExcusedAbsencesInput[]
   deleteMany?: Prisma.AttendanceScalarWhereInput | Prisma.AttendanceScalarWhereInput[]
 }
 
@@ -414,17 +459,37 @@ export type DateTimeFieldUpdateOperationsInput = {
 export type AttendanceCreateWithoutPresentsInput = {
   date?: Date | string
   class: Prisma.ClassCreateNestedOneWithoutAttendanceInput
+  excusedAbsences?: Prisma.UserCreateNestedManyWithoutExcusedAbsencesInput
 }
 
 export type AttendanceUncheckedCreateWithoutPresentsInput = {
   id?: number
   classId: number
   date?: Date | string
+  excusedAbsences?: Prisma.UserUncheckedCreateNestedManyWithoutExcusedAbsencesInput
 }
 
 export type AttendanceCreateOrConnectWithoutPresentsInput = {
   where: Prisma.AttendanceWhereUniqueInput
   create: Prisma.XOR<Prisma.AttendanceCreateWithoutPresentsInput, Prisma.AttendanceUncheckedCreateWithoutPresentsInput>
+}
+
+export type AttendanceCreateWithoutExcusedAbsencesInput = {
+  date?: Date | string
+  class: Prisma.ClassCreateNestedOneWithoutAttendanceInput
+  presents?: Prisma.UserCreateNestedManyWithoutAttendancesInput
+}
+
+export type AttendanceUncheckedCreateWithoutExcusedAbsencesInput = {
+  id?: number
+  classId: number
+  date?: Date | string
+  presents?: Prisma.UserUncheckedCreateNestedManyWithoutAttendancesInput
+}
+
+export type AttendanceCreateOrConnectWithoutExcusedAbsencesInput = {
+  where: Prisma.AttendanceWhereUniqueInput
+  create: Prisma.XOR<Prisma.AttendanceCreateWithoutExcusedAbsencesInput, Prisma.AttendanceUncheckedCreateWithoutExcusedAbsencesInput>
 }
 
 export type AttendanceUpsertWithWhereUniqueWithoutPresentsInput = {
@@ -452,15 +517,33 @@ export type AttendanceScalarWhereInput = {
   date?: Prisma.DateTimeFilter<"Attendance"> | Date | string
 }
 
+export type AttendanceUpsertWithWhereUniqueWithoutExcusedAbsencesInput = {
+  where: Prisma.AttendanceWhereUniqueInput
+  update: Prisma.XOR<Prisma.AttendanceUpdateWithoutExcusedAbsencesInput, Prisma.AttendanceUncheckedUpdateWithoutExcusedAbsencesInput>
+  create: Prisma.XOR<Prisma.AttendanceCreateWithoutExcusedAbsencesInput, Prisma.AttendanceUncheckedCreateWithoutExcusedAbsencesInput>
+}
+
+export type AttendanceUpdateWithWhereUniqueWithoutExcusedAbsencesInput = {
+  where: Prisma.AttendanceWhereUniqueInput
+  data: Prisma.XOR<Prisma.AttendanceUpdateWithoutExcusedAbsencesInput, Prisma.AttendanceUncheckedUpdateWithoutExcusedAbsencesInput>
+}
+
+export type AttendanceUpdateManyWithWhereWithoutExcusedAbsencesInput = {
+  where: Prisma.AttendanceScalarWhereInput
+  data: Prisma.XOR<Prisma.AttendanceUpdateManyMutationInput, Prisma.AttendanceUncheckedUpdateManyWithoutExcusedAbsencesInput>
+}
+
 export type AttendanceCreateWithoutClassInput = {
   date?: Date | string
   presents?: Prisma.UserCreateNestedManyWithoutAttendancesInput
+  excusedAbsences?: Prisma.UserCreateNestedManyWithoutExcusedAbsencesInput
 }
 
 export type AttendanceUncheckedCreateWithoutClassInput = {
   id?: number
   date?: Date | string
   presents?: Prisma.UserUncheckedCreateNestedManyWithoutAttendancesInput
+  excusedAbsences?: Prisma.UserUncheckedCreateNestedManyWithoutExcusedAbsencesInput
 }
 
 export type AttendanceCreateOrConnectWithoutClassInput = {
@@ -492,15 +575,36 @@ export type AttendanceUpdateManyWithWhereWithoutClassInput = {
 export type AttendanceUpdateWithoutPresentsInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   class?: Prisma.ClassUpdateOneRequiredWithoutAttendanceNestedInput
+  excusedAbsences?: Prisma.UserUpdateManyWithoutExcusedAbsencesNestedInput
 }
 
 export type AttendanceUncheckedUpdateWithoutPresentsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   classId?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  excusedAbsences?: Prisma.UserUncheckedUpdateManyWithoutExcusedAbsencesNestedInput
 }
 
 export type AttendanceUncheckedUpdateManyWithoutPresentsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  classId?: Prisma.IntFieldUpdateOperationsInput | number
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type AttendanceUpdateWithoutExcusedAbsencesInput = {
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  class?: Prisma.ClassUpdateOneRequiredWithoutAttendanceNestedInput
+  presents?: Prisma.UserUpdateManyWithoutAttendancesNestedInput
+}
+
+export type AttendanceUncheckedUpdateWithoutExcusedAbsencesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  classId?: Prisma.IntFieldUpdateOperationsInput | number
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  presents?: Prisma.UserUncheckedUpdateManyWithoutAttendancesNestedInput
+}
+
+export type AttendanceUncheckedUpdateManyWithoutExcusedAbsencesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   classId?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -514,12 +618,14 @@ export type AttendanceCreateManyClassInput = {
 export type AttendanceUpdateWithoutClassInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   presents?: Prisma.UserUpdateManyWithoutAttendancesNestedInput
+  excusedAbsences?: Prisma.UserUpdateManyWithoutExcusedAbsencesNestedInput
 }
 
 export type AttendanceUncheckedUpdateWithoutClassInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   presents?: Prisma.UserUncheckedUpdateManyWithoutAttendancesNestedInput
+  excusedAbsences?: Prisma.UserUncheckedUpdateManyWithoutExcusedAbsencesNestedInput
 }
 
 export type AttendanceUncheckedUpdateManyWithoutClassInput = {
@@ -534,10 +640,12 @@ export type AttendanceUncheckedUpdateManyWithoutClassInput = {
 
 export type AttendanceCountOutputType = {
   presents: number
+  excusedAbsences: number
 }
 
 export type AttendanceCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   presents?: boolean | AttendanceCountOutputTypeCountPresentsArgs
+  excusedAbsences?: boolean | AttendanceCountOutputTypeCountExcusedAbsencesArgs
 }
 
 /**
@@ -557,6 +665,13 @@ export type AttendanceCountOutputTypeCountPresentsArgs<ExtArgs extends runtime.T
   where?: Prisma.UserWhereInput
 }
 
+/**
+ * AttendanceCountOutputType without action
+ */
+export type AttendanceCountOutputTypeCountExcusedAbsencesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserWhereInput
+}
+
 
 export type AttendanceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -564,6 +679,7 @@ export type AttendanceSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   date?: boolean
   class?: boolean | Prisma.ClassDefaultArgs<ExtArgs>
   presents?: boolean | Prisma.Attendance$presentsArgs<ExtArgs>
+  excusedAbsences?: boolean | Prisma.Attendance$excusedAbsencesArgs<ExtArgs>
   _count?: boolean | Prisma.AttendanceCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["attendance"]>
 
@@ -591,6 +707,7 @@ export type AttendanceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs
 export type AttendanceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   class?: boolean | Prisma.ClassDefaultArgs<ExtArgs>
   presents?: boolean | Prisma.Attendance$presentsArgs<ExtArgs>
+  excusedAbsences?: boolean | Prisma.Attendance$excusedAbsencesArgs<ExtArgs>
   _count?: boolean | Prisma.AttendanceCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type AttendanceIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -605,6 +722,7 @@ export type $AttendancePayload<ExtArgs extends runtime.Types.Extensions.Internal
   objects: {
     class: Prisma.$ClassPayload<ExtArgs>
     presents: Prisma.$UserPayload<ExtArgs>[]
+    excusedAbsences: Prisma.$UserPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1006,6 +1124,7 @@ export interface Prisma__AttendanceClient<T, Null = never, ExtArgs extends runti
   readonly [Symbol.toStringTag]: "PrismaPromise"
   class<T extends Prisma.ClassDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClassDefaultArgs<ExtArgs>>): Prisma.Prisma__ClassClient<runtime.Types.Result.GetResult<Prisma.$ClassPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   presents<T extends Prisma.Attendance$presentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Attendance$presentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  excusedAbsences<T extends Prisma.Attendance$excusedAbsencesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Attendance$excusedAbsencesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1437,6 +1556,30 @@ export type AttendanceDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.In
  * Attendance.presents
  */
 export type Attendance$presentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+  orderBy?: Prisma.UserOrderByWithRelationInput | Prisma.UserOrderByWithRelationInput[]
+  cursor?: Prisma.UserWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
+}
+
+/**
+ * Attendance.excusedAbsences
+ */
+export type Attendance$excusedAbsencesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the User
    */
