@@ -33,6 +33,8 @@ export async function POST(req: Request) {
       {
         id: user.id,
         mobile: user.mobile,
+        firstName: user.firstName,
+        lastName: user.lastName,
         roles: user.roles.map(r => r.role)
       },
       JWT_SECRET,

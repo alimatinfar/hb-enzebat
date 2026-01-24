@@ -11,6 +11,7 @@ import MobileField, {MobileFieldType, mobileFieldName} from "@/components/pages/
 import PasswordField, {passwordFieldName, PasswordFieldType} from "@/components/pages/auth/FormFields/PasswordField";
 import ROUTER_LINKS from "@/constances/routerLinks";
 import setToken from "@/utils/authentication/setToken";
+import useGoToPanel from "@/hooks/useGoToPanel";
 
 type FormDataType = {
   [mobileFieldName]: MobileFieldType;
@@ -30,7 +31,7 @@ export default function LoginPage() {
     },
   })
 
-  const router = useRouter()
+  const {goToPanel} = useGoToPanel()
 
   const onSubmitHandler = useCallback(function (formData: FormDataType) {
     const data: BodyDataType = {
@@ -40,11 +41,11 @@ export default function LoginPage() {
 
     mutate(data, {
       onSuccess: async (response) => {
-        router.push(ROUTER_LINKS.TEACHER_PANEL_CLASSES)
         setToken(response?.token)
+        goToPanel()
       },
     })
-  }, [mutate])
+  }, [mutate, goToPanel])
 
   const {
     formMethods, onSubmit
