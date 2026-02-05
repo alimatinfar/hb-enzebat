@@ -5,11 +5,19 @@ import Button from "@/components/Form/Button/Button";
 import ArrowIcon from "@/components/svg/ArrowIcon";
 import Link from "next/link";
 import getAccessiblePanels from "@/utils/authentication/getAccessiblePanels";
+import {useEffect} from "react";
+import useLogout from "@/request/hooks/useLogout";
 
 
 function SelectPanelPage() {
 
   const accessiblePanels = getAccessiblePanels()
+
+  const {logoutHandler} = useLogout()
+
+  useEffect(function () {
+    if (accessiblePanels?.length < 1) logoutHandler()
+  }, [accessiblePanels])
 
   return (
     <div className='space-y-12'>
