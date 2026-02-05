@@ -20,8 +20,8 @@ model User {
   attendances     Attendance[] @relation("AttendancePresents")
   excusedAbsences Attendance[] @relation("AttendanceExcusedAbsences")
 
-  cityId Int
-  city   City @relation(fields: [cityId], references: [id])
+  cityId Int?
+  city   City? @relation(fields: [cityId], references: [id])
 }
 
 model UserRole {
@@ -44,8 +44,8 @@ model Class {
   teacherId  Int
   students   User[]       @relation("StudentClasses")
   attendance Attendance[]
-  cityId     Int
-  city       City         @relation(fields: [cityId], references: [id])
+  cityId     Int?
+  city       City?         @relation(fields: [cityId], references: [id])
 }
 
 model Attendance {

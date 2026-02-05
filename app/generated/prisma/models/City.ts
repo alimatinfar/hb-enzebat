@@ -271,9 +271,9 @@ export type CityUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
-export type CityScalarRelationFilter = {
-  is?: Prisma.CityWhereInput
-  isNot?: Prisma.CityWhereInput
+export type CityNullableScalarRelationFilter = {
+  is?: Prisma.CityWhereInput | null
+  isNot?: Prisma.CityWhereInput | null
 }
 
 export type CityCountOrderByAggregateInput = {
@@ -305,10 +305,12 @@ export type CityCreateNestedOneWithoutUsersInput = {
   connect?: Prisma.CityWhereUniqueInput
 }
 
-export type CityUpdateOneRequiredWithoutUsersNestedInput = {
+export type CityUpdateOneWithoutUsersNestedInput = {
   create?: Prisma.XOR<Prisma.CityCreateWithoutUsersInput, Prisma.CityUncheckedCreateWithoutUsersInput>
   connectOrCreate?: Prisma.CityCreateOrConnectWithoutUsersInput
   upsert?: Prisma.CityUpsertWithoutUsersInput
+  disconnect?: Prisma.CityWhereInput | boolean
+  delete?: Prisma.CityWhereInput | boolean
   connect?: Prisma.CityWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.CityUpdateToOneWithWhereWithoutUsersInput, Prisma.CityUpdateWithoutUsersInput>, Prisma.CityUncheckedUpdateWithoutUsersInput>
 }
@@ -319,10 +321,12 @@ export type CityCreateNestedOneWithoutClassesInput = {
   connect?: Prisma.CityWhereUniqueInput
 }
 
-export type CityUpdateOneRequiredWithoutClassesNestedInput = {
+export type CityUpdateOneWithoutClassesNestedInput = {
   create?: Prisma.XOR<Prisma.CityCreateWithoutClassesInput, Prisma.CityUncheckedCreateWithoutClassesInput>
   connectOrCreate?: Prisma.CityCreateOrConnectWithoutClassesInput
   upsert?: Prisma.CityUpsertWithoutClassesInput
+  disconnect?: Prisma.CityWhereInput | boolean
+  delete?: Prisma.CityWhereInput | boolean
   connect?: Prisma.CityWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.CityUpdateToOneWithWhereWithoutClassesInput, Prisma.CityUpdateWithoutClassesInput>, Prisma.CityUncheckedUpdateWithoutClassesInput>
 }
