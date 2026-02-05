@@ -19,6 +19,9 @@ model User {
   studentClasses  Class[]      @relation("StudentClasses")
   attendances     Attendance[] @relation("AttendancePresents")
   excusedAbsences Attendance[] @relation("AttendanceExcusedAbsences")
+
+  cityId Int
+  city   City @relation(fields: [cityId], references: [id])
 }
 
 model UserRole {
@@ -41,6 +44,8 @@ model Class {
   teacherId  Int
   students   User[]       @relation("StudentClasses")
   attendance Attendance[]
+  cityId     Int
+  city       City         @relation(fields: [cityId], references: [id])
 }
 
 model Attendance {
@@ -50,4 +55,11 @@ model Attendance {
   date            DateTime @default(now())
   presents        User[]   @relation("AttendancePresents")
   excusedAbsences User[]   @relation("AttendanceExcusedAbsences")
+}
+
+model City {
+  id      Int     @id @default(autoincrement())
+  name    String  @unique
+  users   User[]
+  classes Class[]
 }

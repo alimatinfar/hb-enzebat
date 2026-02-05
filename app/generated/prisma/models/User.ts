@@ -28,10 +28,12 @@ export type AggregateUser = {
 
 export type UserAvgAggregateOutputType = {
   id: number | null
+  cityId: number | null
 }
 
 export type UserSumAggregateOutputType = {
   id: number | null
+  cityId: number | null
 }
 
 export type UserMinAggregateOutputType = {
@@ -40,6 +42,7 @@ export type UserMinAggregateOutputType = {
   password: string | null
   firstName: string | null
   lastName: string | null
+  cityId: number | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -48,6 +51,7 @@ export type UserMaxAggregateOutputType = {
   password: string | null
   firstName: string | null
   lastName: string | null
+  cityId: number | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -56,16 +60,19 @@ export type UserCountAggregateOutputType = {
   password: number
   firstName: number
   lastName: number
+  cityId: number
   _all: number
 }
 
 
 export type UserAvgAggregateInputType = {
   id?: true
+  cityId?: true
 }
 
 export type UserSumAggregateInputType = {
   id?: true
+  cityId?: true
 }
 
 export type UserMinAggregateInputType = {
@@ -74,6 +81,7 @@ export type UserMinAggregateInputType = {
   password?: true
   firstName?: true
   lastName?: true
+  cityId?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -82,6 +90,7 @@ export type UserMaxAggregateInputType = {
   password?: true
   firstName?: true
   lastName?: true
+  cityId?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -90,6 +99,7 @@ export type UserCountAggregateInputType = {
   password?: true
   firstName?: true
   lastName?: true
+  cityId?: true
   _all?: true
 }
 
@@ -185,6 +195,7 @@ export type UserGroupByOutputType = {
   password: string
   firstName: string | null
   lastName: string | null
+  cityId: number
   _count: UserCountAggregateOutputType | null
   _avg: UserAvgAggregateOutputType | null
   _sum: UserSumAggregateOutputType | null
@@ -216,11 +227,13 @@ export type UserWhereInput = {
   password?: Prisma.StringFilter<"User"> | string
   firstName?: Prisma.StringNullableFilter<"User"> | string | null
   lastName?: Prisma.StringNullableFilter<"User"> | string | null
+  cityId?: Prisma.IntFilter<"User"> | number
   roles?: Prisma.UserRoleListRelationFilter
   teacherClasses?: Prisma.ClassListRelationFilter
   studentClasses?: Prisma.ClassListRelationFilter
   attendances?: Prisma.AttendanceListRelationFilter
   excusedAbsences?: Prisma.AttendanceListRelationFilter
+  city?: Prisma.XOR<Prisma.CityScalarRelationFilter, Prisma.CityWhereInput>
 }
 
 export type UserOrderByWithRelationInput = {
@@ -229,11 +242,13 @@ export type UserOrderByWithRelationInput = {
   password?: Prisma.SortOrder
   firstName?: Prisma.SortOrderInput | Prisma.SortOrder
   lastName?: Prisma.SortOrderInput | Prisma.SortOrder
+  cityId?: Prisma.SortOrder
   roles?: Prisma.UserRoleOrderByRelationAggregateInput
   teacherClasses?: Prisma.ClassOrderByRelationAggregateInput
   studentClasses?: Prisma.ClassOrderByRelationAggregateInput
   attendances?: Prisma.AttendanceOrderByRelationAggregateInput
   excusedAbsences?: Prisma.AttendanceOrderByRelationAggregateInput
+  city?: Prisma.CityOrderByWithRelationInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -245,11 +260,13 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   password?: Prisma.StringFilter<"User"> | string
   firstName?: Prisma.StringNullableFilter<"User"> | string | null
   lastName?: Prisma.StringNullableFilter<"User"> | string | null
+  cityId?: Prisma.IntFilter<"User"> | number
   roles?: Prisma.UserRoleListRelationFilter
   teacherClasses?: Prisma.ClassListRelationFilter
   studentClasses?: Prisma.ClassListRelationFilter
   attendances?: Prisma.AttendanceListRelationFilter
   excusedAbsences?: Prisma.AttendanceListRelationFilter
+  city?: Prisma.XOR<Prisma.CityScalarRelationFilter, Prisma.CityWhereInput>
 }, "id" | "mobile">
 
 export type UserOrderByWithAggregationInput = {
@@ -258,6 +275,7 @@ export type UserOrderByWithAggregationInput = {
   password?: Prisma.SortOrder
   firstName?: Prisma.SortOrderInput | Prisma.SortOrder
   lastName?: Prisma.SortOrderInput | Prisma.SortOrder
+  cityId?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
@@ -274,6 +292,7 @@ export type UserScalarWhereWithAggregatesInput = {
   password?: Prisma.StringWithAggregatesFilter<"User"> | string
   firstName?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   lastName?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  cityId?: Prisma.IntWithAggregatesFilter<"User"> | number
 }
 
 export type UserCreateInput = {
@@ -286,6 +305,7 @@ export type UserCreateInput = {
   studentClasses?: Prisma.ClassCreateNestedManyWithoutStudentsInput
   attendances?: Prisma.AttendanceCreateNestedManyWithoutPresentsInput
   excusedAbsences?: Prisma.AttendanceCreateNestedManyWithoutExcusedAbsencesInput
+  city: Prisma.CityCreateNestedOneWithoutUsersInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -294,6 +314,7 @@ export type UserUncheckedCreateInput = {
   password: string
   firstName?: string | null
   lastName?: string | null
+  cityId: number
   roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   teacherClasses?: Prisma.ClassUncheckedCreateNestedManyWithoutTeacherInput
   studentClasses?: Prisma.ClassUncheckedCreateNestedManyWithoutStudentsInput
@@ -311,6 +332,7 @@ export type UserUpdateInput = {
   studentClasses?: Prisma.ClassUpdateManyWithoutStudentsNestedInput
   attendances?: Prisma.AttendanceUpdateManyWithoutPresentsNestedInput
   excusedAbsences?: Prisma.AttendanceUpdateManyWithoutExcusedAbsencesNestedInput
+  city?: Prisma.CityUpdateOneRequiredWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -319,6 +341,7 @@ export type UserUncheckedUpdateInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cityId?: Prisma.IntFieldUpdateOperationsInput | number
   roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   teacherClasses?: Prisma.ClassUncheckedUpdateManyWithoutTeacherNestedInput
   studentClasses?: Prisma.ClassUncheckedUpdateManyWithoutStudentsNestedInput
@@ -332,6 +355,7 @@ export type UserCreateManyInput = {
   password: string
   firstName?: string | null
   lastName?: string | null
+  cityId: number
 }
 
 export type UserUpdateManyMutationInput = {
@@ -347,6 +371,7 @@ export type UserUncheckedUpdateManyInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cityId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type UserCountOrderByAggregateInput = {
@@ -355,10 +380,12 @@ export type UserCountOrderByAggregateInput = {
   password?: Prisma.SortOrder
   firstName?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
+  cityId?: Prisma.SortOrder
 }
 
 export type UserAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  cityId?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -367,6 +394,7 @@ export type UserMaxOrderByAggregateInput = {
   password?: Prisma.SortOrder
   firstName?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
+  cityId?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -375,10 +403,12 @@ export type UserMinOrderByAggregateInput = {
   password?: Prisma.SortOrder
   firstName?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
+  cityId?: Prisma.SortOrder
 }
 
 export type UserSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  cityId?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
@@ -554,6 +584,48 @@ export type UserUncheckedUpdateManyWithoutExcusedAbsencesNestedInput = {
   deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
 }
 
+export type UserCreateNestedManyWithoutCityInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCityInput, Prisma.UserUncheckedCreateWithoutCityInput> | Prisma.UserCreateWithoutCityInput[] | Prisma.UserUncheckedCreateWithoutCityInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCityInput | Prisma.UserCreateOrConnectWithoutCityInput[]
+  createMany?: Prisma.UserCreateManyCityInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUncheckedCreateNestedManyWithoutCityInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCityInput, Prisma.UserUncheckedCreateWithoutCityInput> | Prisma.UserCreateWithoutCityInput[] | Prisma.UserUncheckedCreateWithoutCityInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCityInput | Prisma.UserCreateOrConnectWithoutCityInput[]
+  createMany?: Prisma.UserCreateManyCityInputEnvelope
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+}
+
+export type UserUpdateManyWithoutCityNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCityInput, Prisma.UserUncheckedCreateWithoutCityInput> | Prisma.UserCreateWithoutCityInput[] | Prisma.UserUncheckedCreateWithoutCityInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCityInput | Prisma.UserCreateOrConnectWithoutCityInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutCityInput | Prisma.UserUpsertWithWhereUniqueWithoutCityInput[]
+  createMany?: Prisma.UserCreateManyCityInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutCityInput | Prisma.UserUpdateWithWhereUniqueWithoutCityInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutCityInput | Prisma.UserUpdateManyWithWhereWithoutCityInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
+export type UserUncheckedUpdateManyWithoutCityNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCityInput, Prisma.UserUncheckedCreateWithoutCityInput> | Prisma.UserCreateWithoutCityInput[] | Prisma.UserUncheckedCreateWithoutCityInput[]
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCityInput | Prisma.UserCreateOrConnectWithoutCityInput[]
+  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutCityInput | Prisma.UserUpsertWithWhereUniqueWithoutCityInput[]
+  createMany?: Prisma.UserCreateManyCityInputEnvelope
+  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
+  update?: Prisma.UserUpdateWithWhereUniqueWithoutCityInput | Prisma.UserUpdateWithWhereUniqueWithoutCityInput[]
+  updateMany?: Prisma.UserUpdateManyWithWhereWithoutCityInput | Prisma.UserUpdateManyWithWhereWithoutCityInput[]
+  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
+}
+
 export type UserCreateWithoutRolesInput = {
   mobile: string
   password: string
@@ -563,6 +635,7 @@ export type UserCreateWithoutRolesInput = {
   studentClasses?: Prisma.ClassCreateNestedManyWithoutStudentsInput
   attendances?: Prisma.AttendanceCreateNestedManyWithoutPresentsInput
   excusedAbsences?: Prisma.AttendanceCreateNestedManyWithoutExcusedAbsencesInput
+  city: Prisma.CityCreateNestedOneWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutRolesInput = {
@@ -571,6 +644,7 @@ export type UserUncheckedCreateWithoutRolesInput = {
   password: string
   firstName?: string | null
   lastName?: string | null
+  cityId: number
   teacherClasses?: Prisma.ClassUncheckedCreateNestedManyWithoutTeacherInput
   studentClasses?: Prisma.ClassUncheckedCreateNestedManyWithoutStudentsInput
   attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutPresentsInput
@@ -602,6 +676,7 @@ export type UserUpdateWithoutRolesInput = {
   studentClasses?: Prisma.ClassUpdateManyWithoutStudentsNestedInput
   attendances?: Prisma.AttendanceUpdateManyWithoutPresentsNestedInput
   excusedAbsences?: Prisma.AttendanceUpdateManyWithoutExcusedAbsencesNestedInput
+  city?: Prisma.CityUpdateOneRequiredWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRolesInput = {
@@ -610,6 +685,7 @@ export type UserUncheckedUpdateWithoutRolesInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cityId?: Prisma.IntFieldUpdateOperationsInput | number
   teacherClasses?: Prisma.ClassUncheckedUpdateManyWithoutTeacherNestedInput
   studentClasses?: Prisma.ClassUncheckedUpdateManyWithoutStudentsNestedInput
   attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutPresentsNestedInput
@@ -625,6 +701,7 @@ export type UserCreateWithoutTeacherClassesInput = {
   studentClasses?: Prisma.ClassCreateNestedManyWithoutStudentsInput
   attendances?: Prisma.AttendanceCreateNestedManyWithoutPresentsInput
   excusedAbsences?: Prisma.AttendanceCreateNestedManyWithoutExcusedAbsencesInput
+  city: Prisma.CityCreateNestedOneWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutTeacherClassesInput = {
@@ -633,6 +710,7 @@ export type UserUncheckedCreateWithoutTeacherClassesInput = {
   password: string
   firstName?: string | null
   lastName?: string | null
+  cityId: number
   roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   studentClasses?: Prisma.ClassUncheckedCreateNestedManyWithoutStudentsInput
   attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutPresentsInput
@@ -653,6 +731,7 @@ export type UserCreateWithoutStudentClassesInput = {
   teacherClasses?: Prisma.ClassCreateNestedManyWithoutTeacherInput
   attendances?: Prisma.AttendanceCreateNestedManyWithoutPresentsInput
   excusedAbsences?: Prisma.AttendanceCreateNestedManyWithoutExcusedAbsencesInput
+  city: Prisma.CityCreateNestedOneWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutStudentClassesInput = {
@@ -661,6 +740,7 @@ export type UserUncheckedCreateWithoutStudentClassesInput = {
   password: string
   firstName?: string | null
   lastName?: string | null
+  cityId: number
   roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   teacherClasses?: Prisma.ClassUncheckedCreateNestedManyWithoutTeacherInput
   attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutPresentsInput
@@ -692,6 +772,7 @@ export type UserUpdateWithoutTeacherClassesInput = {
   studentClasses?: Prisma.ClassUpdateManyWithoutStudentsNestedInput
   attendances?: Prisma.AttendanceUpdateManyWithoutPresentsNestedInput
   excusedAbsences?: Prisma.AttendanceUpdateManyWithoutExcusedAbsencesNestedInput
+  city?: Prisma.CityUpdateOneRequiredWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTeacherClassesInput = {
@@ -700,6 +781,7 @@ export type UserUncheckedUpdateWithoutTeacherClassesInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cityId?: Prisma.IntFieldUpdateOperationsInput | number
   roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   studentClasses?: Prisma.ClassUncheckedUpdateManyWithoutStudentsNestedInput
   attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutPresentsNestedInput
@@ -731,6 +813,7 @@ export type UserScalarWhereInput = {
   password?: Prisma.StringFilter<"User"> | string
   firstName?: Prisma.StringNullableFilter<"User"> | string | null
   lastName?: Prisma.StringNullableFilter<"User"> | string | null
+  cityId?: Prisma.IntFilter<"User"> | number
 }
 
 export type UserCreateWithoutAttendancesInput = {
@@ -742,6 +825,7 @@ export type UserCreateWithoutAttendancesInput = {
   teacherClasses?: Prisma.ClassCreateNestedManyWithoutTeacherInput
   studentClasses?: Prisma.ClassCreateNestedManyWithoutStudentsInput
   excusedAbsences?: Prisma.AttendanceCreateNestedManyWithoutExcusedAbsencesInput
+  city: Prisma.CityCreateNestedOneWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutAttendancesInput = {
@@ -750,6 +834,7 @@ export type UserUncheckedCreateWithoutAttendancesInput = {
   password: string
   firstName?: string | null
   lastName?: string | null
+  cityId: number
   roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   teacherClasses?: Prisma.ClassUncheckedCreateNestedManyWithoutTeacherInput
   studentClasses?: Prisma.ClassUncheckedCreateNestedManyWithoutStudentsInput
@@ -770,6 +855,7 @@ export type UserCreateWithoutExcusedAbsencesInput = {
   teacherClasses?: Prisma.ClassCreateNestedManyWithoutTeacherInput
   studentClasses?: Prisma.ClassCreateNestedManyWithoutStudentsInput
   attendances?: Prisma.AttendanceCreateNestedManyWithoutPresentsInput
+  city: Prisma.CityCreateNestedOneWithoutUsersInput
 }
 
 export type UserUncheckedCreateWithoutExcusedAbsencesInput = {
@@ -778,6 +864,7 @@ export type UserUncheckedCreateWithoutExcusedAbsencesInput = {
   password: string
   firstName?: string | null
   lastName?: string | null
+  cityId: number
   roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
   teacherClasses?: Prisma.ClassUncheckedCreateNestedManyWithoutTeacherInput
   studentClasses?: Prisma.ClassUncheckedCreateNestedManyWithoutStudentsInput
@@ -821,6 +908,57 @@ export type UserUpdateManyWithWhereWithoutExcusedAbsencesInput = {
   data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutExcusedAbsencesInput>
 }
 
+export type UserCreateWithoutCityInput = {
+  mobile: string
+  password: string
+  firstName?: string | null
+  lastName?: string | null
+  roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  teacherClasses?: Prisma.ClassCreateNestedManyWithoutTeacherInput
+  studentClasses?: Prisma.ClassCreateNestedManyWithoutStudentsInput
+  attendances?: Prisma.AttendanceCreateNestedManyWithoutPresentsInput
+  excusedAbsences?: Prisma.AttendanceCreateNestedManyWithoutExcusedAbsencesInput
+}
+
+export type UserUncheckedCreateWithoutCityInput = {
+  id?: number
+  mobile: string
+  password: string
+  firstName?: string | null
+  lastName?: string | null
+  roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  teacherClasses?: Prisma.ClassUncheckedCreateNestedManyWithoutTeacherInput
+  studentClasses?: Prisma.ClassUncheckedCreateNestedManyWithoutStudentsInput
+  attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutPresentsInput
+  excusedAbsences?: Prisma.AttendanceUncheckedCreateNestedManyWithoutExcusedAbsencesInput
+}
+
+export type UserCreateOrConnectWithoutCityInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCityInput, Prisma.UserUncheckedCreateWithoutCityInput>
+}
+
+export type UserCreateManyCityInputEnvelope = {
+  data: Prisma.UserCreateManyCityInput | Prisma.UserCreateManyCityInput[]
+  skipDuplicates?: boolean
+}
+
+export type UserUpsertWithWhereUniqueWithoutCityInput = {
+  where: Prisma.UserWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCityInput, Prisma.UserUncheckedUpdateWithoutCityInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCityInput, Prisma.UserUncheckedCreateWithoutCityInput>
+}
+
+export type UserUpdateWithWhereUniqueWithoutCityInput = {
+  where: Prisma.UserWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCityInput, Prisma.UserUncheckedUpdateWithoutCityInput>
+}
+
+export type UserUpdateManyWithWhereWithoutCityInput = {
+  where: Prisma.UserScalarWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutCityInput>
+}
+
 export type UserUpdateWithoutStudentClassesInput = {
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
@@ -830,6 +968,7 @@ export type UserUpdateWithoutStudentClassesInput = {
   teacherClasses?: Prisma.ClassUpdateManyWithoutTeacherNestedInput
   attendances?: Prisma.AttendanceUpdateManyWithoutPresentsNestedInput
   excusedAbsences?: Prisma.AttendanceUpdateManyWithoutExcusedAbsencesNestedInput
+  city?: Prisma.CityUpdateOneRequiredWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStudentClassesInput = {
@@ -838,6 +977,7 @@ export type UserUncheckedUpdateWithoutStudentClassesInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cityId?: Prisma.IntFieldUpdateOperationsInput | number
   roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   teacherClasses?: Prisma.ClassUncheckedUpdateManyWithoutTeacherNestedInput
   attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutPresentsNestedInput
@@ -850,6 +990,7 @@ export type UserUncheckedUpdateManyWithoutStudentClassesInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cityId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type UserUpdateWithoutAttendancesInput = {
@@ -861,6 +1002,7 @@ export type UserUpdateWithoutAttendancesInput = {
   teacherClasses?: Prisma.ClassUpdateManyWithoutTeacherNestedInput
   studentClasses?: Prisma.ClassUpdateManyWithoutStudentsNestedInput
   excusedAbsences?: Prisma.AttendanceUpdateManyWithoutExcusedAbsencesNestedInput
+  city?: Prisma.CityUpdateOneRequiredWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAttendancesInput = {
@@ -869,6 +1011,7 @@ export type UserUncheckedUpdateWithoutAttendancesInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cityId?: Prisma.IntFieldUpdateOperationsInput | number
   roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
   teacherClasses?: Prisma.ClassUncheckedUpdateManyWithoutTeacherNestedInput
   studentClasses?: Prisma.ClassUncheckedUpdateManyWithoutStudentsNestedInput
@@ -881,6 +1024,7 @@ export type UserUncheckedUpdateManyWithoutAttendancesInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cityId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type UserUpdateWithoutExcusedAbsencesInput = {
@@ -892,9 +1036,52 @@ export type UserUpdateWithoutExcusedAbsencesInput = {
   teacherClasses?: Prisma.ClassUpdateManyWithoutTeacherNestedInput
   studentClasses?: Prisma.ClassUpdateManyWithoutStudentsNestedInput
   attendances?: Prisma.AttendanceUpdateManyWithoutPresentsNestedInput
+  city?: Prisma.CityUpdateOneRequiredWithoutUsersNestedInput
 }
 
 export type UserUncheckedUpdateWithoutExcusedAbsencesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  mobile?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cityId?: Prisma.IntFieldUpdateOperationsInput | number
+  roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  teacherClasses?: Prisma.ClassUncheckedUpdateManyWithoutTeacherNestedInput
+  studentClasses?: Prisma.ClassUncheckedUpdateManyWithoutStudentsNestedInput
+  attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutPresentsNestedInput
+}
+
+export type UserUncheckedUpdateManyWithoutExcusedAbsencesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  mobile?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cityId?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type UserCreateManyCityInput = {
+  id?: number
+  mobile: string
+  password: string
+  firstName?: string | null
+  lastName?: string | null
+}
+
+export type UserUpdateWithoutCityInput = {
+  mobile?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  teacherClasses?: Prisma.ClassUpdateManyWithoutTeacherNestedInput
+  studentClasses?: Prisma.ClassUpdateManyWithoutStudentsNestedInput
+  attendances?: Prisma.AttendanceUpdateManyWithoutPresentsNestedInput
+  excusedAbsences?: Prisma.AttendanceUpdateManyWithoutExcusedAbsencesNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCityInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
@@ -904,9 +1091,10 @@ export type UserUncheckedUpdateWithoutExcusedAbsencesInput = {
   teacherClasses?: Prisma.ClassUncheckedUpdateManyWithoutTeacherNestedInput
   studentClasses?: Prisma.ClassUncheckedUpdateManyWithoutStudentsNestedInput
   attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutPresentsNestedInput
+  excusedAbsences?: Prisma.AttendanceUncheckedUpdateManyWithoutExcusedAbsencesNestedInput
 }
 
-export type UserUncheckedUpdateManyWithoutExcusedAbsencesInput = {
+export type UserUncheckedUpdateManyWithoutCityInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
@@ -987,11 +1175,13 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   password?: boolean
   firstName?: boolean
   lastName?: boolean
+  cityId?: boolean
   roles?: boolean | Prisma.User$rolesArgs<ExtArgs>
   teacherClasses?: boolean | Prisma.User$teacherClassesArgs<ExtArgs>
   studentClasses?: boolean | Prisma.User$studentClassesArgs<ExtArgs>
   attendances?: boolean | Prisma.User$attendancesArgs<ExtArgs>
   excusedAbsences?: boolean | Prisma.User$excusedAbsencesArgs<ExtArgs>
+  city?: boolean | Prisma.CityDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1001,6 +1191,8 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   password?: boolean
   firstName?: boolean
   lastName?: boolean
+  cityId?: boolean
+  city?: boolean | Prisma.CityDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1009,6 +1201,8 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   password?: boolean
   firstName?: boolean
   lastName?: boolean
+  cityId?: boolean
+  city?: boolean | Prisma.CityDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -1017,19 +1211,25 @@ export type UserSelectScalar = {
   password?: boolean
   firstName?: boolean
   lastName?: boolean
+  cityId?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "mobile" | "password" | "firstName" | "lastName", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "mobile" | "password" | "firstName" | "lastName" | "cityId", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   roles?: boolean | Prisma.User$rolesArgs<ExtArgs>
   teacherClasses?: boolean | Prisma.User$teacherClassesArgs<ExtArgs>
   studentClasses?: boolean | Prisma.User$studentClassesArgs<ExtArgs>
   attendances?: boolean | Prisma.User$attendancesArgs<ExtArgs>
   excusedAbsences?: boolean | Prisma.User$excusedAbsencesArgs<ExtArgs>
+  city?: boolean | Prisma.CityDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  city?: boolean | Prisma.CityDefaultArgs<ExtArgs>
+}
+export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  city?: boolean | Prisma.CityDefaultArgs<ExtArgs>
+}
 
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
@@ -1039,6 +1239,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     studentClasses: Prisma.$ClassPayload<ExtArgs>[]
     attendances: Prisma.$AttendancePayload<ExtArgs>[]
     excusedAbsences: Prisma.$AttendancePayload<ExtArgs>[]
+    city: Prisma.$CityPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1046,6 +1247,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     password: string
     firstName: string | null
     lastName: string | null
+    cityId: number
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -1445,6 +1647,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   studentClasses<T extends Prisma.User$studentClassesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$studentClassesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ClassPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   attendances<T extends Prisma.User$attendancesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$attendancesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AttendancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   excusedAbsences<T extends Prisma.User$excusedAbsencesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$excusedAbsencesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AttendancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  city<T extends Prisma.CityDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CityDefaultArgs<ExtArgs>>): Prisma.Prisma__CityClient<runtime.Types.Result.GetResult<Prisma.$CityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1479,6 +1682,7 @@ export interface UserFieldRefs {
   readonly password: Prisma.FieldRef<"User", 'String'>
   readonly firstName: Prisma.FieldRef<"User", 'String'>
   readonly lastName: Prisma.FieldRef<"User", 'String'>
+  readonly cityId: Prisma.FieldRef<"User", 'Int'>
 }
     
 
@@ -1728,6 +1932,10 @@ export type UserCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    */
   data: Prisma.UserCreateManyInput | Prisma.UserCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1798,6 +2006,10 @@ export type UserUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    * Limit how many Users to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**

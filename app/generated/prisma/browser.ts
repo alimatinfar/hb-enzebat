@@ -37,3 +37,8 @@ export type Class = Prisma.ClassModel
  * 
  */
 export type Attendance = Prisma.AttendanceModel
+/**
+ * Model City
+ * 
+ */
+export type City = Prisma.CityModel
