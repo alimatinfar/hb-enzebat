@@ -15,10 +15,14 @@ export function withRoleAuth(
       });
 
       if (!user) return NextErrorResponse({error: 'کاربر یافت نشد', status: 404})
-
+      console.log({
+        user,
+        hasPermission: user.roles.some((userRole) => roles.includes(userRole.role)),
+        roles: user.roles,
+        mainRoles: roles,
+      })
       // بررسی نقش
-      //@ts-ignore
-      if (!user.roles.some((userRole: string) => !roles.includes(userRole))) {
+      if (!user.roles.some((userRole) => roles.includes(userRole.role))) {
         return NextErrorResponse({error: "دسترسی غیرمجاز", status: 403})
       }
 

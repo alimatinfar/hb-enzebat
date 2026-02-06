@@ -4,20 +4,19 @@ import NextSuccessResponse from "@/utils/backend/response/NextSuccessResponse";
 import prisma from "@/lib/prisma";
 import { Role } from "@/app/generated/prisma/client";
 
-
-const uniqueUsernameErrorMessage = "این نام کاربری قبلاً ثبت شده است"
+const uniqueUsernameErrorMessage = "این نام کاربری قبلاً ثبت شده است";
 
 export const POST = withRoleAuth(["ADMIN"], async (req, adminUser) => {
   const body = await req.json();
-  const { mobile, password, roles } = body;
+  const { mobile, password, roles, cityId, firstName = '', lastName = '' } = body;
 
-  if (!mobile || !password || !roles) {
+  if (!mobile || !password || !roles || !cityId) {
     return NextErrorResponse({ error: "اطلاعات ناقص است", status: 422 });
   }
 
   // چک تکراری بودن نام کاربری
   const existingUser = await prisma.user.findUnique({
-    where: { mobile }
+    where: { mobile },
   });
 
   if (existingUser) {
@@ -29,16 +28,24 @@ export const POST = withRoleAuth(["ADMIN"], async (req, adminUser) => {
       data: {
         mobile,
         password,
+        firstName,
+        lastName,
+        city: {
+          connect: { id: cityId },
+        },
         roles: {
-          create: roles.map((r: Role) => ({ role: r }))
-        }
+          create: roles.map((r: Role) => ({ role: r })),
+        },
       },
-      include: { roles: true }
+      include: {
+        roles: true,
+        city: true,
+      },
     });
 
     return NextSuccessResponse({ data: newUser });
   } catch (err: any) {
-    // هندل کردن خطای unique constraint اگر از چند جا همزمان درخواست بیاد
+    console.log({err})
     if (err.code === "P2002") {
       return NextErrorResponse({ error: uniqueUsernameErrorMessage, status: 409 });
     }
@@ -46,4 +53,3 @@ export const POST = withRoleAuth(["ADMIN"], async (req, adminUser) => {
     return NextErrorResponse({ error: "خطای سرور", status: 500 });
   }
 });
-

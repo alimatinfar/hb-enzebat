@@ -3,6 +3,9 @@ const TEACHER_PANEL_CLASS_ATTENDANCES = (classId: string) => `${TEACHER_PANEL_CL
 const TEACHER_PANEL_CLASS_ATTENDANCE_INFO = (classId: string, attendanceId: string) => `${TEACHER_PANEL_CLASS_ATTENDANCES(classId)}/${attendanceId}`
 
 const APIES = {
+  //admin
+  ADMIN_ADD_USER: '/admin/users/add',
+
   //authentication
   LOGIN: '/auth/login',
 
