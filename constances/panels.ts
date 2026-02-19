@@ -13,6 +13,11 @@ export const PANELS: Record<string, PanelType> = {
     label: 'پنل ادمین',
     link: ROUTER_LINKS.ADMIN_PANEL
   },
+  CITY_ADMIN: {
+    roles: [Role.CITY_ADMIN],
+    label: 'ادمین شهرستان',
+    link: ROUTER_LINKS.ADMIN_PANEL
+  },
   STUDENT: {
     roles: [Role.STUDENT],
     label: 'پنل دانش آموز',

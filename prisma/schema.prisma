@@ -33,6 +33,7 @@ model UserRole {
 
 enum Role {
   ADMIN
+  CITY_ADMIN
   TEACHER
   STUDENT
 }

@@ -15,7 +15,7 @@ type BodyDataType = {
   firstName?: string;
   lastName?: string;
   roles: string[];
-  cityId: number;
+  cityId?: number;
 }
 
 function AdminAddUser() {
@@ -28,11 +28,11 @@ function AdminAddUser() {
 
   const onClickHandler = useCallback(function () {
     const data: BodyDataType = {
-      mobile: "09123456789",
+      mobile: "12345",
       password: "123456",
-      firstName: "نام تستی",
-      // lastName: "نام خانوادگی تستی",
-      roles: [Role.ADMIN],
+      // firstName: "محمدعلی",
+      lastName: "متعلم2",
+      roles: [Role.STUDENT],
       cityId: 1
     }
 

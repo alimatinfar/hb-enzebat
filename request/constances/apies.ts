@@ -5,6 +5,7 @@ const TEACHER_PANEL_CLASS_ATTENDANCE_INFO = (classId: string, attendanceId: stri
 const APIES = {
   //admin
   ADMIN_ADD_USER: '/admin/users/add',
+  ADMIN_USER: '/admin/users',
 
   //authentication
   LOGIN: '/auth/login',

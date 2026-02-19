@@ -6,15 +6,53 @@ import { Role } from "@/app/generated/prisma/client";
 
 const uniqueUsernameErrorMessage = "این نام کاربری قبلاً ثبت شده است";
 
-export const POST = withRoleAuth(["ADMIN"], async (req, adminUser) => {
+export const POST = withRoleAuth(["ADMIN", "CITY_ADMIN"], async (req, adminUser) => {
   const body = await req.json();
   const { mobile, password, roles, cityId, firstName = '', lastName = '' } = body;
 
-  if (!mobile || !password || !roles || !cityId) {
+  if (!mobile || !password || !roles) {
     return NextErrorResponse({ error: "اطلاعات ناقص است", status: 422 });
   }
 
-  // چک تکراری بودن نام کاربری
+  const isAdmin = adminUser.roles.some(r => r.role === "ADMIN");
+  const isCityAdmin = adminUser.roles.some(r => r.role === "CITY_ADMIN");
+
+  let finalCityId: number | null = null;
+
+  // ===============================
+  // اگر ADMIN باشد
+  // ===============================
+  if (isAdmin) {
+    if (!cityId) {
+      return NextErrorResponse({ error: "cityId الزامی است", status: 422 });
+    }
+    finalCityId = cityId;
+  }
+
+  // ===============================
+  // اگر CITY_ADMIN باشد
+  // ===============================
+  if (!isAdmin && isCityAdmin) {
+
+    if (!adminUser.cityId) {
+      return NextErrorResponse({ error: "ادمین شهری شهر ندارد", status: 403 });
+    }
+
+    // امنیت: اجازه نده cityId از بیرون ارسال شود
+    if (cityId && cityId !== adminUser.cityId) {
+      return NextErrorResponse({ error: "اجازه ثبت کاربر در شهر دیگر را ندارید", status: 403 });
+    }
+
+    // شهر را از خود ادمین بگیر
+    finalCityId = adminUser.cityId;
+
+    // جلوگیری از ساخت ADMIN
+    if (roles.includes("ADMIN")) {
+      return NextErrorResponse({ error: "امکان ایجاد ادمین وجود ندارد", status: 403 });
+    }
+  }
+
+  // چک تکراری بودن موبایل
   const existingUser = await prisma.user.findUnique({
     where: { mobile },
   });
@@ -31,7 +69,7 @@ export const POST = withRoleAuth(["ADMIN"], async (req, adminUser) => {
         firstName,
         lastName,
         city: {
-          connect: { id: cityId },
+          connect: { id: finalCityId! },
         },
         roles: {
           create: roles.map((r: Role) => ({ role: r })),
@@ -44,8 +82,10 @@ export const POST = withRoleAuth(["ADMIN"], async (req, adminUser) => {
     });
 
     return NextSuccessResponse({ data: newUser });
+
   } catch (err: any) {
-    console.log({err})
+    console.log({ err });
+
     if (err.code === "P2002") {
       return NextErrorResponse({ error: uniqueUsernameErrorMessage, status: 409 });
     }
