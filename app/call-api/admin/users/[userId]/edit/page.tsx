@@ -33,8 +33,8 @@ function EditPage() {
       mobile: "111223",
       password: "123456",
       // firstName: "محمدعلی",
-      lastName: "متعلم5",
-      roles: [Role.STUDENT],
+      lastName: "متعلم پلاس",
+      roles: [Role.TEACHER],
       cityId: 2
     }
 
