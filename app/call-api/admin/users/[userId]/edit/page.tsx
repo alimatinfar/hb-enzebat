@@ -4,10 +4,10 @@ import useMutateData from "@/request/hooks/useMutateData";
 import {NextSuccessResponseProps} from "@/utils/backend/response/NextSuccessResponse";
 import APIES from "@/request/constances/apies";
 import {useCallback} from "react";
-import Button from "@/components/Form/Button/Button";
 import {Role} from "@/app/generated/prisma/enums";
 import toastPromise from "@/utils/promises/toastPromise";
-
+import Button from "@/components/Form/Button/Button";
+import {useParams} from "next/navigation";
 
 type BodyDataType = {
   mobile: string;
@@ -18,20 +18,22 @@ type BodyDataType = {
   cityId?: number;
 }
 
-function AdminAddUser() {
+function EditPage() {
+
+  const {userId} = useParams()
 
   const {mutate, isPending} = useMutateData<NextSuccessResponseProps<any>, BodyDataType>({
     axiosConfig: {
-      url: APIES.ADMIN_ADD_USER, method: 'POST'
+      url: APIES.ADMIN_EDIT_USER(String(userId)), method: 'PUT'
     },
   })
 
   const onClickHandler = useCallback(function () {
     const data: BodyDataType = {
-      mobile: "12311",
+      mobile: "111223",
       password: "123456",
       // firstName: "محمدعلی",
-      lastName: "متعلم3",
+      lastName: "متعلم5",
       roles: [Role.STUDENT],
       cityId: 2
     }
@@ -52,4 +54,4 @@ function AdminAddUser() {
   );
 }
 
-export default AdminAddUser;
+export default EditPage;

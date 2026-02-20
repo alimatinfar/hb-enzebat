@@ -4,7 +4,7 @@ import NextSuccessResponse from "@/utils/backend/response/NextSuccessResponse";
 import prisma from "@/lib/prisma";
 import { Role } from "@/app/generated/prisma/client";
 
-const uniqueUsernameErrorMessage = "این نام کاربری قبلاً ثبت شده است";
+const uniqueMobileErrorMessage = "این شماره موبایل قبلاً ثبت شده است";
 
 export const POST = withRoleAuth(["ADMIN", "CITY_ADMIN"], async (req, adminUser) => {
   const body = await req.json();
@@ -58,7 +58,7 @@ export const POST = withRoleAuth(["ADMIN", "CITY_ADMIN"], async (req, adminUser)
   });
 
   if (existingUser) {
-    return NextErrorResponse({ error: uniqueUsernameErrorMessage, status: 409 });
+    return NextErrorResponse({ error: uniqueMobileErrorMessage, status: 409 });
   }
 
   try {
@@ -87,7 +87,7 @@ export const POST = withRoleAuth(["ADMIN", "CITY_ADMIN"], async (req, adminUser)
     console.log({ err });
 
     if (err.code === "P2002") {
-      return NextErrorResponse({ error: uniqueUsernameErrorMessage, status: 409 });
+      return NextErrorResponse({ error: uniqueMobileErrorMessage, status: 409 });
     }
 
     return NextErrorResponse({ error: "خطای سرور", status: 500 });

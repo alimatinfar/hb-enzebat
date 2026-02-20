@@ -9,6 +9,11 @@ import ButtonWithConfirm from "@/components/Form/Button/inherited/ButtonWithConf
 import useMutateData from "@/request/hooks/useMutateData";
 import {NextSuccessResponseProps} from "@/utils/backend/response/NextSuccessResponse";
 import toastPromise from "@/utils/promises/toastPromise";
+import Button from "@/components/Form/Button/Button";
+import EditIcon from "@/components/svg/EditIcon";
+import DeleteIcon from "@/components/svg/DeleteIcon";
+import Link from "next/link";
+import ROUTER_LINKS from "@/constances/routerLinks";
 
 
 type UserResponseType = {
@@ -83,18 +88,31 @@ function UsersListPage() {
             {fields.map((field, index) => (
               <KeyValue key={index} title={field.title} value={field.value} />
             ))}
-            <ButtonWithConfirm
-              buttonProps={{
-                onClick: () => setActiveDeleteUserId(item.id),
-                size: 'sm', variant: 'outlined'
-              }}
-              modalProps={{
-                title: 'حذف کاربر', loading: deleteLoading, onConfirmHandler: onDeleteHandler,
-                description: 'آیا از حذف این کاربر مطمئن هستید؟',
-              }}
-            >
-              حذف
-            </ButtonWithConfirm>
+
+            <div className='grid grid-cols-2 gap-4 mt-4'>
+              <Link href={ROUTER_LINKS.CALL_API_ADMIN_EDIT_USER(item.id)}>
+                <Button
+                  rightIcon={<EditIcon textColor='text-primary' />}
+                  variant='link' size='sm'
+                >
+                  ویرایش
+                </Button>
+              </Link>
+
+              <ButtonWithConfirm
+                buttonProps={{
+                  onClick: () => setActiveDeleteUserId(item.id),
+                  size: 'sm', variant: 'link',
+                  rightIcon: <DeleteIcon textColor='text-primary' width={20} height={20} />
+                }}
+                modalProps={{
+                  title: 'حذف کاربر', loading: deleteLoading, onConfirmHandler: onDeleteHandler,
+                  description: 'آیا از حذف این کاربر مطمئن هستید؟',
+                }}
+              >
+                حذف
+              </ButtonWithConfirm>
+            </div>
           </Card>
         )
       })}

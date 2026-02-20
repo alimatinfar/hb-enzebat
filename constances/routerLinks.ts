@@ -9,6 +9,8 @@ const STUDENT_PANEL = '/student-panel'
 
 const ADMIN_PANEL = '/admin-panel'
 
+const CALL_API_ADMIN_USERS = '/call-api/admin/users'
+
 const ROUTER_LINKS = {
   //auth routes
   LOGIN: `${AUTH_URL}/login`,
@@ -26,6 +28,9 @@ const ROUTER_LINKS = {
 
   //admin panel routes
   ADMIN_PANEL,
+
+  //call api routes
+  CALL_API_ADMIN_EDIT_USER: (userId: string | number) => `${CALL_API_ADMIN_USERS}/${userId}/edit`
 } as const
 
 export default ROUTER_LINKS;
