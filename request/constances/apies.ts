@@ -2,13 +2,20 @@ const TEACHER_PANEL_CLASSES = '/teacher/classes'
 const TEACHER_PANEL_CLASS_ATTENDANCES = (classId: string) => `${TEACHER_PANEL_CLASSES}/${classId}/attendance`
 const TEACHER_PANEL_CLASS_ATTENDANCE_INFO = (classId: string, attendanceId: string) => `${TEACHER_PANEL_CLASS_ATTENDANCES(classId)}/${attendanceId}`
 
-const ADMIN_USER = '/admin/users'
+const ADMIN_USERS = '/admin/users'
+const ADMIN_CLASSES = '/admin/classes'
 
 const APIES = {
   //admin
-  ADMIN_USER,
-  ADMIN_ADD_USER: `${ADMIN_USER}/add`,
-  ADMIN_EDIT_USER: (userId: string) => `${ADMIN_USER}/${userId}/edit`,
+  ADMIN_USERS,
+  ADMIN_ADD_USER: `${ADMIN_USERS}/add`,
+  ADMIN_EDIT_USER: (userId: string) => `${ADMIN_USERS}/${userId}/edit`,
+  ADMIN_DELETE_USER: (userId: string) => `${ADMIN_USERS}/${userId}/delete`,
+
+  ADMIN_CLASSES,
+  ADMIN_ADD_CLASS: `${ADMIN_CLASSES}/add`,
+  ADMIN_EDIT_CLASS: (classId: string) => `${ADMIN_CLASSES}/${classId}/edit`,
+  ADMIN_DELETE_CLASS: (classId: string) => `${ADMIN_CLASSES}/${classId}/delete`,
 
   //authentication
   LOGIN: '/auth/login',

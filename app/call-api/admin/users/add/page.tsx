@@ -28,10 +28,10 @@ function AdminAddUser() {
 
   const onClickHandler = useCallback(function () {
     const data: BodyDataType = {
-      mobile: "12311",
+      mobile: "1231122",
       password: "123456",
       // firstName: "محمدعلی",
-      lastName: "متعلم3",
+      lastName: "متعلم plus",
       roles: [Role.STUDENT],
       cityId: 2
     }

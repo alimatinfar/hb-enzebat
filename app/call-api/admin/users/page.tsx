@@ -42,7 +42,7 @@ function UsersListPage() {
     data, isFetching, error, refetch
   } = useFetchData<{ users: UserResponseType[] }>({
     axiosConfig: {
-      url: APIES.ADMIN_USER
+      url: APIES.ADMIN_USERS
     },
     disableThrowErrorToast: true
   })
@@ -58,7 +58,7 @@ function UsersListPage() {
 
   const {mutate: deleteMutate, isPending: deleteLoading} = useMutateData<NextSuccessResponseProps<any>, null>({
     axiosConfig: {
-      url: `${APIES.ADMIN_USER}/${activeDeleteUserId}/delete`, method: 'DELETE'
+      url: APIES.ADMIN_DELETE_USER(String(activeDeleteUserId)), method: 'DELETE'
     },
   })
 
