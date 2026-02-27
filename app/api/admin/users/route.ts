@@ -19,13 +19,9 @@ export const GET = withRoleAuth(["ADMIN", "CITY_ADMIN"], async (req, adminUser) 
 
       whereClause = {
         cityId: adminUser.cityId,
-
-        // حذف کاربرانی که نقش ADMIN دارند
         NOT: {
           roles: {
-            some: {
-              role: "ADMIN"
-            }
+            some: { role: "ADMIN" }
           }
         }
       };
@@ -36,6 +32,12 @@ export const GET = withRoleAuth(["ADMIN", "CITY_ADMIN"], async (req, adminUser) 
       include: {
         roles: true,
         city: true,
+        _count: {
+          select: {
+            teacherClasses: true,   // 👈 تعداد کلاس‌هایی که معلم است
+            studentClasses: true,   // 👈 تعداد کلاس‌هایی که دانش‌آموز است
+          },
+        },
       },
       orderBy: {
         id: "desc",

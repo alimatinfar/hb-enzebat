@@ -33,6 +33,10 @@ type UserResponseType = {
   city: {
     id: 1,
     name: string
+  },
+  _count: {
+    teacherClasses: 0,
+    studentClasses: 0
   }
 }
 
@@ -81,6 +85,8 @@ function UsersListPage() {
           {title: 'موبایل', value: item.mobile},
           {title: 'شهر', value: item.city?.name},
           {title: 'نقش ها', value: item.roles?.map(role => role.role).join(', ')},
+          {title: 'در چند کلاس معلم است', value: item._count.teacherClasses},
+          {title: 'در چند کلاس دانش آموز است', value: item._count.studentClasses},
         ]
 
         return (
