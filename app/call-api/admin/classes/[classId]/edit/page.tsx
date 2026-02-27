@@ -13,6 +13,7 @@ type BodyDataType = {
   name?: string;
   teacherId?: number;
   cityId?: number;
+  studentIds?: number[];
 }
 
 function EditClassPage() {
@@ -31,8 +32,9 @@ function EditClassPage() {
 
     const data: BodyDataType = {
       name: "اصول فقه ۲",
-      teacherId: 66,  // آیدی یک کاربر با نقش TEACHER
-      cityId: 2      // فقط اگر ADMIN هستی لازم است
+      teacherId: 56,  // آیدی یک کاربر با نقش TEACHER
+      cityId: 2,     // فقط اگر ADMIN هستی لازم است
+      studentIds: [56]
     }
 
     mutate(data, {
