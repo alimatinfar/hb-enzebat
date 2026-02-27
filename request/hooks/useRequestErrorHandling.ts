@@ -36,7 +36,7 @@ function useRequestErrorHandling() {
     }
     if (errorStatusCode === 403) {
       logoutHandler()
-      return toast.error?.('شما به این قسمت دسترسی ندارید', {toastId: 'logout-error'})
+      toast.error?.('شما به این قسمت دسترسی ندارید', {toastId: 'logout-error'})
     }
     // if (errorStatusCode >= 500) {
     //   setClientError({error, status: 500})

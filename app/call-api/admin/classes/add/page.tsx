@@ -12,6 +12,7 @@ type BodyDataType = {
   name: string;
   teacherId: number;
   cityId?: number;
+  studentIds?: number[];
 }
 
 function AdminAddClass() {
@@ -27,9 +28,10 @@ function AdminAddClass() {
   const onClickHandler = useCallback(function () {
 
     const data: BodyDataType = {
-      name: "اصول فقه",
+      name: "میزان مشهد",
       teacherId: 56,   // آیدی یک کاربر با نقش TEACHER
-      cityId: 2       // فقط اگر ADMIN هستی لازم است
+      cityId: 2,       // فقط اگر ADMIN هستی لازم است
+      studentIds: [56]
     }
 
     mutate(data, {

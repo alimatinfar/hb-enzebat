@@ -5,7 +5,7 @@ import prisma from "@/lib/prisma";
 
 export const POST = withRoleAuth(["ADMIN", "CITY_ADMIN"], async (req, adminUser) => {
   const body = await req.json();
-  const { name, teacherId, cityId } = body;
+  const { name, teacherId, cityId, studentIds = [] } = body;
 
   if (!name || !teacherId) {
     return NextErrorResponse({ error: "اطلاعات ناقص است", status: 422 });
@@ -17,7 +17,7 @@ export const POST = withRoleAuth(["ADMIN", "CITY_ADMIN"], async (req, adminUser)
   let finalCityId: number | null = null;
 
   // ===============================
-  // اگر ADMIN باشد
+  // ADMIN
   // ===============================
   if (isAdmin) {
     if (!cityId) {
@@ -27,7 +27,7 @@ export const POST = withRoleAuth(["ADMIN", "CITY_ADMIN"], async (req, adminUser)
   }
 
   // ===============================
-  // اگر CITY_ADMIN باشد
+  // CITY_ADMIN
   // ===============================
   if (!isAdmin && isCityAdmin) {
 
@@ -35,7 +35,6 @@ export const POST = withRoleAuth(["ADMIN", "CITY_ADMIN"], async (req, adminUser)
       return NextErrorResponse({ error: "ادمین شهری شهر ندارد", status: 403 });
     }
 
-    // امنیت: اجازه نده cityId از بیرون تغییر کند
     if (cityId && cityId !== adminUser.cityId) {
       return NextErrorResponse({
         error: "اجازه ایجاد کلاس در شهر دیگر را ندارید",
@@ -49,7 +48,7 @@ export const POST = withRoleAuth(["ADMIN", "CITY_ADMIN"], async (req, adminUser)
   try {
 
     // ===============================
-    // چک وجود معلم
+    // چک معلم
     // ===============================
     const teacher = await prisma.user.findUnique({
       where: { id: teacherId },
@@ -60,19 +59,57 @@ export const POST = withRoleAuth(["ADMIN", "CITY_ADMIN"], async (req, adminUser)
       return NextErrorResponse({ error: "معلم یافت نشد", status: 404 });
     }
 
-    // بررسی داشتن نقش TEACHER
     const isTeacher = teacher.roles.some(r => r.role === "TEACHER");
 
     if (!isTeacher) {
       return NextErrorResponse({ error: "کاربر انتخاب شده معلم نیست", status: 422 });
     }
 
-    // اگر cityAdmin است، معلم هم باید در همان شهر باشد
     if (!isAdmin && teacher.cityId !== finalCityId) {
       return NextErrorResponse({
         error: "معلم مربوط به این شهر نیست",
         status: 403
       });
+    }
+
+    // ===============================
+    // چک دانش‌آموزها
+    // ===============================
+    if (studentIds.length > 0) {
+
+      const students = await prisma.user.findMany({
+        where: {
+          id: { in: studentIds },
+        },
+        include: { roles: true }
+      });
+
+      // چک اینکه همه پیدا شده باشند
+      if (students.length !== studentIds.length) {
+        return NextErrorResponse({
+          error: "برخی دانش‌آموزان یافت نشدند",
+          status: 404
+        });
+      }
+
+      for (const student of students) {
+
+        const isStudent = student.roles.some(r => r.role === "STUDENT");
+
+        if (!isStudent) {
+          return NextErrorResponse({
+            error: `کاربر با شناسه ${student.id} دانش‌آموز نیست`,
+            status: 422
+          });
+        }
+
+        if (!isAdmin && student.cityId !== finalCityId) {
+          return NextErrorResponse({
+            error: "برخی دانش‌آموزان مربوط به این شهر نیستند",
+            status: 403
+          });
+        }
+      }
     }
 
     // ===============================
@@ -87,6 +124,9 @@ export const POST = withRoleAuth(["ADMIN", "CITY_ADMIN"], async (req, adminUser)
         city: {
           connect: { id: finalCityId! },
         },
+        students: {
+          connect: studentIds.map((id: number) => ({ id }))
+        }
       },
       include: {
         teacher: {
@@ -96,6 +136,14 @@ export const POST = withRoleAuth(["ADMIN", "CITY_ADMIN"], async (req, adminUser)
             lastName: true,
             mobile: true,
           },
+        },
+        students: {
+          select: {
+            id: true,
+            firstName: true,
+            lastName: true,
+            mobile: true,
+          }
         },
         city: true,
         _count: {
