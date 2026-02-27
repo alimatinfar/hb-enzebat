@@ -15,8 +15,9 @@ export default function Home() {
   useEffect(() => {
     const token = getToken()
     if (!token) router.replace(ROUTER_LINKS.LOGIN)
+
     goToPanel()
-  }, [router]);
+  }, [router, goToPanel]);
 
   return (
     <div></div>
