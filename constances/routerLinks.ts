@@ -8,6 +8,10 @@ const TEACHER_PANEL_CLASSES_ATTENDANCES = (classId: string) => `${TEACHER_PANEL_
 const STUDENT_PANEL = '/student-panel'
 
 const ADMIN_PANEL = '/admin-panel'
+const ADMIN_PANEL_USERS = `${ADMIN_PANEL}/users`
+const ADMIN_PANEL_USER_DETAIL = (userId: number | string) => `${ADMIN_PANEL_USERS}/${userId}`
+const ADMIN_PANEL_CLASSES = `${ADMIN_PANEL}/classes`
+const ADMIN_PANEL_CLASS_DETAIL = (classId: number | string) => `${ADMIN_PANEL_CLASSES}/${classId}`
 
 const CALL_API_ADMIN_USERS = '/call-api/admin/users'
 const CALL_API_ADMIN_CLASSES = '/call-api/admin/classes'
@@ -17,6 +21,7 @@ const ROUTER_LINKS = {
   LOGIN: `${AUTH_URL}/login`,
   SELECT_PANEL: `${AUTH_URL}/select-panel`,
 
+
   //teacher panel routes
   TEACHER_PANEL,
   TEACHER_PANEL_CLASSES,
@@ -24,11 +29,25 @@ const ROUTER_LINKS = {
   TEACHER_PANEL_CLASSES_ATTENDANCES_ADD: (classId: string) => `${TEACHER_PANEL_CLASSES_ATTENDANCES(classId)}/add`,
   TEACHER_PANEL_CLASSES_ATTENDANCE_DETAIL: (classId: string, attendanceId: string) => `${TEACHER_PANEL_CLASSES_ATTENDANCES(classId)}/${attendanceId}`,
 
+
   //student panel routes
   STUDENT_PANEL,
 
+
   //admin panel routes
   ADMIN_PANEL,
+
+  ADMIN_PANEL_HOME: `${ADMIN_PANEL}/home`,
+  ADMIN_PANEL_USERS,
+  ADMIN_PANEL_USER_ADD: `${ADMIN_PANEL_USERS}/add`,
+  ADMIN_PANEL_USER_DETAIL,
+  ADMIN_PANEL_USER_EDIT: (userId: number | string) => `${ADMIN_PANEL_USER_DETAIL(userId)}/edit`,
+
+  ADMIN_PANEL_CLASSES,
+  ADMIN_PANEL_CLASS_ADD: `${ADMIN_PANEL_CLASSES}/add`,
+  ADMIN_PANEL_CLASS_DETAIL,
+  ADMIN_PANEL_CLASS_EDIT: (classId: number | string) => `${ADMIN_PANEL_CLASS_DETAIL(classId)}/edit`,
+
 
   //call api routes
   CALL_API_ADMIN_EDIT_USER: (userId: string | number) => `${CALL_API_ADMIN_USERS}/${userId}/edit`,

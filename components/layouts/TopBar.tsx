@@ -7,7 +7,7 @@ import IconClickable from "@/components/others/Icon/IconClickable";
 import LogoutIcon from "@/components/svg/LogoutIcon";
 import useLogout from "@/request/hooks/useLogout";
 import {useRouter} from "next/navigation";
-import ZIndexes from "@/constances/zIndexes";
+import Z_INDEXES from "@/constances/zIndexes";
 
 export type TopBarProps = {
   hasBack?: boolean;
@@ -33,7 +33,7 @@ function TopBar(
       }}
       className={`
         grid grid-cols-6 bg-primary rounded-b-xl fixed top-0 mx-auto w-full px-4 
-        ${LAYOUT_MAX_WIDTH} ${TOP_BAR_HEIGHT} ${ZIndexes.topBar}
+        ${LAYOUT_MAX_WIDTH} ${TOP_BAR_HEIGHT} ${Z_INDEXES.topBar}
       `}>
       <div className='flex items-center'>
         {hasBack && (

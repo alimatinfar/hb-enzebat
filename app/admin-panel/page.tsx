@@ -1,17 +1,20 @@
 'use client'
 
-import hasRole from "@/utils/authentication/hasRole";
+import {useEffect} from "react";
+import {useRouter} from "next/navigation";
+import ROUTER_LINKS from "@/constances/routerLinks";
 
+function AdminRootPage() {
 
-function AdminPanelPage() {
+  const router = useRouter()
 
-  console.log({hasAdminRole: hasRole('ADMIN')})
+  useEffect(function () {
+    router.replace(ROUTER_LINKS.ADMIN_PANEL_HOME)
+  }, [])
 
   return (
-    <div>
-      admin panel page
-    </div>
+    <></>
   );
 }
 
-export default AdminPanelPage;
+export default AdminRootPage;
