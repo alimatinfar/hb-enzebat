@@ -1,9 +1,8 @@
-import importToast from "@/utils/awaitImports/importToast";
+const {toast} = await import("react-toastify")
 
 function toastPromise() {
-  return new Promise((resolve) => {
+  return new Promise((resolve: (item: typeof toast) => void) => {
     (async () => {
-      const toast = await importToast();
       resolve(toast);
     })()
   })

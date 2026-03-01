@@ -11,7 +11,7 @@ function useGoToPanel() {
 
   function goToPanel() {
     const accessiblePanels = getAccessiblePanels()
-    console.log({accessiblePanels})
+
     if (accessiblePanels.length === 1) {
       router.replace(accessiblePanels[0]?.link)
       return

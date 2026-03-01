@@ -8,6 +8,7 @@ const ADMIN_CLASSES = '/admin/classes'
 const APIES = {
   //admin
   ADMIN_USERS,
+  ADMIN_ASSIGN_MISSING_STUDENT_ROLE: `${ADMIN_USERS}/assign-missing-student-role`,
   ADMIN_ADD_USER: `${ADMIN_USERS}/add`,
   ADMIN_EDIT_USER: (userId: string) => `${ADMIN_USERS}/${userId}/edit`,
   ADMIN_DELETE_USER: (userId: string) => `${ADMIN_USERS}/${userId}/delete`,
@@ -16,6 +17,8 @@ const APIES = {
   ADMIN_ADD_CLASS: `${ADMIN_CLASSES}/add`,
   ADMIN_EDIT_CLASS: (classId: string) => `${ADMIN_CLASSES}/${classId}/edit`,
   ADMIN_DELETE_CLASS: (classId: string) => `${ADMIN_CLASSES}/${classId}/delete`,
+
+  ADMIN_REPORT: '/admin/report',
 
   //authentication
   LOGIN: '/auth/login',
