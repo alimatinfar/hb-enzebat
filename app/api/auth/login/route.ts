@@ -16,7 +16,7 @@ export async function POST(req: Request) {
     // یافتن کاربر
     const user = await prisma.user.findUnique({
       where: { mobile },
-      include: { roles: true }
+      include: { roles: true, city: true }
     });
 
     if (!user) {
@@ -35,7 +35,8 @@ export async function POST(req: Request) {
         mobile: user.mobile,
         firstName: user.firstName,
         lastName: user.lastName,
-        roles: user.roles.map(r => r.role)
+        roles: user.roles.map(r => r.role),
+        city: user.city
       },
       JWT_SECRET,
       { expiresIn: "7d" }

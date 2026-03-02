@@ -10,6 +10,7 @@ type TokenDataType = {
   firstName: string;
   lastName: string;
   roles: Role[];
+  city: { id: number, name: string };
 }
 
 function getTokenData() {
