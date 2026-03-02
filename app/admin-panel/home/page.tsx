@@ -2,6 +2,7 @@
 
 import hasRole from "@/utils/authentication/hasRole";
 import AdminLayout from "@/components/layouts/AdminLayout";
+import AdminHomeReport from "@/components/pages/admin-panel/home/AdminHomeReport";
 
 
 function AdminPanelPage() {
@@ -10,7 +11,7 @@ function AdminPanelPage() {
 
   return (
     <AdminLayout>
-      admin panel page
+      <AdminHomeReport />
     </AdminLayout>
   );
 }

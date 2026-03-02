@@ -1,6 +1,6 @@
 
 
-type Props = {
+export type KeyValueProps = {
   title: string | number;
   value: string | number;
   titleClass?: string;
@@ -8,7 +8,7 @@ type Props = {
 }
 
 function KeyValue(
-  {title, value, titleClass, valueClass}: Props
+  {title, value, titleClass, valueClass}: KeyValueProps
 ) {
   return (
     <div className='flex items-center justify-between space-x-2'>

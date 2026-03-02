@@ -22,6 +22,7 @@ const BOTTOM_NAVIGATION_LINKS: BottomNavigationProps['links'] = [
   },
   {
     link: ROUTER_LINKS.ADMIN_PANEL_CLASSES,
+    //TODO this icon should be changed
     icon: HangerIcon,
     title: 'کلاس‌ها',
   },
