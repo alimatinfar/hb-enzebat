@@ -1,11 +1,12 @@
 'use client'
 
-import Card from "@/components/others/Card/Card";
-import KeyValue, {KeyValueProps} from "@/components/others/KeyValue/KeyValue";
+import {KeyValueProps} from "@/components/others/KeyValue/KeyValue";
 import {useMemo} from "react";
+import ReportCard from "@/components/others/Card/ReportCard";
 
 function AdminHomeReport() {
 
+  //TODO should fetch this data from api
   const reportKeyValues: KeyValueProps[] = useMemo(function () {
     return [
       {
@@ -28,17 +29,7 @@ function AdminHomeReport() {
   }, [])
 
   return (
-    <Card backgroundClass='bg-white'>
-      <p className='text-center font-semibold pb-2'>
-        گزارش عملکرد کلی
-      </p>
-
-      <div className='flex flex-col gap-y-1'>
-        {reportKeyValues.map(({title, value}, index) => (
-          <KeyValue key={index} title={title} value={value} />
-        ))}
-      </div>
-    </Card>
+    <ReportCard title='گزارش عملکرد کلی' keyValues={reportKeyValues}/>
   );
 }
 

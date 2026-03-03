@@ -1,6 +1,6 @@
 'use client'
 
-import PanelLayout from "@/components/layouts/PanelLayout";
+import PanelLayout, {PanelLayoutProps} from "@/components/layouts/PanelLayout";
 import {ChildrenAndClassNamePropsType} from "@/types/ChildrenAndClassNamePropsType";
 import BottomNavigation, {BottomNavigationProps} from "@/components/layouts/BottomNavigation";
 import ROUTER_LINKS from "@/constances/routerLinks";
@@ -30,10 +30,11 @@ const BOTTOM_NAVIGATION_LINKS: BottomNavigationProps['links'] = [
   },
 ]
 
-type Props = Pick<ChildrenAndClassNamePropsType, 'children'>
+type Props = Pick<ChildrenAndClassNamePropsType, 'children'> &
+  Pick<PanelLayoutProps, 'hasBack'>
 
 function AdminLayout(
-  {children}: Props
+  {children, hasBack}: Props
 ) {
 
   const tokenData = getTokenData()
@@ -43,7 +44,7 @@ function AdminLayout(
       hasRole('CITY_ADMIN') ? `ادمین شهر ${tokenData?.city?.name}` : 'بدون نقش ادمین'
 
   return (
-    <PanelLayout>
+    <PanelLayout hasBack={hasBack}>
       <div className='mb-2 text-primary text-sm font-semibold rounded-lg p-2 text-center '>
         {roleTitle}
       </div>

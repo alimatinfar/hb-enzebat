@@ -20,7 +20,7 @@ function IconClickable(
       {...(onClick && {onClick})} {...wrapperRef && {ref: wrapperRef}}
       className={`
         ${className || ""} p-1.5 cursor-pointer ${rounded} duration-200 
-        ${hoverClass || primaryMode ? 'hover:bg-primary' : 'hover:bg-gray-300'}
+        ${hoverClass || primaryMode ? 'hover:bg-primary' : 'hover:bg-gray-200'}
       `}
     >
       {children}

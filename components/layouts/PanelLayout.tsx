@@ -8,12 +8,12 @@ import {
 } from "@/constances/layout/mainLayoutExports";
 import {ChildrenAndClassNamePropsType} from "@/types/ChildrenAndClassNamePropsType";
 
-type Props = {
+export type PanelLayoutProps = {
   hasBottomFixedButton?: boolean;
 } & Pick<TopBarProps, 'hasBack'> & Pick<ChildrenAndClassNamePropsType, 'children'>
 
 function PanelLayout(
-  {hasBack, children, hasBottomFixedButton}: Props
+  {hasBack, children, hasBottomFixedButton}: PanelLayoutProps
 ) {
   return (
     <>
