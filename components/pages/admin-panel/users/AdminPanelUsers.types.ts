@@ -1,3 +1,7 @@
+import {Role} from "@/app/generated/prisma/enums";
+
+export type UserRoleType = typeof Role[keyof typeof Role]
+
 export type UserResponseType = {
   id: number;
   mobile: string;
@@ -8,7 +12,7 @@ export type UserResponseType = {
   roles: [
     {
       id: number;
-      role: string;
+      role: UserRoleType;
       userId: 1;
     }
   ];
