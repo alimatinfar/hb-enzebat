@@ -1,12 +1,13 @@
 import React from "react";
 
 type Props = {
-  size: string
+  size: string;
+  bgClass?: string;
 }
 
-function Skeleton({size}: Props) {
+function Skeleton({size, bgClass}: Props) {
   return (
-    <div className={`animate-pulse bg-gray-200 ${size}`}></div>
+    <div className={`animate-pulse ${bgClass || 'bg-gray-200'} ${size}`}></div>
   )
 }
 

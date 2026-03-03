@@ -9,9 +9,9 @@ import FilterEmptyState from "@/components/svg/RenderLogic/FilterEmptyState";
 export type RenderLogicProps = {
   error?: Error | null | string,
   isLoading?: boolean,
-  loadingElement?: JSX.Element,
-  children: JSX.Element,
-  errorComponent?: JSX.Element,
+  loadingElement?: ReactNode,
+  children: ReactNode,
+  errorComponent?: ReactNode,
   isEmpty?: boolean,
   emptyText?: string,
   emptyElement?: any,

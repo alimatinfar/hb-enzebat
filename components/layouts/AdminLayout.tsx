@@ -6,10 +6,9 @@ import BottomNavigation, {BottomNavigationProps} from "@/components/layouts/Bott
 import ROUTER_LINKS from "@/constances/routerLinks";
 import UserIcon from "@/components/svg/UserIcon";
 import HomeIcon from "@/components/svg/HomeIcon";
-import HangerIcon from "@/components/svg/HangerIcon";
 import getTokenData from "@/utils/authentication/getTokenData";
-import {Role} from "@/app/generated/prisma/enums";
 import hasRole from "@/utils/authentication/hasRole";
+import ClassIcon from "@/components/svg/ClassIcon";
 
 
 const BOTTOM_NAVIGATION_LINKS: BottomNavigationProps['links'] = [
@@ -26,7 +25,7 @@ const BOTTOM_NAVIGATION_LINKS: BottomNavigationProps['links'] = [
   {
     link: ROUTER_LINKS.ADMIN_PANEL_CLASSES,
     //TODO this icon should be changed
-    icon: HangerIcon,
+    icon: ClassIcon,
     title: 'کلاس‌ها',
   },
 ]
@@ -49,7 +48,9 @@ function AdminLayout(
         {roleTitle}
       </div>
 
-      {children}
+      <div className='pb-20'>
+        {children}
+      </div>
 
       <BottomNavigation
         links={BOTTOM_NAVIGATION_LINKS}

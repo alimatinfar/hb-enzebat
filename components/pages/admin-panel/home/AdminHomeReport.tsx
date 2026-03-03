@@ -13,10 +13,6 @@ function AdminHomeReport() {
         value: 0
       },
       {
-        title: 'تعداد کل معلمان',
-        value: 0
-      },
-      {
         title: 'تعداد کل متعلمان',
         value: 0
       },
@@ -33,7 +29,7 @@ function AdminHomeReport() {
 
   return (
     <Card backgroundClass='bg-white'>
-      <p className='text-center font-semibold'>
+      <p className='text-center font-semibold pb-2'>
         گزارش عملکرد کلی
       </p>
 
