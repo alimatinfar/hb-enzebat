@@ -11,9 +11,11 @@ import {USER_ROLE_LABELS} from "@/components/pages/admin-panel/users/AdminPanelU
 import CardRowLink from "@/components/others/Card/CardRowLink";
 import PageTitle from "@/components/others/PageTitle/PageTitle";
 import RenderLogic from "@/components/others/RenderLogic/RenderLogic";
+import hasRole from "@/utils/authentication/hasRole";
 
 function AdminUsersPage() {
 
+  //TODO added pagination
   const {
     data, isFetching, error
   } = useFetchData<{ users: UserResponseType[] }>({
@@ -42,13 +44,15 @@ function AdminUsersPage() {
             return (
               <Card key={item.id} className='gap-2'>
                 <div className='flex items-center justify-between'>
-                <span className='text-lg font-medium'>
-                  {`${item.firstName} ${item.lastName}`}
-                </span>
+                  <span className='text-lg font-medium'>
+                    {`${item.firstName} ${item.lastName}`}
+                  </span>
 
-                  <span className='text-gray-500 text-sm'>
-                  {item.city?.name || ''}
-                </span>
+                  {hasRole('ADMIN') && (
+                    <span className='text-gray-500 text-sm'>
+                      {item.city?.name || ''}
+                    </span>
+                  )}
                 </div>
 
                 <div className='flex items-center gap-x-2 mt-2 text-sm'>
