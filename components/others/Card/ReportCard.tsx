@@ -16,7 +16,7 @@ function ReportCard(
   {title, keyValues, bgIsGray, children}: Props
 ) {
   return (
-    <Card {...!bgIsGray && {backgroundClass: 'bg-white'}}>
+    <Card>
       <p className='text-center font-semibold pb-2'>
         {title}
       </p>

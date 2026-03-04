@@ -2,6 +2,7 @@ import {useParams} from "next/navigation";
 import {KeyValueProps} from "@/components/others/KeyValue/KeyValue";
 import {useMemo} from "react";
 import {USER_ROLE_LABELS} from "@/components/pages/admin-panel/users/AdminPanelUsers.constances";
+import {AdminClassCardProps} from "@/components/pages/admin-panel/classes/AdminClassCard";
 
 function useAdminUserDetailPage() {
 
@@ -68,8 +69,25 @@ function useAdminUserDetailPage() {
     ]
   }, [userIsStudent])
 
+  const teacherClasses: AdminClassCardProps[] = useMemo(function () {
+    return [
+      {id: 1, name: 'کلاس شماره 1', cityName: 'تهران'},
+      {id: 2, name: 'کلاس شماره 2', cityName: 'تهران'},
+      {id: 3, name: 'کلاس شماره 3', cityName: 'تهران'},
+    ]
+  }, [])
+
+  const studentClasses: AdminClassCardProps[] = useMemo(function () {
+    return [
+      {id: 1, name: 'کلاس شماره 1', cityName: 'تهران'},
+      {id: 2, name: 'کلاس شماره 2', cityName: 'تهران'},
+      {id: 3, name: 'کلاس شماره 3', cityName: 'تهران'},
+    ]
+  }, [])
+
   return {
-    teacherReportKeyValues, studentReportKeyValues, infoKeyValues, userId, userIsStudent, userIsTeacher
+    teacherReportKeyValues, studentReportKeyValues, infoKeyValues, userId, userIsStudent, userIsTeacher,
+    teacherClasses, studentClasses
   }
 }
 

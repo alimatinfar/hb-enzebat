@@ -8,12 +8,14 @@ import EditIcon from "@/components/svg/EditIcon";
 import Link from "next/link";
 import ROUTER_LINKS from "@/constances/routerLinks";
 import useAdminUserDetailPage from "@/components/pages/admin-panel/users/detail/hooks/useAdminUserDetailPage";
+import AdminUserDetailClasses from "@/components/pages/admin-panel/users/detail/AdminUserDetailClasses";
 
 
 function AdminUserDetailPage() {
 
   const {
-    teacherReportKeyValues, studentReportKeyValues, infoKeyValues, userId, userIsStudent, userIsTeacher
+    teacherReportKeyValues, studentReportKeyValues, infoKeyValues, userId, userIsStudent, userIsTeacher,
+    teacherClasses, studentClasses
   } = useAdminUserDetailPage()
 
   return (
@@ -33,11 +35,19 @@ function AdminUserDetailPage() {
 
         <ReportCard title='اطلاعات' keyValues={infoKeyValues}>
           <Link href={ROUTER_LINKS.ADMIN_PANEL_USER_EDIT(String(userId))}>
-            <Button size='sm' rightIcon={<EditIcon textColor='text-white' />}>
+            <Button size='sm' rightIcon={<EditIcon textColor='text-white'/>}>
               ویرایش اطلاعات
             </Button>
           </Link>
         </ReportCard>
+
+        <AdminUserDetailClasses
+          title='کلاس‌های معلم' classes={teacherClasses}
+        />
+
+        <AdminUserDetailClasses
+          title='کلاس‌های دانش‌آموز' classes={studentClasses}
+        />
       </div>
     </AdminLayout>
   );

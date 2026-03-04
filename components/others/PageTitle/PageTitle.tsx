@@ -6,10 +6,11 @@ import BackIconClickable from "@/components/others/Icon/BackIconClickable";
 import {useRouter} from "next/navigation";
 
 type Props = {
-  hasBack?: boolean
+  hasBack?: boolean;
+  small?: boolean;
 } & Pick<ChildrenAndClassNamePropsType, 'children'>
 
-function PageTitle({children, hasBack}: Props) {
+function PageTitle({children, hasBack, small}: Props) {
 
   const router = useRouter()
 
@@ -23,7 +24,7 @@ function PageTitle({children, hasBack}: Props) {
         <BackIconClickable onBackRoute={onBackRoute} />
       )}
 
-      <div className='font-semibold text-2xl flex-1'>
+      <div className={`${small ? 'font-semibold text-lg' : 'font-semibold text-2xl'} flex-1`}>
         {children}
       </div>
     </div>

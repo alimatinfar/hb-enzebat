@@ -16,7 +16,7 @@ function Card(
       {...onClick && {onClick}}
       className={`
       ${className || ''} p-4 rounded-lg border border-gray-300 duration-200
-      ${isClickable && 'hover:border-gray-400 cursor-pointer select-none'} ${backgroundClass || 'bg-gray-3'}
+      ${isClickable && 'hover:border-gray-400 cursor-pointer select-none'} ${backgroundClass || 'bg-white'}
     `}>
       {children}
     </div>

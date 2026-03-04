@@ -5,12 +5,12 @@ import ROUTER_LINKS from "@/constances/routerLinks";
 import {AdminClassResponseType} from "@/components/pages/admin-panel/classes/AdminPanelClasses.types";
 
 
-type Props = {
+export type AdminClassCardProps = {
   cityName: AdminClassResponseType['city']['name'];
 } & Pick<AdminClassResponseType, 'id' | 'name'>
 
 function AdminClassCard(
-  {id, name, cityName}: Props
+  {id, name, cityName}: AdminClassCardProps
 ) {
   return (
     <Card className='gap-2'>
