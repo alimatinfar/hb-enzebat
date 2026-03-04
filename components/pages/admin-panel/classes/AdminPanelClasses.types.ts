@@ -11,7 +11,7 @@ export type ClassResponseType = {
   city: {
     id: number,
     name: string
-  } | null,
+  },
   _count: {
     students: number,
     attendance: number

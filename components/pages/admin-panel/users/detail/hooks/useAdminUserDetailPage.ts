@@ -69,7 +69,7 @@ function useAdminUserDetailPage() {
   }, [userIsStudent])
 
   return {
-    teacherReportKeyValues, studentReportKeyValues, infoKeyValues, userId
+    teacherReportKeyValues, studentReportKeyValues, infoKeyValues, userId, userIsStudent, userIsTeacher
   }
 }
 

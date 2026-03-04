@@ -22,7 +22,7 @@ function AdminHomeShortCutCard(
   {title, lastTitle, isLoading, error, RowIcon, link, items}: AdminHomeShortCutCardProps
 ) {
   return (
-    <Card>
+    <Card backgroundClass='bg-white'>
       <p className='font-semibold text-gray-600 text-center text-sm pb-2'>
         {`آخرین ${lastTitle || title} افزوده شده`}
       </p>

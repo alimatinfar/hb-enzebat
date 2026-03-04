@@ -13,7 +13,7 @@ import useAdminUserDetailPage from "@/components/pages/admin-panel/users/detail/
 function AdminUserDetailPage() {
 
   const {
-    teacherReportKeyValues, studentReportKeyValues, infoKeyValues, userId
+    teacherReportKeyValues, studentReportKeyValues, infoKeyValues, userId, userIsStudent, userIsTeacher
   } = useAdminUserDetailPage()
 
   return (
@@ -23,11 +23,15 @@ function AdminUserDetailPage() {
       </PageTitle>
 
       <div className='flex flex-col gap-y-4'>
-        <ReportCard title='گزارش عملکرد معلم' keyValues={teacherReportKeyValues}/>
+        {userIsTeacher && (
+          <ReportCard title='گزارش عملکرد معلم' keyValues={teacherReportKeyValues}/>
+        )}
 
-        <ReportCard title='گزارش عملکرد دانش‌آموز' keyValues={studentReportKeyValues}/>
+        {userIsStudent && (
+          <ReportCard title='گزارش عملکرد دانش‌آموز' keyValues={studentReportKeyValues}/>
+        )}
 
-        <ReportCard title='اطلاعات' keyValues={infoKeyValues} bgIsGray>
+        <ReportCard title='اطلاعات' keyValues={infoKeyValues}>
           <Link href={ROUTER_LINKS.ADMIN_PANEL_USER_EDIT(String(userId))}>
             <Button size='sm' rightIcon={<EditIcon textColor='text-white' />}>
               ویرایش اطلاعات
