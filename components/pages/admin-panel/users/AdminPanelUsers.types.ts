@@ -2,7 +2,7 @@ import {Role} from "@/app/generated/prisma/enums";
 
 export type UserRoleType = typeof Role[keyof typeof Role]
 
-export type UserResponseType = {
+export type AdminUserResponseType = {
   id: number;
   mobile: string;
   password: string;

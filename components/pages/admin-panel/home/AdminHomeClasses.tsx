@@ -6,14 +6,14 @@ import AdminHomeShortCutCard, {
 } from "@/components/pages/admin-panel/home/AdminHomeShortCutCard";
 import ROUTER_LINKS from "@/constances/routerLinks";
 import ClassIcon from "@/components/svg/ClassIcon";
-import {ClassResponseType} from "@/components/pages/admin-panel/classes/AdminPanelClasses.types";
+import {AdminClassResponseType} from "@/components/pages/admin-panel/classes/AdminPanelClasses.types";
 
 
 function AdminHomeClasses() {
 
   const {
     data, isFetching, error
-  } = useFetchData<{ classes: ClassResponseType[] }>({
+  } = useFetchData<{ classes: AdminClassResponseType[] }>({
     axiosConfig: {
       url: APIES.ADMIN_CLASSES
     },

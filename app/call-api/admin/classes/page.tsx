@@ -17,7 +17,7 @@ import ROUTER_LINKS from "@/constances/routerLinks";
 import RenderLogic from "@/components/others/RenderLogic/RenderLogic";
 
 
-type ClassResponseType = {
+type AdminClassResponseType = {
   id: number,
   name: string,
   cityId: number | null,
@@ -41,7 +41,7 @@ function ClassesListPage() {
 
   const {
     data, isFetching, error, refetch
-  } = useFetchData<{ classes: ClassResponseType[] }>({
+  } = useFetchData<{ classes: AdminClassResponseType[] }>({
     axiosConfig: {
       url: APIES.ADMIN_CLASSES
     },
@@ -54,7 +54,7 @@ function ClassesListPage() {
   }, [data])
 
   // delete
-  const [activeDeleteClassId, setActiveDeleteClassId] = useState<ClassResponseType['id']>()
+  const [activeDeleteClassId, setActiveDeleteClassId] = useState<AdminClassResponseType['id']>()
 
   const {mutate: deleteMutate, isPending: deleteLoading} =
     useMutateData<NextSuccessResponseProps<any>, null>({

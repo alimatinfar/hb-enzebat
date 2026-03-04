@@ -4,7 +4,7 @@ import useFetchData from "@/request/hooks/useFetchData";
 import APIES from "@/request/constances/apies";
 import {useMemo} from "react";
 import RenderLogic from "@/components/others/RenderLogic/RenderLogic";
-import {ClassResponseType} from "@/components/pages/admin-panel/classes/AdminPanelClasses.types";
+import {AdminClassResponseType} from "@/components/pages/admin-panel/classes/AdminPanelClasses.types";
 import PageTitle from "@/components/others/PageTitle/PageTitle";
 import AdminLayout from "@/components/layouts/AdminLayout";
 import AdminClassCard from "@/components/pages/admin-panel/classes/AdminClassCard";
@@ -15,7 +15,7 @@ function AdminClassesPage() {
   //TODO added pagination
   const {
     data, isFetching, error
-  } = useFetchData<{ classes: ClassResponseType[] }>({
+  } = useFetchData<{ classes: AdminClassResponseType[] }>({
     axiosConfig: {
       url: APIES.ADMIN_CLASSES
     },

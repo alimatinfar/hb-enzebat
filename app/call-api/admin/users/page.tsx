@@ -16,7 +16,7 @@ import Link from "next/link";
 import ROUTER_LINKS from "@/constances/routerLinks";
 
 
-type UserResponseType = {
+type AdminUserResponseType = {
   id: 1,
   mobile: string,
   password: string,
@@ -44,7 +44,7 @@ function UsersListPage() {
 
   const {
     data, isFetching, error, refetch
-  } = useFetchData<{ users: UserResponseType[] }>({
+  } = useFetchData<{ users: AdminUserResponseType[] }>({
     axiosConfig: {
       url: APIES.ADMIN_USERS
     },
@@ -58,7 +58,7 @@ function UsersListPage() {
   }, [data])
 
   //delete
-  const [activeDeleteUserId, setActiveDeleteUserId] = useState<UserResponseType['id']>()
+  const [activeDeleteUserId, setActiveDeleteUserId] = useState<AdminUserResponseType['id']>()
 
   const {mutate: deleteMutate, isPending: deleteLoading} = useMutateData<NextSuccessResponseProps<any>, null>({
     axiosConfig: {

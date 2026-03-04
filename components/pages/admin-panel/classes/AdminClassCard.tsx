@@ -2,12 +2,12 @@ import hasRole from "@/utils/authentication/hasRole";
 import Card from "@/components/others/Card/Card";
 import CardRowLink from "@/components/others/Card/CardRowLink";
 import ROUTER_LINKS from "@/constances/routerLinks";
-import {ClassResponseType} from "@/components/pages/admin-panel/classes/AdminPanelClasses.types";
+import {AdminClassResponseType} from "@/components/pages/admin-panel/classes/AdminPanelClasses.types";
 
 
 type Props = {
-  cityName: ClassResponseType['city']['name'];
-} & Pick<ClassResponseType, 'id' | 'name'>
+  cityName: AdminClassResponseType['city']['name'];
+} & Pick<AdminClassResponseType, 'id' | 'name'>
 
 function AdminClassCard(
   {id, name, cityName}: Props

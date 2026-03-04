@@ -1,7 +1,7 @@
 import {useMemo} from "react";
 import useFetchData from "@/request/hooks/useFetchData";
 import APIES from "@/request/constances/apies";
-import {UserResponseType} from "@/components/pages/admin-panel/users/AdminPanelUsers.types";
+import {AdminUserResponseType} from "@/components/pages/admin-panel/users/AdminPanelUsers.types";
 import AdminHomeShortCutCard, {
   AdminHomeShortCutCardProps
 } from "@/components/pages/admin-panel/home/AdminHomeShortCutCard";
@@ -13,7 +13,7 @@ function AdminHomeUsers() {
   //TODO should implemented api for 3 last users
   const {
     data, isFetching, error
-  } = useFetchData<{ users: UserResponseType[] }>({
+  } = useFetchData<{ users: AdminUserResponseType[] }>({
     axiosConfig: {
       url: APIES.ADMIN_USERS
     },

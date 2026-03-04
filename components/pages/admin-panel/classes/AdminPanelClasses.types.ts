@@ -1,4 +1,4 @@
-export type ClassResponseType = {
+export type AdminClassResponseType = {
   id: number,
   name: string,
   cityId: number | null,
