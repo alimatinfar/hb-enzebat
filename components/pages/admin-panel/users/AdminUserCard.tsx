@@ -6,12 +6,12 @@ import CardRowLink from "@/components/others/Card/CardRowLink";
 import {AdminUserResponseType} from "@/components/pages/admin-panel/users/AdminPanelUsers.types";
 
 
-type Props = {
+export type AdminUserCardProps = {
   cityName: AdminUserResponseType['city']['name']
 } & Pick<AdminUserResponseType, 'id' | 'firstName' | 'lastName' | 'roles'>
 
 function AdminUserCard(
-  {id, firstName, lastName, roles, cityName}: Props
+  {id, firstName, lastName, roles, cityName}: AdminUserCardProps
 ) {
   return (
     <Card className='gap-2'>

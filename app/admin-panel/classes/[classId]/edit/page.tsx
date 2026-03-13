@@ -3,14 +3,14 @@
 import AdminLayout from "@/components/layouts/AdminLayout";
 import PageTitle from "@/components/others/PageTitle/PageTitle";
 
-function AdminUserEditPage() {
+function AdminClassEditPage() {
   return (
     <AdminLayout hasBack>
       <PageTitle>
-        ویرایش اطلاعات علی متین فر
+        ویرایش کلاس الطریق النجاه
       </PageTitle>
     </AdminLayout>
   );
 }
 
-export default AdminUserEditPage;
+export default AdminClassEditPage;

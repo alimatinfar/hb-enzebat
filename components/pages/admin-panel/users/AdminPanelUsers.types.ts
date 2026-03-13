@@ -9,13 +9,11 @@ export type AdminUserResponseType = {
   firstName: string;
   lastName: string;
   cityId: number;
-  roles: [
-    {
-      id: number;
-      role: UserRoleType;
-      userId: 1;
-    }
-  ];
+  roles: {
+    id: number;
+    role: UserRoleType;
+    userId: number;
+  }[];
   city: {
     id: number;
     name: string;

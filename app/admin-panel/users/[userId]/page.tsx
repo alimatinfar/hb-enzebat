@@ -25,14 +25,6 @@ function AdminUserDetailPage() {
       </PageTitle>
 
       <div className='flex flex-col gap-y-4'>
-        {userIsTeacher && (
-          <ReportCard title='گزارش عملکرد معلم' keyValues={teacherReportKeyValues}/>
-        )}
-
-        {userIsStudent && (
-          <ReportCard title='گزارش عملکرد دانش‌آموز' keyValues={studentReportKeyValues}/>
-        )}
-
         <ReportCard title='اطلاعات' keyValues={infoKeyValues}>
           <Link href={ROUTER_LINKS.ADMIN_PANEL_USER_EDIT(String(userId))}>
             <Button size='sm' rightIcon={<EditIcon textColor='text-white'/>}>
@@ -41,13 +33,25 @@ function AdminUserDetailPage() {
           </Link>
         </ReportCard>
 
-        <AdminUserDetailClasses
-          title='کلاس‌های معلم' classes={teacherClasses}
-        />
+        {userIsTeacher && (
+          <ReportCard title='گزارش عملکرد معلم' keyValues={teacherReportKeyValues}/>
+        )}
 
-        <AdminUserDetailClasses
-          title='کلاس‌های دانش‌آموز' classes={studentClasses}
-        />
+        {userIsStudent && (
+          <ReportCard title='گزارش عملکرد دانش‌آموز' keyValues={studentReportKeyValues}/>
+        )}
+
+        {userIsTeacher && (
+          <AdminUserDetailClasses
+            title='کلاس‌های معلم' classes={teacherClasses}
+          />
+        )}
+
+        {userIsStudent && (
+          <AdminUserDetailClasses
+            title='کلاس‌های دانش‌آموز' classes={studentClasses}
+          />
+        )}
       </div>
     </AdminLayout>
   );

@@ -18,15 +18,15 @@ function useAdminUserDetailPage() {
     return [
       {
         title: 'تعداد کل کلاس‌های معلم',
-        value: 0
+        value: 2
       },
       {
         title: 'تعداد کل جلسات برگزار شده',
-        value: 0
+        value: 50
       },
       {
         title: 'تعداد کل شاگردان',
-        value: 0
+        value: 9
       },
     ]
   }, [userIsTeacher])
@@ -39,11 +39,11 @@ function useAdminUserDetailPage() {
     return [
       {
         title: 'تعداد کل کلاس‌های عضو شده',
-        value: 0
+        value: 4
       },
       {
         title: 'تعداد کل جلسات شرکت کرده',
-        value: 0
+        value: 50
       },
       {
         title: 'درصد کل حضور در کلاس‌ها',
@@ -57,17 +57,15 @@ function useAdminUserDetailPage() {
   }, [userIsStudent])
 
   const infoKeyValues: KeyValueProps[] = useMemo(function () {
-    if (!userIsStudent) return []
-
     return [
-      {title: 'شناسه', value: ''},
-      {title: 'نام', value: ''},
-      {title: 'نام خانوادگی', value: ''},
-      {title: 'موبایل', value: ''},
-      {title: 'شهر', value: ''},
+      {title: 'شناسه', value: '1'},
+      {title: 'نام', value: 'علی'},
+      {title: 'نام خانوادگی', value: 'متین فر'},
+      {title: 'موبایل', value: '09195922298'},
+      {title: 'شهر', value: 'تهران'},
       {title: 'نقش ها', value: USER_ROLE_LABELS['ADMIN']},
     ]
-  }, [userIsStudent])
+  }, [])
 
   const teacherClasses: AdminClassCardProps[] = useMemo(function () {
     return [
