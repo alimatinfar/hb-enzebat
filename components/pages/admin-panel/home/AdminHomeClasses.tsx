@@ -11,6 +11,7 @@ import {AdminClassResponseType} from "@/components/pages/admin-panel/classes/Adm
 
 function AdminHomeClasses() {
 
+  //TODO should implemented api for 3 last classes
   const {
     data, isFetching, error
   } = useFetchData<{ classes: AdminClassResponseType[] }>({

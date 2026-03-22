@@ -53,9 +53,11 @@ function AdminLayout(
         {children}
       </div>
 
-      <BottomNavigation
-        links={BOTTOM_NAVIGATION_LINKS}
-      />
+      {!hasBack && (
+        <BottomNavigation
+          links={BOTTOM_NAVIGATION_LINKS}
+        />
+      )}
     </PanelLayout>
   );
 }
