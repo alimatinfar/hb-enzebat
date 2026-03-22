@@ -3,7 +3,6 @@
 import ReactHookFormWrapper from "@/components/Form/FormLayout/ReactHookFormWrapper/ReactHookFormWrapper";
 import useReactHookFormWrapper from "@/components/Form/FormLayout/ReactHookFormWrapper/hooks/useReactHookFormWrapper";
 import ClassNameField from "@/components/pages/admin-panel/classes/Form/FormFields/ClassNameField/ClassNameField";
-import Button from "@/components/Form/Button/Button";
 import BottomFixedButton from "@/components/Form/Button/inherited/BottomFixedButton";
 
 function AdminClassForm() {

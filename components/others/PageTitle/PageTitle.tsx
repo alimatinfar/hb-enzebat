@@ -1,16 +1,17 @@
 'use client'
 
-import React, {useCallback} from 'react';
+import React, {ReactNode, useCallback} from 'react';
 import {ChildrenAndClassNamePropsType} from "@/types/ChildrenAndClassNamePropsType";
 import BackIconClickable from "@/components/others/Icon/BackIconClickable";
 import {useRouter} from "next/navigation";
 
-type Props = {
+export type PageTitleProps = {
   hasBack?: boolean;
   small?: boolean;
+  endAdornment?: ReactNode;
 } & Pick<ChildrenAndClassNamePropsType, 'children'>
 
-function PageTitle({children, hasBack, small}: Props) {
+function PageTitle({children, hasBack, small, endAdornment}: PageTitleProps) {
 
   const router = useRouter()
 
@@ -18,15 +19,20 @@ function PageTitle({children, hasBack, small}: Props) {
     router.back()
   }, [router])
 
-  return (
-    <div className='flex items-center space-x-2 mb-4 pb-4 border-b border-gray-5 w-full'>
-      {hasBack && (
-        <BackIconClickable onBackRoute={onBackRoute} />
-      )}
 
-      <div className={`${small ? 'font-semibold text-lg' : 'font-semibold text-2xl'} flex-1`}>
-        {children}
+  return (
+    <div className='flex items-center justify-between w-full border-b border-gray-5 mb-4 pb-4'>
+      <div className='flex items-center space-x-2 w-full'>
+        {hasBack && (
+          <BackIconClickable onBackRoute={onBackRoute} />
+        )}
+
+        <div className={`${small ? 'font-semibold text-lg' : 'font-semibold text-2xl'} flex-1`}>
+          {children}
+        </div>
       </div>
+
+      {endAdornment ? endAdornment : null}
     </div>
   )
 }

@@ -5,9 +5,11 @@ import APIES from "@/request/constances/apies";
 import {useMemo} from "react";
 import RenderLogic from "@/components/others/RenderLogic/RenderLogic";
 import {AdminClassResponseType} from "@/components/pages/admin-panel/classes/AdminPanelClasses.types";
-import PageTitle from "@/components/others/PageTitle/PageTitle";
 import AdminLayout from "@/components/layouts/AdminLayout";
 import AdminClassCard from "@/components/pages/admin-panel/classes/AdminClassCard";
+import PageTitleWithAddButton from "@/components/others/PageTitle/PageTitleWithAddButton";
+import {useRouter} from "next/navigation";
+import ROUTER_LINKS from "@/constances/routerLinks";
 
 
 function AdminClassesPage() {
@@ -27,11 +29,22 @@ function AdminClassesPage() {
     return data.classes
   }, [data])
 
+  const router = useRouter()
+
+  const goToAddClassPage = function () {
+    router.push(ROUTER_LINKS.ADMIN_PANEL_CLASS_ADD)
+  }
+
   return (
     <AdminLayout>
-      <PageTitle>
+      <PageTitleWithAddButton
+        btnProps={{
+          children: 'افزودن کلاس',
+          onClick: goToAddClassPage
+        }}
+      >
         لیست کلاس‌ها
-      </PageTitle>
+      </PageTitleWithAddButton>
 
       <RenderLogic
         isLoading={isFetching} error={error}
