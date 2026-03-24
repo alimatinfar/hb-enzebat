@@ -4,7 +4,9 @@ import AdminLayout from "@/components/layouts/AdminLayout";
 import useFetchData from "@/request/hooks/useFetchData";
 import APIES from "@/request/constances/apies";
 import {useMemo} from "react";
-import {AdminUserResponseType} from "@/components/pages/admin-panel/users/AdminPanelUsers.types";
+import {
+  AdminUserResponseStructureType
+} from "@/components/pages/admin-panel/users/AdminPanelUsers.types";
 import PageTitle from "@/components/others/PageTitle/PageTitle";
 import RenderLogic from "@/components/others/RenderLogic/RenderLogic";
 import AdminUserCard from "@/components/pages/admin-panel/users/AdminUserCard";
@@ -14,7 +16,7 @@ function AdminUsersPage() {
   //TODO added pagination
   const {
     data, isFetching, error
-  } = useFetchData<{ users: AdminUserResponseType[] }>({
+  } = useFetchData<AdminUserResponseStructureType>({
     axiosConfig: {
       url: APIES.ADMIN_USERS
     },

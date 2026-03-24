@@ -17,7 +17,8 @@ function useInputStyles(
 ) {
 
 
-  const backgroundColor = 'bg-gray-3'
+  const disabledBackgroundColor = 'bg-gray-4'
+  const backgroundColor = (disabled || readOnly) ? disabledBackgroundColor : 'bg-gray-3'
   const borderColor = `
     border-gray-4 [&:has(input:enabled)]:hover:border-black/80 [&:has(input:focus)]:border-black
   `
@@ -30,7 +31,7 @@ function useInputStyles(
     default: `
     flex items-center shadow-base border block w-full overflow-hidden appearance-none duration-200
     `,
-    background: isConflict ? 'bg-orange-100' : (disabled || readOnly) ? 'bg-gray-100' : backgroundColor,
+    background: isConflict ? 'bg-orange-100' : backgroundColor,
     shadow: 'shadow-xs',
     border: borderColor,
     borderRadius: 'rounded-lg',

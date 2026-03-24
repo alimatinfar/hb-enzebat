@@ -5,11 +5,18 @@ import SelectForm from "@/components/Form/Select/SelectForm";
 import {
   selectStudentsFieldLabel, selectStudentsFieldName
 } from "@/components/pages/admin-panel/classes/Form/FormFields/SelectStudentsField/SelectStudentsField.constances";
+import useGetSelectCityFieldValue from "@/components/pages/admin-panel/classes/Form/hooks/useGetSelectCityFieldValue";
 
-function SelectStudentsField() {
+type Props = {
+  loading: boolean;
+}
+
+function SelectStudentsField({loading}: Props) {
   const requiredErrorMessage = useGetRequiredErrorMessage(selectStudentsFieldLabel, true);
   const getErrorMessage = useGetFormErrorMessage();
   const errorMessage = getErrorMessage(selectStudentsFieldName);
+
+  const {firstSelectCityInputProps} = useGetSelectCityFieldValue()
 
   return (
     <SelectForm
@@ -17,12 +24,14 @@ function SelectStudentsField() {
       inputProps={{
         errorMessage,
         label: selectStudentsFieldLabel,
+        ...firstSelectCityInputProps
       }}
       rules={{
         required: requiredErrorMessage,
       }}
       selectProps={{
-        mode: 'multiple'
+        mode: 'multiple',
+        loading
       }}
     />
   );

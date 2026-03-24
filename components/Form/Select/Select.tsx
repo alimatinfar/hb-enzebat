@@ -9,7 +9,7 @@ import SelectInput from "./SelectInput";
 function Select(props: SelectProps) {
 
   const {
-    name, inputProps, value, mode, removeCloseIcon, disabled, optionStartAdornment, optionEndAdornment
+    name, inputProps, value, mode, removeCloseIcon, optionStartAdornment, optionEndAdornment
   } = props;
 
   const {
@@ -29,11 +29,11 @@ function Select(props: SelectProps) {
           errorMessage={inputProps?.errorMessage} onBlur={inputProps?.onBlur}
           hiddenErrorMessageElement={Boolean(inputProps?.hiddenErrorMessage)} required={inputProps?.required}
           onRemoveHandler={onRemoveHandler} onKeyDown={inputProps?.onKeyDown} placeholder={inputProps?.placeholder}
-          clearInput={clearInput} disabled={Boolean(disabled)}
+          clearInput={clearInput} disabled={Boolean(inputProps?.disabled)} loading={loading}
         />
       ) : (
         <SelectInput
-          toggleDropDown={toggleDropDown} disabled={Boolean(disabled)}
+          toggleDropDown={toggleDropDown}
           closeIconShouldBeRemoved={Boolean(closeIconShouldBeRemoved)} value={value}
           dropDownOpen={dropDownOpen} clearInput={clearInput} onQuery={onQuery} name={name}
           inputProps={inputProps} loading={loading}

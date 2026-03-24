@@ -9,7 +9,8 @@ import useSelectOptionsList from "./useSelectOptionsList";
 
 function useSelect(
   {
-    apiAddress, onSelect, options, value, name, mode, loading: loadingFromParent, apiOptionKey, apiOptionValue
+    apiAddress, onSelect, options, value, name, mode, loading: loadingFromParent, apiOptionKey, apiOptionValue,
+    inputProps
   }: SelectProps
 ) {
 
@@ -27,6 +28,8 @@ function useSelect(
   useOutsideClicked(inputWrapperRef, closeDropDown, [value])
 
   function toggleDropDown() {
+    if (inputProps?.disabled || loadingFromParent) return
+
     setDropDownOpen(prev => {
       if (prev) {
         setCurrentValueToInput()

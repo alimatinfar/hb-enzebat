@@ -23,3 +23,5 @@ export type AdminUserResponseType = {
     studentClasses: number;
   };
 }
+
+export type AdminUserResponseStructureType = {users: AdminUserResponseType[]}

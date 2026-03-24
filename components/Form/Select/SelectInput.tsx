@@ -7,7 +7,6 @@ import {InputProps} from "../Input/types/InputProps";
 
 type SelectInputProps = {
   toggleDropDown: () => void,
-  disabled: boolean,
   closeIconShouldBeRemoved: boolean,
   value: any,
   dropDownOpen: boolean,
@@ -19,7 +18,7 @@ type SelectInputProps = {
 
 function SelectInput(
   {
-    toggleDropDown, disabled, closeIconShouldBeRemoved, value, dropDownOpen,
+    toggleDropDown, closeIconShouldBeRemoved, value, dropDownOpen,
     clearInput, onQuery, name, inputProps, loading
   }: SelectInputProps
 ) {
@@ -27,18 +26,16 @@ function SelectInput(
     <Input
       autoCompleteOff
       inputWrapperOnClick={toggleDropDown}
-      {...!disabled && {
-        endAdornment: (
-          <SelectArrowAndCloseEndAdornment
-            loading={loading}
-            hasNotValue={
-              closeIconShouldBeRemoved ? true : !value
-            }
-            dropDownOpen={dropDownOpen}
-          />
-        ),
-        endAdornmentOnClick: (value && !closeIconShouldBeRemoved) ? clearInput : toggleDropDown
-      }}
+      endAdornment={(
+        <SelectArrowAndCloseEndAdornment
+          loading={loading}
+          hasNotValue={
+            closeIconShouldBeRemoved ? true : !value
+          }
+          dropDownOpen={dropDownOpen}
+        />
+      )}
+      endAdornmentOnClick={(value && !closeIconShouldBeRemoved) ? clearInput : toggleDropDown}
       onChange={onQuery}
       name={name}
       placeholder='انتخاب کنید'

@@ -20,6 +20,7 @@ type Props = {
   name: InputProps['name'];
   required: InputProps['required'];
   errorMessage: InputProps['errorMessage'];
+  loading?: boolean;
   value: any;
   onRemoveHandler: (tagId:SelectOptionType['id']) => void;
   onKeyDown: InputProps['onKeyDown'];
@@ -38,7 +39,7 @@ type Props = {
 function InputForMultiSelectMode(
   {
     name, label, required, errorMessage, value, onRemoveHandler, onBlur, onKeyDown, inputRef, onQuery, placeholder,
-    dropDownOpen, hiddenErrorMessageElement, wrapperOnClick, clearInput, size='md', disabled
+    dropDownOpen, hiddenErrorMessageElement, wrapperOnClick, clearInput, size='md', disabled, loading
   }: Props
 ) {
 
@@ -51,7 +52,7 @@ function InputForMultiSelectMode(
   }
 
   const {inputStyles, inputWrapperStyles} = useInputStyles({
-    errorMessage, wrapperClassName, inputClassName
+    errorMessage, wrapperClassName, inputClassName, disabled
   })
 
   return (
@@ -81,7 +82,6 @@ function InputForMultiSelectMode(
               className={joinObjectValues({
                 ...inputStyles, padding: 'px-2 py-1.5'
               })}
-              placeholder='جستجو'
               autoComplete='off'
             />
           </div>
@@ -90,7 +90,7 @@ function InputForMultiSelectMode(
             endAdornment={(
               <SelectArrowAndCloseEndAdornment
                 hasNotValue={value?.length === 0 || !value}
-                dropDownOpen={dropDownOpen}
+                dropDownOpen={dropDownOpen} loading={loading}
               />
             )}
             endAdornmentOnClick={() => value?.length !== 0 ? clearInput() : wrapperOnClick()}

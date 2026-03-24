@@ -14,7 +14,6 @@ export type SelectDropDownScrollPagination =
 
 export type SelectProps = {
   name: InputProps["name"];
-  disabled?: InputProps["disabled"];
   inputProps?: InputProps;
   alwaysShouldHaveSearch?: boolean;
   removeCloseIcon?: boolean;

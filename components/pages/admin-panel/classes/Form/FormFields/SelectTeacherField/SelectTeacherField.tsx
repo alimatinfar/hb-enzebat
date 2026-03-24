@@ -6,22 +6,36 @@ import {
   selectTeacherFieldLabel,
   selectTeacherFieldName
 } from "@/components/pages/admin-panel/classes/Form/FormFields/SelectTeacherField/SelectTeacherField.constances";
+import useGetSelectCityFieldValue from "@/components/pages/admin-panel/classes/Form/hooks/useGetSelectCityFieldValue";
 
-function SelectTeacherField() {
+
+type Props = {
+  loading: boolean;
+}
+
+function SelectTeacherField(
+  {loading}: Props
+) {
 
   const requiredErrorMessage = useGetRequiredErrorMessage(selectTeacherFieldLabel, true);
   const getErrorMessage = useGetFormErrorMessage();
   const errorMessage = getErrorMessage(selectTeacherFieldName);
+
+  const {firstSelectCityInputProps} = useGetSelectCityFieldValue()
 
   return (
     <SelectForm
       fieldName={selectTeacherFieldName}
       inputProps={{
         errorMessage,
-        label: selectTeacherFieldLabel
+        label: selectTeacherFieldLabel,
+        ...firstSelectCityInputProps
       }}
       rules={{
         required: requiredErrorMessage
+      }}
+      selectProps={{
+        loading
       }}
     />
   );
