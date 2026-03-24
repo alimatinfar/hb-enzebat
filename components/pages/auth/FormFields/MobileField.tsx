@@ -1,11 +1,19 @@
 import React from 'react';
 import StringFormField from "@/components/Form/FormLayout/StringFormField";
+import FORM_PATTERNS from "@/constances/form/formPatterns";
 
 export const mobileFieldName = 'mobile'
 export const mobileFieldLabel = 'موبایل'
 export type MobileFieldType = string;
 
-function MobileField() {
+
+type Props = {
+  hasValidation?: boolean;
+}
+
+function MobileField(
+  {hasValidation}: Props
+) {
   return (
     <StringFormField
       fieldName={mobileFieldName} fieldLabel={mobileFieldLabel}
@@ -15,6 +23,11 @@ function MobileField() {
         inputLtr: true,
         useTrim: true,
         justNumber: true
+      }}
+      {...hasValidation && {
+        rules: {
+          pattern: FORM_PATTERNS.MOBILE
+        }
       }}
     />
   );

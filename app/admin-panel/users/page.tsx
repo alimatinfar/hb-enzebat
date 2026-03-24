@@ -7,9 +7,11 @@ import {useMemo} from "react";
 import {
   AdminUserResponseStructureType
 } from "@/components/pages/admin-panel/users/AdminPanelUsers.types";
-import PageTitle from "@/components/others/PageTitle/PageTitle";
 import RenderLogic from "@/components/others/RenderLogic/RenderLogic";
 import AdminUserCard from "@/components/pages/admin-panel/users/AdminUserCard";
+import PageTitleWithAddButton from "@/components/others/PageTitle/PageTitleWithAddButton";
+import {useRouter} from "next/navigation";
+import ROUTER_LINKS from "@/constances/routerLinks";
 
 function AdminUsersPage() {
 
@@ -28,11 +30,22 @@ function AdminUsersPage() {
     return data.users
   }, [data])
 
+  const router = useRouter()
+
+  const goToAddUserPage = function () {
+    router.push(ROUTER_LINKS.ADMIN_PANEL_USER_ADD)
+  }
+
   return (
     <AdminLayout>
-      <PageTitle>
+      <PageTitleWithAddButton
+        btnProps={{
+          children: 'افزودن کاربر',
+          onClick: goToAddUserPage
+        }}
+      >
         لیست کاربران
-      </PageTitle>
+      </PageTitleWithAddButton>
 
       <RenderLogic
         isLoading={isFetching} error={error}
