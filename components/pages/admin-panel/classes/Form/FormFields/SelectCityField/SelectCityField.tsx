@@ -5,11 +5,24 @@ import SelectForm from "@/components/Form/Select/SelectForm";
 import {
   selectCityFieldLabel, selectCityFieldName
 } from "@/components/pages/admin-panel/classes/Form/FormFields/SelectCityField/SelectCityField.constances";
+import useFetchData from "@/request/hooks/useFetchData";
+import {
+  AdminCityResponseType
+} from "@/components/pages/admin-panel/classes/AdminPanelClasses.types";
+import APIES from "@/request/constances/apies";
 
 function SelectCityField() {
   const requiredErrorMessage = useGetRequiredErrorMessage(selectCityFieldLabel, true);
   const getErrorMessage = useGetFormErrorMessage();
   const errorMessage = getErrorMessage(selectCityFieldName);
+
+  const {
+    data, isFetching, error
+  } = useFetchData<{ cities: AdminCityResponseType[] }>({
+    axiosConfig: {
+      url: APIES.ADMIN_CITIES
+    }
+  })
 
   return (
     <SelectForm
@@ -20,6 +33,10 @@ function SelectCityField() {
       }}
       rules={{
         required: requiredErrorMessage
+      }}
+      selectProps={{
+        loading: isFetching,
+        options: data?.cities || []
       }}
     />
   );

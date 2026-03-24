@@ -20,6 +20,8 @@ const APIES = {
 
   ADMIN_REPORT: '/admin/report',
 
+  ADMIN_CITIES: '/admin/cities',
+
   //authentication
   LOGIN: '/auth/login',
 

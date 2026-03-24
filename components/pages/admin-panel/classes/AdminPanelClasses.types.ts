@@ -17,3 +17,8 @@ export type AdminClassResponseType = {
     attendance: number
   }
 }
+
+export type AdminCityResponseType = {
+  id: number;
+  name: string;
+}
