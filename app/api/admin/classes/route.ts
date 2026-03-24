@@ -36,6 +36,7 @@ export const GET = withRoleAuth(["ADMIN", "CITY_ADMIN"], async (req, adminUser) 
             mobile: true,
           },
         },
+        city: true,
         _count: {
           select: {
             students: true,

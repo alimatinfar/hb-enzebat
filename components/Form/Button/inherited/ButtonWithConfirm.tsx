@@ -7,14 +7,14 @@ const DeleteModal = lazy(() => import(
   "@/components/others/Modal/InheritedModals/DeleteModal"
   ));
 
-type Props = {
-  buttonProps: Omit<ButtonProps, 'children'>;
+export type ButtonWithConfirmProps = {
+  buttonProps?: Omit<ButtonProps, 'children'>;
   children: ReactNode;
   modalProps: Omit<DeleteModalProps, 'open' | 'onClose'>
 }
 
 function ButtonWithConfirm(
-  {buttonProps, modalProps, children}: Props
+  {buttonProps, modalProps, children}: ButtonWithConfirmProps
 ) {
 
   const {

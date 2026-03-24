@@ -2,6 +2,8 @@ import {useParams} from "next/navigation";
 import {KeyValueProps} from "@/components/others/KeyValue/KeyValue";
 import {useMemo} from "react";
 import {AdminUserCardProps} from "@/components/pages/admin-panel/users/AdminUserCard";
+import useAdminClassDetailPageDelete
+  from "@/components/pages/admin-panel/classes/detail/hooks/useAdminClassDetailPageDelete";
 
 function useAdminClassDetailPage() {
 
@@ -12,6 +14,7 @@ function useAdminClassDetailPage() {
   const infoKeyValues: KeyValueProps[] = useMemo(function () {
     return [
       {title: 'شناسه', value: 1},
+      {title: 'شهر', value: 'تهران'},
       {title: 'نام کلاس', value: 'الطریق النجاه'},
       {title: 'تعداد دانش آموزان', value: 10},
       {title: 'تعداد جلسات تشکیل شده', value: 20},
@@ -47,8 +50,15 @@ function useAdminClassDetailPage() {
     ]
   }, [])
 
+  const {
+    deleteLoading, onDeleteHandler
+  } = useAdminClassDetailPageDelete()
+
+  const classTitle = 'طریق النجاه'
+
   return {
-    infoKeyValues, classId, teacherKeyValues, students
+    infoKeyValues, classId, teacherKeyValues, students,
+    deleteLoading, onDeleteHandler, classTitle
   }
 }
 
