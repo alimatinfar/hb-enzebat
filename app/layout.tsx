@@ -26,7 +26,7 @@ export default function RootLayout({
         // zIndex: 10,
       }}
       className={`
-        ${allFontsClassName} antialiased bg-gray-2 font-kook rtl text-foreground ${LAYOUT_MAX_WIDTH}
+        ${allFontsClassName} antialiased bg-gray-2 font-kook rtl text-foreground
       `}
     >
     <CustomToastContainer/>

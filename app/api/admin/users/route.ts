@@ -5,14 +5,16 @@ import prisma from "@/lib/prisma";
 
 export const GET = withRoleAuth(["ADMIN", "CITY_ADMIN"], async (req, adminUser) => {
   try {
+    const { searchParams } = new URL(req.url);
+    const filterCityId = searchParams.get("cityId"); // ← فیلتر جدید
 
     const isAdmin = adminUser.roles.some(r => r.role === "ADMIN");
     const isCityAdmin = adminUser.roles.some(r => r.role === "CITY_ADMIN");
 
     let whereClause: any = {};
 
+    // ------ 1) ادمین شهری ------
     if (!isAdmin && isCityAdmin) {
-
       if (!adminUser.cityId) {
         return NextErrorResponse({ error: "ادمین شهری شهر ندارد", status: 403 });
       }
@@ -27,6 +29,14 @@ export const GET = withRoleAuth(["ADMIN", "CITY_ADMIN"], async (req, adminUser) 
       };
     }
 
+    // ------ 2) ادمین اصلی با فیلتر اختیاری ------
+    if (isAdmin) {
+      if (filterCityId) {
+        whereClause.cityId = Number(filterCityId);
+      }
+      // اگر cityId نبود → همه کاربرا
+    }
+
     const users = await prisma.user.findMany({
       where: whereClause,
       include: {
@@ -34,14 +44,12 @@ export const GET = withRoleAuth(["ADMIN", "CITY_ADMIN"], async (req, adminUser) 
         city: true,
         _count: {
           select: {
-            teacherClasses: true,   // 👈 تعداد کلاس‌هایی که معلم است
-            studentClasses: true,   // 👈 تعداد کلاس‌هایی که دانش‌آموز است
+            teacherClasses: true,
+            studentClasses: true,
           },
         },
       },
-      orderBy: {
-        id: "desc",
-      },
+      orderBy: { id: "desc" },
     });
 
     return NextSuccessResponse({ data: { users } });

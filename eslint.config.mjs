@@ -19,6 +19,8 @@ const eslintConfig = defineConfig([
       "react-hooks/immutability": "off",
       "@typescript-eslint/no-wrapper-object-types": "off",
       "react-hooks/static-components": "off",
+      "react-hooks/refs": "off",
+      "@typescript-eslint/ban-ts-comment": "off",
     },
   },
 ]);
