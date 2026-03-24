@@ -2,7 +2,7 @@ import React, {ReactNode} from "react";
 import {FormProvider} from "react-hook-form";
 import HiddenButton from "./HiddenButton";
 
-type Props = {
+export type ReactHookFormWrapperProps = {
   formMethods: any,
   onSubmit: (e?: React.BaseSyntheticEvent) => Promise<void>;
   className?: string;
@@ -10,7 +10,7 @@ type Props = {
   hiddenButton?: boolean;
 }
 
-function ReactHookFormWrapper({formMethods, onSubmit, className, children, hiddenButton}: Props) {
+function ReactHookFormWrapper({formMethods, onSubmit, className, children, hiddenButton}: ReactHookFormWrapperProps) {
   return (
     <FormProvider {...formMethods}>
       <form onSubmit={onSubmit} className={className || ''}>

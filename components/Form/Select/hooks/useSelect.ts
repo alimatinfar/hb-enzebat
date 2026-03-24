@@ -137,7 +137,7 @@ function useSelect(
     const bodyWidth = document?.body?.clientWidth
 
     if (!inputWrapperPosition || !inputPosition) return {}
-
+    console.log('calculateDropDownStyle')
     setDropDownStyle({
       top: inputPosition.bottom + 1,
       right: bodyWidth - inputWrapperPosition?.right,
@@ -164,6 +164,7 @@ function useSelect(
       const inputPosition = getInputPosition()
 
       if (dropDownIsVisible || !inputPosition) return
+      console.log('useEffect')
       setDropDownStyle((prev:any) => ({
         top: inputPosition.top - 1,
         right: prev?.right,

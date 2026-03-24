@@ -1,7 +1,6 @@
 'use client'
 
 import ReactHookFormWrapper from "@/components/Form/FormLayout/ReactHookFormWrapper/ReactHookFormWrapper";
-import useReactHookFormWrapper from "@/components/Form/FormLayout/ReactHookFormWrapper/hooks/useReactHookFormWrapper";
 import ClassNameField from "@/components/pages/admin-panel/classes/Form/FormFields/ClassNameField/ClassNameField";
 import BottomFixedButton from "@/components/Form/Button/inherited/BottomFixedButton";
 import SelectTeacherField
@@ -9,60 +8,27 @@ import SelectTeacherField
 import SelectCityField from "@/components/pages/admin-panel/classes/Form/FormFields/SelectCityField/SelectCityField";
 import SelectStudentsField
   from "@/components/pages/admin-panel/classes/Form/FormFields/SelectStudentsField/SelectStudentsField";
-import useFetchData from "@/request/hooks/useFetchData";
-import APIES from "@/request/constances/apies";
-import {
-  AdminUserResponseStructureType
-} from "@/components/pages/admin-panel/users/AdminPanelUsers.types";
-import {useWatch} from "react-hook-form";
-import {
-  selectCityFieldName
-} from "@/components/pages/admin-panel/classes/Form/FormFields/SelectCityField/SelectCityField.constances";
-import getUrlWithParams from "@/utils/getUrlWithParams";
-import {SelectOptionType} from "@/components/Form/Select/select-exports";
+import useAdminClassForm from "@/components/pages/admin-panel/classes/Form/hooks/useAdminClassForm";
 
 function AdminClassForm() {
 
-  const onSubmitHandler = function () {
-
-  }
-
   const {
-    formMethods, onSubmit
-  } = useReactHookFormWrapper({
-    onSubmitHandler
-  })
-
-  //get students base city
-
-  const cityValue = useWatch({name: selectCityFieldName, control: formMethods.control}) as (undefined | SelectOptionType)
-
-  const {
-    data, isFetching: getUsersLoading, error
-  } = useFetchData<AdminUserResponseStructureType>({
-    axiosConfig: {
-      url: getUrlWithParams(APIES.ADMIN_USERS, {cityId: cityValue?.id})
-    },
-    options: {
-      enabled: !!cityValue
-    }
-  })
-
-  console.log({data})
+    formMethods, onSubmit, usersLoading, teachers, students, formLoading
+  } = useAdminClassForm()
 
   return (
     <ReactHookFormWrapper
       formMethods={formMethods} onSubmit={onSubmit}
     >
-      <ClassNameField />
+      <ClassNameField/>
 
-      <SelectCityField />
+      <SelectCityField/>
 
-      <SelectTeacherField loading={getUsersLoading} />
+      <SelectTeacherField loading={usersLoading} options={teachers}/>
 
-      <SelectStudentsField loading={getUsersLoading} />
+      <SelectStudentsField loading={usersLoading} options={students}/>
 
-      <BottomFixedButton type='submit'>
+      <BottomFixedButton type='submit' loading={formLoading}>
         افزودن
       </BottomFixedButton>
     </ReactHookFormWrapper>

@@ -6,12 +6,14 @@ import {
   selectStudentsFieldLabel, selectStudentsFieldName
 } from "@/components/pages/admin-panel/classes/Form/FormFields/SelectStudentsField/SelectStudentsField.constances";
 import useGetSelectCityFieldValue from "@/components/pages/admin-panel/classes/Form/hooks/useGetSelectCityFieldValue";
+import {SelectOptionType} from "@/components/Form/Select/select-exports";
 
 type Props = {
   loading: boolean;
+  options: SelectOptionType[]
 }
 
-function SelectStudentsField({loading}: Props) {
+function SelectStudentsField({loading, options}: Props) {
   const requiredErrorMessage = useGetRequiredErrorMessage(selectStudentsFieldLabel, true);
   const getErrorMessage = useGetFormErrorMessage();
   const errorMessage = getErrorMessage(selectStudentsFieldName);
@@ -31,7 +33,8 @@ function SelectStudentsField({loading}: Props) {
       }}
       selectProps={{
         mode: 'multiple',
-        loading
+        loading,
+        options
       }}
     />
   );

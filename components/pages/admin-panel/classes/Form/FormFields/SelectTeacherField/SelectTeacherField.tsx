@@ -7,14 +7,16 @@ import {
   selectTeacherFieldName
 } from "@/components/pages/admin-panel/classes/Form/FormFields/SelectTeacherField/SelectTeacherField.constances";
 import useGetSelectCityFieldValue from "@/components/pages/admin-panel/classes/Form/hooks/useGetSelectCityFieldValue";
+import {SelectOptionType} from "@/components/Form/Select/select-exports";
 
 
 type Props = {
   loading: boolean;
+  options: SelectOptionType[]
 }
 
 function SelectTeacherField(
-  {loading}: Props
+  {loading, options}: Props
 ) {
 
   const requiredErrorMessage = useGetRequiredErrorMessage(selectTeacherFieldLabel, true);
@@ -35,7 +37,8 @@ function SelectTeacherField(
         required: requiredErrorMessage
       }}
       selectProps={{
-        loading
+        loading,
+        options
       }}
     />
   );
