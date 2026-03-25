@@ -1,6 +1,6 @@
 import {mobileFieldName} from "@/components/pages/auth/FormFields/MobileField";
 import {passwordFieldName} from "@/components/pages/auth/FormFields/PasswordField";
-import {useRouter} from "next/navigation";
+import {useParams, useRouter} from "next/navigation";
 import useMutateData from "@/request/hooks/useMutateData";
 import {NextSuccessResponseProps} from "@/utils/backend/response/NextSuccessResponse";
 import {
@@ -23,14 +23,21 @@ import {
 import getSelectIdValue from "@/components/Form/Select/utils/getSelectIdValue";
 import toastPromise from "@/utils/promises/toastPromise";
 import useReactHookFormWrapper from "@/components/Form/FormLayout/ReactHookFormWrapper/hooks/useReactHookFormWrapper";
+import useAdminUserFormEdit from "@/components/pages/admin-panel/users/Form/hooks/useAdminUserFormEdit";
+import {useMemo} from "react";
 
 function useAdminUserForm() {
+
+  const {userId} = useParams()
+
+  const isEditMode = useMemo(() => userId != null, [userId])
 
   const router = useRouter()
 
   const {mutate, isPending: formLoading} = useMutateData<NextSuccessResponseProps<any>, AdminUserFormBodyDataType>({
     axiosConfig: {
-      url: APIES.ADMIN_ADD_USER, method: 'POST'
+      url: isEditMode ? APIES.ADMIN_EDIT_USER(String(userId)) : APIES.ADMIN_ADD_USER,
+      method: isEditMode ? 'PUT' : 'POST'
     },
   })
 
@@ -46,7 +53,7 @@ function useAdminUserForm() {
 
     mutate(data, {
       onSuccess: async () => {
-        toastPromise().then((toast: any) => toast.success('عملیات با موفقیت انجام شد'))
+        toastPromise().then((toast: any) => toast.success(`${isEditMode ? 'ویرایش' : 'افزودن'} کاربر با موفقیت انجام شد`))
         router.back()
       },
     })
@@ -58,8 +65,14 @@ function useAdminUserForm() {
     onSubmitHandler
   })
 
+  const {
+    fullName, detailInfoLoading
+  } = useAdminUserFormEdit({
+    setValue: formMethods.setValue, isEditMode, userId: String(userId)
+  })
+
   return {
-    formMethods, onSubmit, formLoading
+    formMethods, onSubmit, formLoading, fullName, detailInfoLoading, isEditMode
   }
 }
 

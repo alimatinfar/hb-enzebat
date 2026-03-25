@@ -25,3 +25,5 @@ export type AdminUserResponseType = {
 }
 
 export type AdminUserResponseStructureType = {users: AdminUserResponseType[]}
+
+export type AdminUserDetailResponseStructureType = {user: AdminUserResponseType}

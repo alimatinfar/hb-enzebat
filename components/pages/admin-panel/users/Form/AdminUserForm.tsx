@@ -9,34 +9,45 @@ import MobileField from "@/components/pages/auth/FormFields/MobileField";
 import PasswordField from "@/components/pages/auth/FormFields/PasswordField";
 import SelectRolesField from "@/components/pages/admin-panel/users/Form/FormFields/SelectRolesField/SelectRolesField";
 import useAdminUserForm from "@/components/pages/admin-panel/users/Form/hooks/useAdminUserForm";
+import PageTitle from "@/components/others/PageTitle/PageTitle";
+import AdminLayout from "@/components/layouts/AdminLayout";
+import RenderLogic from "@/components/others/RenderLogic/RenderLogic";
 
 
 function AdminUserForm() {
 
   const {
-    formMethods, onSubmit, formLoading
+    formMethods, onSubmit, formLoading, fullName, detailInfoLoading, isEditMode
   } = useAdminUserForm()
 
   return (
-    <ReactHookFormWrapper
-      formMethods={formMethods} onSubmit={onSubmit}
-    >
-      <FirstNameField />
+    <RenderLogic isLoading={detailInfoLoading}>
+      <AdminLayout hasBack>
+        <PageTitle>
+          {isEditMode ? `ویرایش اطلاعات ${fullName}` : 'افزودن کاربر جدید'}
+        </PageTitle>
 
-      <LastNameField />
+        <ReactHookFormWrapper
+          formMethods={formMethods} onSubmit={onSubmit}
+        >
+          <FirstNameField />
 
-      <SelectCityField/>
+          <LastNameField />
 
-      <SelectRolesField />
+          <SelectCityField/>
 
-      <MobileField hasValidation />
+          <SelectRolesField />
 
-      <PasswordField />
+          <MobileField hasValidation />
 
-      <BottomFixedButton type='submit' loading={formLoading}>
-        افزودن
-      </BottomFixedButton>
-    </ReactHookFormWrapper>
+          <PasswordField />
+
+          <BottomFixedButton type='submit' loading={formLoading}>
+            {isEditMode ? 'ویرایش' : 'افزودن'}
+          </BottomFixedButton>
+        </ReactHookFormWrapper>
+      </AdminLayout>
+    </RenderLogic>
   );
 }
 

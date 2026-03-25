@@ -1,15 +1,10 @@
 'use client'
 
-import AdminLayout from "@/components/layouts/AdminLayout";
-import PageTitle from "@/components/others/PageTitle/PageTitle";
+import AdminUserForm from "@/components/pages/admin-panel/users/Form/AdminUserForm";
 
 function AdminUserEditPage() {
   return (
-    <AdminLayout hasBack>
-      <PageTitle>
-        ویرایش اطلاعات علی متین فر
-      </PageTitle>
-    </AdminLayout>
+    <AdminUserForm />
   );
 }
 
