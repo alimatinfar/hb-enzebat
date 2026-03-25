@@ -3,6 +3,8 @@ import {KeyValueProps} from "@/components/others/KeyValue/KeyValue";
 import {useMemo} from "react";
 import {USER_ROLE_LABELS} from "@/components/pages/admin-panel/users/AdminPanelUsers.constances";
 import {AdminClassCardProps} from "@/components/pages/admin-panel/classes/AdminClassCard";
+import useAdminUserDetailPageDelete
+  from "@/components/pages/admin-panel/users/detail/hooks/useAdminUserDetailPageDelete";
 
 function useAdminUserDetailPage() {
 
@@ -83,9 +85,16 @@ function useAdminUserDetailPage() {
     ]
   }, [])
 
+  const {
+    deleteLoading, onDeleteHandler
+  } = useAdminUserDetailPageDelete()
+
+  const userTitle = 'علی متین فر'
+
   return {
     teacherReportKeyValues, studentReportKeyValues, infoKeyValues, userId, userIsStudent, userIsTeacher,
-    teacherClasses, studentClasses
+    teacherClasses, studentClasses,
+    deleteLoading, onDeleteHandler, userTitle
   }
 }
 

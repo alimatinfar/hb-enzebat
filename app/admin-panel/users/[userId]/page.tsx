@@ -9,19 +9,34 @@ import Link from "next/link";
 import ROUTER_LINKS from "@/constances/routerLinks";
 import useAdminUserDetailPage from "@/components/pages/admin-panel/users/detail/hooks/useAdminUserDetailPage";
 import AdminUserDetailClasses from "@/components/pages/admin-panel/users/detail/AdminUserDetailClasses";
+import DeleteButtonWithConfirm from "@/components/Form/Button/inherited/DeleteButtonWithConfirm";
 
 
 function AdminUserDetailPage() {
 
   const {
     teacherReportKeyValues, studentReportKeyValues, infoKeyValues, userId, userIsStudent, userIsTeacher,
-    teacherClasses, studentClasses
+    teacherClasses, studentClasses,
+    deleteLoading, onDeleteHandler, userTitle
   } = useAdminUserDetailPage()
 
   return (
     <AdminLayout hasBack>
-      <PageTitle>
-        اطلاعات علی متین فر
+      <PageTitle endAdornment={(
+        <div>
+          <DeleteButtonWithConfirm
+            modalProps={{
+              title: 'حذف کلاس',
+              loading: deleteLoading,
+              onConfirmHandler: onDeleteHandler,
+              description: `آیا از حذف کاربر ${userTitle} مطمئن هستید؟`,
+            }}
+          >
+            حذف کاربر
+          </DeleteButtonWithConfirm>
+        </div>
+      )}>
+        اطلاعات {userTitle}
       </PageTitle>
 
       <div className='flex flex-col gap-y-4'>
