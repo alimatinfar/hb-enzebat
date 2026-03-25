@@ -1,6 +1,6 @@
 import {useParams} from "next/navigation";
 import {KeyValueProps} from "@/components/others/KeyValue/KeyValue";
-import {useMemo} from "react";
+import {useCallback, useMemo} from "react";
 import {USER_ROLE_LABELS} from "@/components/pages/admin-panel/users/AdminPanelUsers.constances";
 import {AdminClassCardProps} from "@/components/pages/admin-panel/classes/AdminClassCard";
 import useAdminUserDetailPageDelete
@@ -25,10 +25,18 @@ function useAdminUserDetailPage() {
   const userInfoData = infoData?.user
   const userTitle = `${userInfoData?.firstName} ${userInfoData?.lastName}`
 
-  const userIsTeacher = useMemo(function () {
+  const hasSpecificRole = useCallback(function (role: Role) {
     if (!userInfoData) return
-    return userInfoData?.roles?.map(role => role.role)?.includes(Role.TEACHER)
+    return userInfoData?.roles?.map(role => role.role)?.includes(role)
   }, [userInfoData])
+
+  const userIsTeacher = useMemo(function () {
+    return hasSpecificRole(Role.TEACHER)
+  }, [hasSpecificRole])
+
+  const userIsStudent = useMemo(function () {
+    return hasSpecificRole(Role.STUDENT)
+  }, [hasSpecificRole])
 
   const infoKeyValues: KeyValueProps[] = useMemo(function () {
     if (!userInfoData) return []
@@ -61,8 +69,6 @@ function useAdminUserDetailPage() {
       },
     ]
   }, [userIsTeacher])
-
-  const userIsStudent = true
 
   const studentReportKeyValues: KeyValueProps[] = useMemo(function () {
     if (!userIsStudent) return []
