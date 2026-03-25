@@ -5,14 +5,43 @@ import {USER_ROLE_LABELS} from "@/components/pages/admin-panel/users/AdminPanelU
 import {AdminClassCardProps} from "@/components/pages/admin-panel/classes/AdminClassCard";
 import useAdminUserDetailPageDelete
   from "@/components/pages/admin-panel/users/detail/hooks/useAdminUserDetailPageDelete";
+import useFetchData from "@/request/hooks/useFetchData";
+import {AdminUserDetailResponseStructureType} from "@/components/pages/admin-panel/users/AdminPanelUsers.types";
+import APIES from "@/request/constances/apies";
+import {Role} from "@/app/generated/prisma/enums";
 
 function useAdminUserDetailPage() {
 
   const {userId} = useParams()
 
-  //TODO should implemented api for user detail
+  const {
+    data: infoData, isFetching: infoLoading
+  } = useFetchData<AdminUserDetailResponseStructureType>({
+    axiosConfig: {
+      url: APIES.ADMIN_USER_DETAIL(String(userId))
+    },
+  })
 
-  const userIsTeacher = true
+  const userInfoData = infoData?.user
+  const userTitle = `${userInfoData?.firstName} ${userInfoData?.lastName}`
+
+  const userIsTeacher = useMemo(function () {
+    if (!userInfoData) return
+    return userInfoData?.roles?.map(role => role.role)?.includes(Role.TEACHER)
+  }, [userInfoData])
+
+  const infoKeyValues: KeyValueProps[] = useMemo(function () {
+    if (!userInfoData) return []
+
+    return [
+      {title: 'شناسه', value: userInfoData?.id},
+      {title: 'نام', value: userInfoData?.firstName},
+      {title: 'نام خانوادگی', value: userInfoData?.lastName},
+      {title: 'موبایل', value: userInfoData?.mobile},
+      {title: 'شهر', value: userInfoData?.city?.name},
+      {title: 'نقش ها', value: userInfoData?.roles?.map(role => USER_ROLE_LABELS[role?.role])?.join(', ')},
+    ]
+  }, [userInfoData])
 
   const teacherReportKeyValues: KeyValueProps[] = useMemo(function () {
     if (!userIsTeacher) return []
@@ -58,17 +87,6 @@ function useAdminUserDetailPage() {
     ]
   }, [userIsStudent])
 
-  const infoKeyValues: KeyValueProps[] = useMemo(function () {
-    return [
-      {title: 'شناسه', value: '1'},
-      {title: 'نام', value: 'علی'},
-      {title: 'نام خانوادگی', value: 'متین فر'},
-      {title: 'موبایل', value: '09195922298'},
-      {title: 'شهر', value: 'تهران'},
-      {title: 'نقش ها', value: USER_ROLE_LABELS['ADMIN']},
-    ]
-  }, [])
-
   const teacherClasses: AdminClassCardProps[] = useMemo(function () {
     return [
       {id: 1, name: 'کلاس شماره 1', cityName: 'تهران'},
@@ -89,11 +107,9 @@ function useAdminUserDetailPage() {
     deleteLoading, onDeleteHandler
   } = useAdminUserDetailPageDelete()
 
-  const userTitle = 'علی متین فر'
-
   return {
     teacherReportKeyValues, studentReportKeyValues, infoKeyValues, userId, userIsStudent, userIsTeacher,
-    teacherClasses, studentClasses,
+    teacherClasses, studentClasses, infoLoading,
     deleteLoading, onDeleteHandler, userTitle
   }
 }

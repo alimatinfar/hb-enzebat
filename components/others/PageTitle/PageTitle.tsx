@@ -21,7 +21,7 @@ function PageTitle({children, hasBack, small, endAdornment}: PageTitleProps) {
 
 
   return (
-    <div className='flex items-center justify-between w-full border-b border-gray-5 mb-4 pb-4'>
+    <div className='flex items-center justify-between w-full border-b border-gray-5 mb-4 pb-4 gap-x-4'>
       <div className='flex items-center space-x-2 w-full'>
         {hasBack && (
           <BackIconClickable onBackRoute={onBackRoute} />
