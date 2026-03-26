@@ -1,15 +1,10 @@
 'use client'
 
-import AdminLayout from "@/components/layouts/AdminLayout";
-import PageTitle from "@/components/others/PageTitle/PageTitle";
+import AdminClassForm from "@/components/pages/admin-panel/classes/Form/AdminClassForm";
 
 function AdminClassEditPage() {
   return (
-    <AdminLayout hasBack>
-      <PageTitle>
-        ویرایش کلاس الطریق النجاه
-      </PageTitle>
-    </AdminLayout>
+    <AdminClassForm/>
   );
 }
 

@@ -2,9 +2,10 @@ const TEACHER_PANEL_CLASSES = '/teacher/classes'
 const TEACHER_PANEL_CLASS_ATTENDANCES = (classId: string) => `${TEACHER_PANEL_CLASSES}/${classId}/attendance`
 const TEACHER_PANEL_CLASS_ATTENDANCE_INFO = (classId: string, attendanceId: string) => `${TEACHER_PANEL_CLASS_ATTENDANCES(classId)}/${attendanceId}`
 
-const ADMIN_USER_DETAIL = (userId: string) => `${ADMIN_USERS}/${userId}`
 const ADMIN_USERS = '/admin/users'
+const ADMIN_USER_DETAIL = (userId: string) => `${ADMIN_USERS}/${userId}`
 const ADMIN_CLASSES = '/admin/classes'
+const ADMIN_CLASS_DETAIL = (classId: string) => `${ADMIN_CLASSES}/${classId}`
 
 const APIES = {
   //admin
@@ -17,8 +18,9 @@ const APIES = {
 
   ADMIN_CLASSES,
   ADMIN_ADD_CLASS: `${ADMIN_CLASSES}/add`,
-  ADMIN_EDIT_CLASS: (classId: string) => `${ADMIN_CLASSES}/${classId}/edit`,
-  ADMIN_DELETE_CLASS: (classId: string) => `${ADMIN_CLASSES}/${classId}/delete`,
+  ADMIN_CLASS_DETAIL,
+  ADMIN_EDIT_CLASS: (classId: string) => `${ADMIN_CLASS_DETAIL(classId)}/edit`,
+  ADMIN_DELETE_CLASS: (classId: string) => `${ADMIN_CLASS_DETAIL(classId)}/delete`,
 
   ADMIN_REPORT: '/admin/report',
 

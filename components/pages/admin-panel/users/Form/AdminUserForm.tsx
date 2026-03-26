@@ -21,8 +21,8 @@ function AdminUserForm() {
   } = useAdminUserForm()
 
   return (
-    <RenderLogic isLoading={detailInfoLoading}>
-      <AdminLayout hasBack>
+    <AdminLayout hasBack>
+      <RenderLogic isLoading={detailInfoLoading}>
         <PageTitle>
           {isEditMode ? `ویرایش اطلاعات ${fullName}` : 'افزودن کاربر جدید'}
         </PageTitle>
@@ -30,24 +30,24 @@ function AdminUserForm() {
         <ReactHookFormWrapper
           formMethods={formMethods} onSubmit={onSubmit}
         >
-          <FirstNameField />
+          <FirstNameField/>
 
-          <LastNameField />
+          <LastNameField/>
 
           <SelectCityField/>
 
-          <SelectRolesField />
+          <SelectRolesField/>
 
-          <MobileField hasValidation />
+          <MobileField hasValidation/>
 
-          <PasswordField />
+          <PasswordField/>
 
           <BottomFixedButton type='submit' loading={formLoading}>
             {isEditMode ? 'ویرایش' : 'افزودن'}
           </BottomFixedButton>
         </ReactHookFormWrapper>
-      </AdminLayout>
-    </RenderLogic>
+      </RenderLogic>
+    </AdminLayout>
   );
 }
 

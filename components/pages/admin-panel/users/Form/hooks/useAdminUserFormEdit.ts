@@ -70,7 +70,7 @@ function useAdminUserFormEdit(
   }, [data, isEditMode]);
 
   return {
-    fullName, detailInfoLoading: isFetching, isEditMode
+    fullName, detailInfoLoading: isFetching
   }
 }
 

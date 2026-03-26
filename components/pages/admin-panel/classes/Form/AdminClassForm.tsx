@@ -9,29 +9,41 @@ import SelectCityField from "@/components/pages/admin-panel/classes/Form/FormFie
 import SelectStudentsField
   from "@/components/pages/admin-panel/classes/Form/FormFields/SelectStudentsField/SelectStudentsField";
 import useAdminClassForm from "@/components/pages/admin-panel/classes/Form/hooks/useAdminClassForm";
+import PageTitle from "@/components/others/PageTitle/PageTitle";
+import AdminLayout from "@/components/layouts/AdminLayout";
+import RenderLogic from "@/components/others/RenderLogic/RenderLogic";
 
 function AdminClassForm() {
 
   const {
-    formMethods, onSubmit, usersLoading, teachers, students, formLoading
+    formMethods, onSubmit, usersLoading, teachers, students, formLoading,
+    classNameValue, detailInfoLoading, isEditMode
   } = useAdminClassForm()
 
   return (
-    <ReactHookFormWrapper
-      formMethods={formMethods} onSubmit={onSubmit}
-    >
-      <ClassNameField/>
+    <AdminLayout hasBack>
+      <RenderLogic isLoading={detailInfoLoading}>
+        <PageTitle>
+          {isEditMode ? `ویرایش کلاس ${classNameValue}` : 'افزودن کلاس جدید'}
+        </PageTitle>
 
-      <SelectCityField/>
+        <ReactHookFormWrapper
+          formMethods={formMethods} onSubmit={onSubmit}
+        >
+          <ClassNameField/>
 
-      <SelectTeacherField loading={usersLoading} options={teachers}/>
+          <SelectCityField/>
 
-      <SelectStudentsField loading={usersLoading} options={students}/>
+          <SelectTeacherField loading={usersLoading} options={teachers}/>
 
-      <BottomFixedButton type='submit' loading={formLoading}>
-        افزودن
-      </BottomFixedButton>
-    </ReactHookFormWrapper>
+          <SelectStudentsField loading={usersLoading} options={students}/>
+
+          <BottomFixedButton type='submit' loading={formLoading}>
+            افزودن
+          </BottomFixedButton>
+        </ReactHookFormWrapper>
+      </RenderLogic>
+    </AdminLayout>
   );
 }
 

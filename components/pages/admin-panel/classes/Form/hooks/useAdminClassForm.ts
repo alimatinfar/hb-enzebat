@@ -20,18 +20,24 @@ import getSelectIdValue from "@/components/Form/Select/utils/getSelectIdValue";
 import {
   selectStudentsFieldName
 } from "@/components/pages/admin-panel/classes/Form/FormFields/SelectStudentsField/SelectStudentsField.constances";
-import {useRouter} from "next/navigation";
+import {useParams, useRouter} from "next/navigation";
 import useAdminClassFormGetUsersBaseCity
   from "@/components/pages/admin-panel/classes/Form/hooks/useAdminClassFormGetUsersBaseCity";
+import {useMemo} from "react";
+import useAdminClassFormEdit from "@/components/pages/admin-panel/classes/Form/hooks/useAdminClassFormEdit";
 
 function useAdminClassForm() {
+
+  const {classId} = useParams()
+
+  const isEditMode = useMemo(() => classId != null, [classId])
 
   const router = useRouter()
 
   const {mutate, isPending: formLoading} = useMutateData<NextSuccessResponseProps<any>, AdminClassFormBodyData>({
     axiosConfig: {
-      url: APIES.ADMIN_ADD_CLASS,
-      method: 'POST'
+      url: isEditMode ? APIES.ADMIN_EDIT_CLASS(String(classId)) : APIES.ADMIN_ADD_CLASS,
+      method: isEditMode ? 'PUT' : 'POST'
     },
   })
 
@@ -45,8 +51,8 @@ function useAdminClassForm() {
 
     mutate(data, {
       onSuccess: async () => {
-        toastPromise().then((toast: any) => toast.success('کلاس با موفقیت ایجاد شد'))
-         router.back()
+        toastPromise().then((toast: any) => toast.success(`کلاس با موفقیت ${isEditMode ? 'ویرایش' : 'ایجاد'} شد`))
+        router.back()
       },
     })
   }
@@ -63,8 +69,15 @@ function useAdminClassForm() {
     formMethods
   })
 
+  const {
+    classNameValue, detailInfoLoading
+  } = useAdminClassFormEdit({
+    setValue: formMethods.setValue, isEditMode, classId: String(classId)
+  })
+
   return {
-    formMethods, onSubmit, usersLoading, teachers, students, formLoading
+    formMethods, onSubmit, usersLoading, teachers, students, formLoading,
+    classNameValue, detailInfoLoading, isEditMode
   }
 }
 

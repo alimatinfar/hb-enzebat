@@ -22,3 +22,26 @@ export type AdminCityResponseType = {
   id: number;
   name: string;
 }
+
+export type AdminClassDetailResponseType = {
+  id: number;
+  name: string;
+  teacherId: number;
+  cityId: number;
+  city: {
+    id: number;
+    name: string;
+  };
+  students: {
+    id: number;
+    firstName: string;
+    lastName: string;
+  }[];
+  teacher: {
+    id: number;
+    firstName: string;
+    lastName: string;
+  };
+}
+
+export type AdminClassDetailResponseStructureType = {class: AdminClassDetailResponseType}
