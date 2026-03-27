@@ -39,7 +39,7 @@ function AdminClassForm() {
           <SelectStudentsField loading={usersLoading} options={students}/>
 
           <BottomFixedButton type='submit' loading={formLoading}>
-            افزودن
+            {isEditMode ? 'ویرایش' : 'افزودن'}
           </BottomFixedButton>
         </ReactHookFormWrapper>
       </RenderLogic>

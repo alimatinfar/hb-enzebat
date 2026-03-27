@@ -4,61 +4,78 @@ import {useMemo} from "react";
 import {AdminUserCardProps} from "@/components/pages/admin-panel/users/AdminUserCard";
 import useAdminClassDetailPageDelete
   from "@/components/pages/admin-panel/classes/detail/hooks/useAdminClassDetailPageDelete";
+import useFetchData from "@/request/hooks/useFetchData";
+import {AdminClassDetailResponseStructureType} from "@/components/pages/admin-panel/classes/AdminPanelClasses.types";
+import APIES from "@/request/constances/apies";
+import getUrlWithParams from "@/utils/getUrlWithParams";
 
 function useAdminClassDetailPage() {
 
   const {classId} = useParams()
 
-  //TODO should implemented api for user detail
+  const {
+    data, isFetching: infoLoading
+  } = useFetchData<AdminClassDetailResponseStructureType>({
+    axiosConfig: {
+      url: getUrlWithParams(APIES.ADMIN_CLASS_DETAIL(String(classId)), {moreInfo: true}),
+    }
+  })
+
+  const classInfo = data?.class
+  const moreInfo = data?.moreInfo
+
+  const classTitle = useMemo(function () {
+    return classInfo ? classInfo?.name : ''
+  }, [classInfo])
+
+  const teacherId = useMemo(function () {
+    return classInfo ? classInfo?.teacherId : ''
+  }, [])
 
   const infoKeyValues: KeyValueProps[] = useMemo(function () {
+    if (!classInfo) return []
+
     return [
-      {title: 'شناسه', value: 1},
-      {title: 'شهر', value: 'تهران'},
-      {title: 'نام کلاس', value: 'الطریق النجاه'},
-      {title: 'تعداد دانش آموزان', value: 10},
-      {title: 'تعداد جلسات تشکیل شده', value: 20},
-      {title: 'میانگین درصد حضور دانش آموزان', value: `${50}%`},
+      {title: 'شناسه', value: classInfo?.id},
+      {title: 'شهر', value: classInfo?.city?.name},
+      {title: 'نام کلاس', value: classInfo?.name},
+      {title: 'تعداد دانش آموزان', value: classInfo?.students?.length},
+      {title: 'تعداد جلسات تشکیل شده', value: moreInfo?.totalSessions},
+      {title: 'میانگین درصد حضور دانش آموزان', value: `${moreInfo?.averageAttendancePercent}%`},
     ]
-  }, [])
+  }, [classInfo, moreInfo])
 
   const teacherKeyValues: KeyValueProps[] = useMemo(function () {
+    if (!classInfo) return []
+
+    const teacher = classInfo?.teacher
+
     return [
-      {title: 'شناسه', value: 1},
-      {title: 'نام و نام خانوادگی', value: 'حاج محمود شفیعیان'},
-      {title: 'موبایل', value: '09199999999'},
+      {title: 'شناسه', value: teacher?.id},
+      {title: 'نام و نام خانوادگی', value: `${teacher?.firstName} ${teacher?.lastName}`},
+      {title: 'موبایل', value: teacher?.mobile},
     ]
-  }, [])
+  }, [classInfo])
 
   const students: AdminUserCardProps[] = useMemo(function () {
-    return [
-      {
-        id: 1, roles: [], firstName: 'علی', lastName: 'متین فر', cityName: 'تهران'
-      },
-      {
-        id: 2, roles: [], firstName: 'علی', lastName: 'متین فر', cityName: 'تهران'
-      },
-      {
-        id: 3, roles: [], firstName: 'علی', lastName: 'متین فر', cityName: 'تهران'
-      },
-      {
-        id: 4, roles: [], firstName: 'علی', lastName: 'متین فر', cityName: 'تهران'
-      },
-      {
-        id: 5, roles: [], firstName: 'علی', lastName: 'متین فر', cityName: 'تهران'
-      },
-    ]
-  }, [])
+    if (!classInfo) return []
+
+    return classInfo?.students?.map(student => ({
+      id: student?.id,
+      roles: student.roles,
+      firstName: student?.firstName,
+      lastName: student?.lastName,
+      cityName: student?.city?.name,
+    }))
+  }, [classInfo])
 
   const {
     deleteLoading, onDeleteHandler
   } = useAdminClassDetailPageDelete()
 
-  const classTitle = 'طریق النجاه'
-
   return {
     infoKeyValues, classId, teacherKeyValues, students,
-    deleteLoading, onDeleteHandler, classTitle
+    deleteLoading, onDeleteHandler, classTitle, infoLoading, teacherId
   }
 }
 
