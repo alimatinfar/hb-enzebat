@@ -26,4 +26,32 @@ export type AdminUserResponseType = {
 
 export type AdminUserResponseStructureType = {users: AdminUserResponseType[]}
 
-export type AdminUserDetailResponseStructureType = {user: AdminUserResponseType}
+export type AdminUserDetailResponseStructureType = {
+  user: AdminUserResponseType;
+  student?: {
+    classes: {
+      id: number;
+      name: string;
+      city: {
+        id: number;
+        name: string;
+      };
+    }[];
+    totalAttendedSessions: number;
+    totalAbsentSessions: number;
+    averageAttendancePercent: number;
+    excusedAbsencePercent: number;
+  };
+  teacher?: {
+    classes: {
+      id: number;
+      name: string;
+      city: {
+        id: number;
+        name: string;
+      };
+    }[];
+    totalSessions: number;
+    totalStudents: number;
+  };
+}

@@ -3,30 +3,39 @@
 import {KeyValueProps} from "@/components/others/KeyValue/KeyValue";
 import {useMemo} from "react";
 import ReportCard from "@/components/others/Card/ReportCard";
+import {AdminHomeResponseType} from "@/components/pages/admin-panel/home/AdminHome.types";
 
-function AdminHomeReport() {
+type Props = {
+  data: AdminHomeResponseType['stats'] | undefined;
+}
+
+function AdminHomeReport(
+  {data}: Props
+) {
 
   //TODO should fetch this data from api
   const reportKeyValues: KeyValueProps[] = useMemo(function () {
+    if (!data) return []
+
     return [
       {
         title: 'تعداد کل کلاس‌ها',
-        value: 0
+        value: data?.totalClasses
       },
       {
         title: 'تعداد کل متعلمان',
-        value: 0
+        value: data?.totalStudents
       },
       {
         title: 'تعداد کل جلسات برگزار شده',
-        value: 0
+        value: data?.totalSessions
       },
       {
         title: 'میانگین درصد حضور متعلمان در جلسات',
-        value: `${50}%`
+        value: `${data?.averageAttendancePercentage}%`
       },
     ]
-  }, [])
+  }, [data])
 
   return (
     <ReportCard title='گزارش عملکرد کلی' keyValues={reportKeyValues}/>

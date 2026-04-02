@@ -9,6 +9,7 @@ import useFetchData from "@/request/hooks/useFetchData";
 import {AdminUserDetailResponseStructureType} from "@/components/pages/admin-panel/users/AdminPanelUsers.types";
 import APIES from "@/request/constances/apies";
 import {Role} from "@/app/generated/prisma/enums";
+import getUrlWithParams from "@/utils/getUrlWithParams";
 
 function useAdminUserDetailPage() {
 
@@ -18,7 +19,7 @@ function useAdminUserDetailPage() {
     data: infoData, isFetching: infoLoading
   } = useFetchData<AdminUserDetailResponseStructureType>({
     axiosConfig: {
-      url: APIES.ADMIN_USER_DETAIL(String(userId))
+      url: getUrlWithParams(APIES.ADMIN_USER_DETAIL(String(userId)), {moreInfo: true})
     },
   })
 
@@ -52,62 +53,71 @@ function useAdminUserDetailPage() {
   }, [userInfoData])
 
   const teacherReportKeyValues: KeyValueProps[] = useMemo(function () {
-    if (!userIsTeacher) return []
+    const teacherInfo = infoData?.teacher
+    if (!userIsTeacher || !teacherInfo) return []
+
 
     return [
       {
         title: 'تعداد کل کلاس‌های معلم',
-        value: 2
+        value: teacherInfo?.classes?.length
       },
       {
         title: 'تعداد کل جلسات برگزار شده',
-        value: 50
+        value: teacherInfo?.totalSessions
       },
       {
         title: 'تعداد کل شاگردان',
-        value: 9
+        value: teacherInfo?.totalStudents
       },
     ]
-  }, [userIsTeacher])
+  }, [userIsTeacher, infoData])
 
   const studentReportKeyValues: KeyValueProps[] = useMemo(function () {
-    if (!userIsStudent) return []
+    const studentInfo = infoData?.student
+    if (!userIsStudent || !studentInfo) return []
 
     return [
       {
         title: 'تعداد کل کلاس‌های عضو شده',
-        value: 4
+        value: studentInfo?.classes?.length,
       },
       {
-        title: 'تعداد کل جلسات شرکت کرده',
-        value: 50
+        title: 'تعداد حضور در جلسات',
+        value: studentInfo?.totalAttendedSessions
       },
       {
-        title: 'درصد کل حضور در کلاس‌ها',
-        value: `${50}%`
+        title: 'تعداد غیبت در جلسات',
+        value: studentInfo?.totalAbsentSessions
+      },
+      {
+        title: 'درصد حضور در جلسات',
+        value: `${studentInfo?.averageAttendancePercent}%`
       },
       {
         title: 'درصد غیبت‌های موجه',
-        value: `${50}%`
+        value: `${studentInfo?.excusedAbsencePercent}%`
       },
     ]
-  }, [userIsStudent])
+  }, [userIsStudent, infoData])
 
   const teacherClasses: AdminClassCardProps[] = useMemo(function () {
-    return [
-      {id: 1, name: 'کلاس شماره 1', cityName: 'تهران'},
-      {id: 2, name: 'کلاس شماره 2', cityName: 'تهران'},
-      {id: 3, name: 'کلاس شماره 3', cityName: 'تهران'},
-    ]
-  }, [])
+    const teacherInfo = infoData?.teacher
+    if (!userIsTeacher || !teacherInfo) return []
+
+    return teacherInfo?.classes?.map(item => ({
+      id: item?.id, name: item?.name, cityName: item?.city?.name
+    }))
+  }, [userIsTeacher, infoData])
 
   const studentClasses: AdminClassCardProps[] = useMemo(function () {
-    return [
-      {id: 1, name: 'کلاس شماره 1', cityName: 'تهران'},
-      {id: 2, name: 'کلاس شماره 2', cityName: 'تهران'},
-      {id: 3, name: 'کلاس شماره 3', cityName: 'تهران'},
-    ]
-  }, [])
+    const studentInfo = infoData?.student
+    if (!userIsStudent || !studentInfo) return []
+
+    return studentInfo?.classes?.map(item => ({
+      id: item?.id, name: item?.name, cityName: item?.city?.name
+    }))
+  }, [userIsStudent, infoData])
 
   const {
     deleteLoading, onDeleteHandler

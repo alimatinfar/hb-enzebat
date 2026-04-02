@@ -22,7 +22,7 @@ const APIES = {
   ADMIN_EDIT_CLASS: (classId: string) => `${ADMIN_CLASS_DETAIL(classId)}/edit`,
   ADMIN_DELETE_CLASS: (classId: string) => `${ADMIN_CLASS_DETAIL(classId)}/delete`,
 
-  ADMIN_REPORT: '/admin/report',
+  ADMIN_HOME: '/admin/home',
 
   ADMIN_CITIES: '/admin/cities',
 

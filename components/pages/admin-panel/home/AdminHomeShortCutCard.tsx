@@ -16,7 +16,7 @@ export type AdminHomeShortCutCardProps = {
     cityName: string;
   }[];
   RowIcon: IconFunctionType;
-} & Pick<RenderLogicProps, 'isLoading' | 'error'>
+}
 
 function AdminHomeShortCutCard(
   {title, lastTitle, isLoading, error, RowIcon, link, items}: AdminHomeShortCutCardProps
