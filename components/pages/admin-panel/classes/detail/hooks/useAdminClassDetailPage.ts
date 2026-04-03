@@ -30,7 +30,7 @@ function useAdminClassDetailPage() {
 
   const teacherId = useMemo(function () {
     return classInfo ? classInfo?.teacherId : ''
-  }, [])
+  }, [classInfo])
 
   const infoKeyValues: KeyValueProps[] = useMemo(function () {
     if (!classInfo) return []
@@ -40,10 +40,17 @@ function useAdminClassDetailPage() {
       {title: 'شهر', value: classInfo?.city?.name},
       {title: 'نام کلاس', value: classInfo?.name},
       {title: 'تعداد دانش آموزان', value: classInfo?.students?.length},
+    ]
+  }, [classInfo])
+
+  const attendancesKeyValues: KeyValueProps[] = useMemo(function () {
+    if (!moreInfo) return []
+
+    return [
       {title: 'تعداد جلسات تشکیل شده', value: moreInfo?.totalSessions},
       {title: 'میانگین درصد حضور دانش آموزان', value: `${moreInfo?.averageAttendancePercent}%`},
     ]
-  }, [classInfo, moreInfo])
+  }, [moreInfo])
 
   const teacherKeyValues: KeyValueProps[] = useMemo(function () {
     if (!classInfo) return []
@@ -74,7 +81,7 @@ function useAdminClassDetailPage() {
   } = useAdminClassDetailPageDelete()
 
   return {
-    infoKeyValues, classId, teacherKeyValues, students,
+    infoKeyValues, classId, teacherKeyValues, students, attendancesKeyValues,
     deleteLoading, onDeleteHandler, classTitle, infoLoading, teacherId
   }
 }

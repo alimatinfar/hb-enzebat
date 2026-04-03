@@ -7,7 +7,7 @@ export const POST = withRoleAuth(["TEACHER"], async (req, user) => {
   const classId = Number(req.url.split("/").at(-3));
   const body = await req.json();
   const { date, presents, excusedAbsences } = body;
-  console.log({excusedAbsences})
+
   if (!date || !Array.isArray(presents) || !Array.isArray(excusedAbsences)) {
     return NextErrorResponse({ error: "اطلاعات ناقص است", status: 422 });
   }

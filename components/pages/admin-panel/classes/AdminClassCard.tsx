@@ -13,7 +13,6 @@ function AdminClassCard(
   {id, name, cityName}: AdminClassCardProps
 ) {
 
-  console.log({isAdmin: hasRole('ADMIN')})
   return (
     <Card className='gap-2'>
       <div className='flex items-center justify-between'>

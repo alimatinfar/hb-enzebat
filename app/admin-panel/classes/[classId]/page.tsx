@@ -15,10 +15,10 @@ import RenderLogic from "@/components/others/RenderLogic/RenderLogic";
 function AdminClassDetailPage() {
 
   const {
-    infoKeyValues, classId, teacherKeyValues, students,
+    infoKeyValues, classId, teacherKeyValues, students, attendancesKeyValues,
     deleteLoading, onDeleteHandler, classTitle, infoLoading, teacherId
   } = useAdminClassDetailPage()
-
+  console.log({teacherDetailLink: ROUTER_LINKS.ADMIN_PANEL_USER_DETAIL(String(teacherId))})
   return (
     <AdminLayout hasBack>
       <RenderLogic isLoading={infoLoading}>
@@ -52,6 +52,14 @@ function AdminClassDetailPage() {
             <Link href={ROUTER_LINKS.ADMIN_PANEL_USER_DETAIL(String(teacherId))}>
               <Button variant='outlined' size='sm'>
                 جزئیات
+              </Button>
+            </Link>
+          </ReportCard>
+
+          <ReportCard title='جلسات تشکیل شده' keyValues={attendancesKeyValues}>
+            <Link href={ROUTER_LINKS.ADMIN_PANEL_CLASS_ATTENDANCES(String(classId))}>
+              <Button size='sm' variant='outlined'>
+                مشاهده جلسات
               </Button>
             </Link>
           </ReportCard>

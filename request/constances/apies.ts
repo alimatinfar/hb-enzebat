@@ -6,6 +6,7 @@ const ADMIN_USERS = '/admin/users'
 const ADMIN_USER_DETAIL = (userId: string) => `${ADMIN_USERS}/${userId}`
 const ADMIN_CLASSES = '/admin/classes'
 const ADMIN_CLASS_DETAIL = (classId: string) => `${ADMIN_CLASSES}/${classId}`
+const ADMIN_CLASS_DETAIL_ATTENDANCES = (classId: string) => `${ADMIN_CLASS_DETAIL(classId)}/attendances`
 
 const APIES = {
   //admin
@@ -19,6 +20,8 @@ const APIES = {
   ADMIN_CLASSES,
   ADMIN_ADD_CLASS: `${ADMIN_CLASSES}/add`,
   ADMIN_CLASS_DETAIL,
+  ADMIN_CLASS_DETAIL_ATTENDANCES,
+  ADMIN_CLASS_DETAIL_ATTENDANCE_DETAIL: (classId: string, attendanceId: string) => `${ADMIN_CLASS_DETAIL_ATTENDANCES(classId)}/${attendanceId}`,
   ADMIN_EDIT_CLASS: (classId: string) => `${ADMIN_CLASS_DETAIL(classId)}/edit`,
   ADMIN_DELETE_CLASS: (classId: string) => `${ADMIN_CLASS_DETAIL(classId)}/delete`,
 

@@ -12,6 +12,7 @@ const ADMIN_PANEL_USERS = `${ADMIN_PANEL}/users`
 const ADMIN_PANEL_USER_DETAIL = (userId: number | string) => `${ADMIN_PANEL_USERS}/${userId}`
 const ADMIN_PANEL_CLASSES = `${ADMIN_PANEL}/classes`
 const ADMIN_PANEL_CLASS_DETAIL = (classId: number | string) => `${ADMIN_PANEL_CLASSES}/${classId}`
+const ADMIN_PANEL_CLASS_ATTENDANCES = (classId: number | string) => `${ADMIN_PANEL_CLASS_DETAIL(classId)}/attendances`
 
 const CALL_API_ADMIN_USERS = '/call-api/admin/users'
 const CALL_API_ADMIN_CLASSES = '/call-api/admin/classes'
@@ -47,7 +48,8 @@ const ROUTER_LINKS = {
   ADMIN_PANEL_CLASS_ADD: `${ADMIN_PANEL_CLASSES}/add`,
   ADMIN_PANEL_CLASS_DETAIL,
   ADMIN_PANEL_CLASS_EDIT: (classId: number | string) => `${ADMIN_PANEL_CLASS_DETAIL(classId)}/edit`,
-
+  ADMIN_PANEL_CLASS_ATTENDANCES,
+  ADMIN_PANEL_CLASS_ATTENDANCE_DETAIL: (classId: number | string, attendanceId: number | string) => `${ADMIN_PANEL_CLASS_ATTENDANCES(classId)}/${attendanceId}`,
 
   //call api routes
   CALL_API_ADMIN_EDIT_USER: (userId: string | number) => `${CALL_API_ADMIN_USERS}/${userId}/edit`,
