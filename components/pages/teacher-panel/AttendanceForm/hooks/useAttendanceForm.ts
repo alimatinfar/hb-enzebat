@@ -9,7 +9,7 @@ import {
 } from "@/components/pages/teacher-panel/AttendanceForm/TeacherPanelAttendanceFormExports";
 
 function useAttendanceForm(
-  {editMode}: Pick<AttendanceFormProps, 'editMode'>
+  {editMode, viewMode}: Pick<AttendanceFormProps, 'editMode' | 'viewMode'>
 ) {
 
   const {classId, attendanceId} = useParams()
@@ -22,7 +22,7 @@ function useAttendanceForm(
     },
     disableThrowErrorToast: true,
     options: {
-      enabled: !!editMode
+      enabled: !!editMode || !!viewMode
     }
   })
 
@@ -30,7 +30,7 @@ function useAttendanceForm(
     studentsList, studentsLoading, studentsError, togglePresentHandler, presents,
     excusedAbsences, excusedAbsencesModalShouldBeRemoved,
     excusedAbsencesOpen, openExcusedAbsencesModalHandler, closeExcusedAbsencesModal, toggleExcusedAbsencesHandler
-  } = useAttendanceFormPresents({editMode, attendanceInfo})
+  } = useAttendanceFormPresents({editMode, viewMode, attendanceInfo})
 
   const {
     formMethods, onSubmit, formLoading, finalSubmitHandler

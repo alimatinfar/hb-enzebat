@@ -15,10 +15,11 @@ const ExcusedAbsencesModal = lazy(() => import("@/components/pages/teacher-panel
 
 export type AttendanceFormProps = {
   editMode?: boolean;
+  viewMode?: boolean;
 }
 
 function AttendanceForm(
-  {editMode}: AttendanceFormProps
+  {editMode, viewMode}: AttendanceFormProps
 ) {
 
   const {
@@ -27,7 +28,7 @@ function AttendanceForm(
     excusedAbsencesModalShouldBeRemoved, excusedAbsencesOpen,
     closeExcusedAbsencesModal, toggleExcusedAbsencesHandler, finalSubmitHandler
   } = useAttendanceForm({
-    editMode
+    editMode, viewMode
   })
 
   return (
@@ -41,13 +42,15 @@ function AttendanceForm(
           <>
             <AttendanceDateField
               defaultValue={editMode ? '' : new Date()}
-              disabled={editMode}
+              disabled={editMode || viewMode}
             />
 
             <div className='flex flex-col space-y-4 mt-2 pt-2 border-t border-gray-300'>
-              <p className='text-gray-500'>
-                حاضرین را انتخاب کنید ({presents.length})
-              </p>
+              {!viewMode && (
+                <p className='text-gray-500'>
+                  حاضرین را انتخاب کنید ({presents.length})
+                </p>
+              )}
 
               <RenderLogic
                 error={studentsError} isLoading={studentsLoading}
@@ -57,19 +60,21 @@ function AttendanceForm(
                   {studentsList.map((student) => (
                     <AttendanceStudentCard
                       key={student.id} student={student} activeList={presents}
-                      togglePresentHandler={togglePresentHandler}
+                      togglePresentHandler={togglePresentHandler} viewMode={viewMode}
                     />
                   ))}
                 </div>
               </RenderLogic>
             </div>
 
-            <BottomFixedButton
-              type='submit' disabled={studentsLoading || !!studentsError}
-              rightIcon={editMode ? <EditIcon textColor='text-white'/> : <AddCircleIcon/>}
-            >
-              {editMode ? 'ویرایش' : 'ثبت'} جلسه
-            </BottomFixedButton>
+            {!viewMode && (
+              <BottomFixedButton
+                type='submit' disabled={studentsLoading || !!studentsError}
+                rightIcon={editMode ? <EditIcon textColor='text-white'/> : <AddCircleIcon/>}
+              >
+                {editMode ? 'ویرایش' : 'ثبت'} جلسه
+              </BottomFixedButton>
+            )}
           </>
         </RenderLogic>
       </ReactHookFormWrapper>

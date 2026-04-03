@@ -36,7 +36,7 @@ function AdminClassAttendancesPage() {
   }, [data])
 
   return (
-    <AdminLayout>
+    <AdminLayout hasBack>
       <PageTitle>
         {`جلسات ${nameOfClass || ''}`}
       </PageTitle>

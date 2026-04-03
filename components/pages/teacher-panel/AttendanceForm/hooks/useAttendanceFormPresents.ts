@@ -12,10 +12,10 @@ import useModalOpenBoolean from "@/hooks/modal/useModalOpenBoolean";
 
 type Props = {
   attendanceInfo: TeacherPanelAttendanceInfoResponseType | undefined;
-} & Pick<AttendanceFormProps, 'editMode'>
+} & Pick<AttendanceFormProps, 'editMode' | 'viewMode'>
 
 function useAttendanceFormPresents(
-  {editMode, attendanceInfo}: Props
+  {editMode, viewMode, attendanceInfo}: Props
 ) {
 
   const {classId} = useParams()
@@ -64,11 +64,21 @@ function useAttendanceFormPresents(
   })
 
   const studentsList = useMemo(function () {
-    return studentsData?.students || []
-  }, [studentsData])
+    const allList = studentsData?.students || []
+    if (viewMode) {
+      return allList.sort((a, b) => {
+        const aPresent = presents.includes(a.id);
+        const bPresent = presents.includes(b.id);
+
+        return Number(bPresent) - Number(aPresent);
+      })
+    } else {
+      return allList
+    }
+  }, [studentsData, viewMode, presents])
 
   useEffect(() => {
-    if (!attendanceInfo || !editMode) return
+    if (!attendanceInfo || !(editMode || viewMode)) return
     setPresents(attendanceInfo?.presents?.map(item => item.id))
     setExcusedAbsences(attendanceInfo?.excusedAbsences?.map(item => item.id))
   }, [attendanceInfo]);

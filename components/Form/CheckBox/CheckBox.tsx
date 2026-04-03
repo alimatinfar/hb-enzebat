@@ -9,9 +9,14 @@ export type CheckBoxProps = {
   wrapperClass?: string;
   indeterminate?: boolean;
   disabled?: boolean;
+  removeCursorPointer?: boolean;
 } & Pick<InputLabelProps, 'label' | 'info'>
 
-function CheckBox({name, value, onChange, label, wrapperClass, indeterminate, disabled, info}: CheckBoxProps) {
+function CheckBox(
+  {
+    name, value, onChange, label, wrapperClass, indeterminate, disabled, info, removeCursorPointer
+  }: CheckBoxProps
+) {
 
   function checkHandler() {
     if (disabled) return
@@ -26,7 +31,7 @@ function CheckBox({name, value, onChange, label, wrapperClass, indeterminate, di
       <div
         className={`w-5 h-5 box-border rounded-sm select-none transition-all border flex items-center justify-center duration-100 overflow-hidden 
         ${disabled ? "bg-gray-300 border-gray-400" : (value && !indeterminate) ? "bg-primary border-transparent" : "bg-white"} ${indeterminate ? 'p-[3px]' : ''} 
-        ${disabled ? "" : "border-gray-300 hover:border-primary cursor-pointer"}`}
+        ${disabled ? "" : `border-gray-300 hover:border-primary ${removeCursorPointer ? '' : 'cursor-pointer'}`}`}
         onClick={checkHandler}
       >
         <div

@@ -4,7 +4,7 @@ import NextSuccessResponse from "@/utils/backend/response/NextSuccessResponse";
 import prisma from "@/lib/prisma";
 
 
-export const GET = withRoleAuth(["TEACHER"], async (req, user) => {
+export const GET = withRoleAuth(["TEACHER", "ADMIN", "CITY_ADMIN"], async (req, user) => {
   const classId = Number(req.url.split("/").at(-2));
 
   const cls = await prisma.class.findUnique({
@@ -22,9 +22,11 @@ export const GET = withRoleAuth(["TEACHER"], async (req, user) => {
     }
   });
 
-  if (!cls || cls.teacherId !== user.id) {
+  const userRoles = user.roles.map(r => r.role);
+
+  if (userRoles.includes("TEACHER") && (!cls || cls.teacherId !== user.id)) {
     return NextErrorResponse({error: "اجازه دسترسی ندارید", status: 403});
   }
 
-  return NextSuccessResponse({data: {students: cls.students}});
+  return NextSuccessResponse({data: {students: cls?.students}});
 });

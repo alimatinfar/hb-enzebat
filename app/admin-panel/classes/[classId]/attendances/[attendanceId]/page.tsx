@@ -7,6 +7,9 @@ import {
   TeacherClassAttendanceResponseType
 } from "@/components/pages/teacher-panel/classDetail/TeacherPanelClassDetailExports";
 import APIES from "@/request/constances/apies";
+import PageTitle from "@/components/others/PageTitle/PageTitle";
+import AttendanceForm from "@/components/pages/teacher-panel/AttendanceForm/AttendanceForm";
+import React from "react";
 
 function AdminClassAttendanceDetailPage() {
 
@@ -22,8 +25,12 @@ function AdminClassAttendanceDetailPage() {
   })
 
   return (
-    <AdminLayout>
-      admin attendance detail {attendanceId}
+    <AdminLayout hasBack>
+      <PageTitle>
+        جزئیات جلسه
+      </PageTitle>
+
+      <AttendanceForm viewMode/>
     </AdminLayout>
   );
 }

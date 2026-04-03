@@ -22,7 +22,8 @@ export function withRoleAuth(
       if (!user) return NextErrorResponse({error: 'کاربر یافت نشد', status: 404})
 
       // بررسی نقش
-      if (!user.roles.some((userRole) => roles.includes(userRole.role))) {
+      const hasAccess = user.roles.some((userRole) => roles.includes(userRole.role))
+      if (!hasAccess) {
         return NextErrorResponse({error: "دسترسی غیرمجاز", status: 403})
       }
 

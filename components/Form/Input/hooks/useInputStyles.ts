@@ -17,7 +17,7 @@ function useInputStyles(
 ) {
 
 
-  const disabledBackgroundColor = 'bg-gray-4'
+  const disabledBackgroundColor = 'bg-gray-100'
   const backgroundColor = (disabled || readOnly) ? disabledBackgroundColor : 'bg-gray-3'
   const borderColor = `
     border-gray-4 [&:has(input:enabled)]:hover:border-black/80 [&:has(input:focus)]:border-black

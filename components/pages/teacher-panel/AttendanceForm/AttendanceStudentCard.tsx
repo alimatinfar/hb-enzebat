@@ -3,6 +3,7 @@ import Card, {CardProps} from "@/components/others/Card/Card";
 import {
   TeacherPanelStudentType
 } from "@/components/pages/teacher-panel/AttendanceForm/TeacherPanelAttendanceFormExports";
+import {AttendanceFormProps} from "@/components/pages/teacher-panel/AttendanceForm/AttendanceForm";
 
 
 type Props = {
@@ -10,18 +11,23 @@ type Props = {
   activeList: TeacherPanelStudentType['id'][];
   togglePresentHandler: (studentId: TeacherPanelStudentType['id']) => void;
   cardProps?: Partial<CardProps>;
-}
+} & Pick<AttendanceFormProps, 'viewMode'>
 
 function AttendanceStudentCard(
-  {student, togglePresentHandler, activeList, cardProps}: Props
+  {student, togglePresentHandler, activeList, cardProps, viewMode}: Props
 ) {
   return (
     <Card
-      key={student.id} className='flex items-center space-x-2' isClickable
-      onClick={() => togglePresentHandler(student.id)} {...cardProps}
+      key={student.id} className='flex items-center space-x-2'
+      {...!viewMode && {
+        isClickable: true,
+        onClick: () => togglePresentHandler(student.id)
+      }}
+      {...cardProps}
     >
       <CheckBox
         value={activeList.some(item => item === student.id)}
+        removeCursorPointer={viewMode}
       />
 
       <p>

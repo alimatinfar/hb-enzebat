@@ -3,7 +3,7 @@ import NextErrorResponse from "@/utils/backend/response/NextErrorResponse";
 import NextSuccessResponse from "@/utils/backend/response/NextSuccessResponse";
 import prisma from "@/lib/prisma";
 
-export const GET = withRoleAuth(["TEACHER"], async (req, user) => {
+export const GET = withRoleAuth(["TEACHER", "ADMIN", "CITY_ADMIN"], async (req, user) => {
   const attendanceId = Number(req.url.split("/").at(-1));
 
   const attendance = await prisma.attendance.findUnique({
@@ -28,7 +28,9 @@ export const GET = withRoleAuth(["TEACHER"], async (req, user) => {
   }
 
   // بررسی اینکه کاربر معلم کلاس است
-  if (attendance.class.teacherId !== user.id) {
+  const userRoles = user.roles.map(r => r.role);
+
+  if (userRoles.includes("TEACHER") && attendance.class.teacherId !== user.id) {
     return NextErrorResponse({ error: "اجازه دسترسی ندارید", status: 403 });
   }
 
