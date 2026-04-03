@@ -3,7 +3,7 @@
 import React, {useMemo} from 'react';
 import PageTitle from "@/components/others/PageTitle/PageTitle";
 import PanelLayout from "@/components/layouts/PanelLayout";
-import {useParams, useSearchParams} from "next/navigation";
+import {useParams} from "next/navigation";
 import useFetchData from "@/request/hooks/useFetchData";
 import APIES from "@/request/constances/apies";
 import {
@@ -23,6 +23,7 @@ import QUERY_PARAMS from "@/constances/queryParams";
 import getUrlWithParams from "@/utils/getUrlWithParams";
 import EditIcon from "@/components/svg/EditIcon";
 import AddCircleIcon from "@/components/svg/AddCircleIcon";
+import AttendanceCard from "@/components/pages/teacher-panel/AttendanceCard/AttendanceCard";
 
 
 function TeacherPanelClassDetailPage() {
@@ -63,32 +64,22 @@ function TeacherPanelClassDetailPage() {
       >
         <div className='space-y-4'>
           {attendancesList.map((item, index) => (
-            <Card key={index} className='flex flex-col space-y-2.5'>
-              <span className='text-xl font-medium'>
-                {getJalaliFormattedDate(item.date)}
-              </span>
-
-              <KeyValue
-                title='تعداد حاضرین به کل' value={`${item.presentCount} از ${item.totalStudents}`}
-              />              <KeyValue
-                title='تعداد غائبین موجه' value={`${item.excusedAbsencesCount} از ${(item.totalStudents - item.presentCount)}`}
-              />
-
+            <AttendanceCard item={item} key={index}>
               <Link href={ROUTER_LINKS.TEACHER_PANEL_CLASSES_ATTENDANCE_DETAIL(String(classId), String(item.id))}>
                 <Button
-                  variant='outlined' size='sm' rightIcon={<EditIcon textColor='text-primary' />}
+                  variant='outlined' size='sm' rightIcon={<EditIcon textColor='text-primary'/>}
                 >
                   مشاهده و ویرایش
                 </Button>
               </Link>
-            </Card>
+            </AttendanceCard>
           ))}
         </div>
       </RenderLogic>
 
       <Link href={addAttendanceLinkUrl}>
         <BottomFixedButton
-          rightIcon={<AddCircleIcon />}
+          rightIcon={<AddCircleIcon/>}
         >
           افزودن جلسه
         </BottomFixedButton>

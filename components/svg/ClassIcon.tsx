@@ -3,29 +3,12 @@ import {IconPropsType} from "@/types/IconPropsType";
 
 function ClassIcon({textColor, className, height, width}: IconPropsType) {
   return (
-    // TODO should be changed
     <svg
-      width={width || 24}
-      height={height || 24}
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      {...className && {className}}
-    >
-      <path
-        className={`stroke-current duration-200 ${textColor || 'text-gray-500'}`}
-        d="M4.12572 15.3668L10.1284 11.9903C10.7234 11.6556 11.3252 11.5 12 11.5C12.6748 11.5 13.2766 11.6556 13.8716 11.9903L19.8743 15.3668C20.5697 15.7579 21 16.4937 21 17.2916C21 18.5113 20.0113 19.5 18.7916 19.5H5.20841C3.98874 19.5 3 18.5113 3 17.2916C3 16.4937 3.43034 15.7579 4.12572 15.3668Z"
-        strokeWidth={1.5}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        className={`stroke-current duration-200 ${textColor || 'text-gray-500'}`}
-        d="M10 6.40476C10 5.35279 10.8954 4.5 12 4.5C13.1046 4.5 14 5.35279 14 6.40476C14 7.12453 13.5808 7.75106 12.9623 8.07498C12.473 8.33119 12 8.75724 12 9.30952V11.5"
-        stroke="#6B7280"
-        strokeWidth={1.5}
-        strokeLinecap="round"
-      />
+      className={`stroke-current duration-200 ${textColor || 'text-gray-500'}`}
+      width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="2" strokeLinecap="round" stroke-linejoin="round">
+      <rect x="3" y="4" width="18" height="12" rx="2" ry="2"></rect>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+      <line x1="9" y1="22" x2="15" y2="22"></line>
     </svg>
   )
 }
