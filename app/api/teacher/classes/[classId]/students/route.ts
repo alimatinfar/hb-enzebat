@@ -24,7 +24,7 @@ export const GET = withRoleAuth(["TEACHER", "ADMIN", "CITY_ADMIN"], async (req, 
 
   const userRoles = user.roles.map(r => r.role);
 
-  if (userRoles.includes("TEACHER") && (!cls || cls.teacherId !== user.id)) {
+  if (!(userRoles.includes("ADMIN") || userRoles.includes("CITY_ADMIN")) && (!cls || cls.teacherId !== user.id)) {
     return NextErrorResponse({error: "اجازه دسترسی ندارید", status: 403});
   }
 

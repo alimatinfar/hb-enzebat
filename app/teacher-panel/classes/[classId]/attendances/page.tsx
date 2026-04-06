@@ -60,7 +60,7 @@ function TeacherPanelClassDetailPage() {
 
       <RenderLogic
         error={error} isLoading={isFetching} isEmpty={attendancesList.length === 0}
-        emptyText='جلسه ای ثبت نشده است'
+        emptyText='جلسه ای ثبت نشده است، با دکمه افزودن جلسه در پایین صفحه، جلسه جدید ایجاد کنید'
       >
         <div className='space-y-4'>
           {attendancesList.map((item, index) => (
