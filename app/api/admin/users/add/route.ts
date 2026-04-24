@@ -58,6 +58,7 @@ export const POST = withRoleAuth(["ADMIN", "CITY_ADMIN"], async (req, adminUser)
   });
 
   if (existingUser) {
+    console.log({existingUser})
     return NextErrorResponse({ error: uniqueMobileErrorMessage, status: 409 });
   }
 
@@ -87,7 +88,7 @@ export const POST = withRoleAuth(["ADMIN", "CITY_ADMIN"], async (req, adminUser)
     console.log({ err });
 
     if (err.code === "P2002") {
-      return NextErrorResponse({ error: uniqueMobileErrorMessage, status: 409 });
+      return NextErrorResponse({ error: 'خطای نامشخص', status: 409 });
     }
 
     return NextErrorResponse({ error: "خطای سرور", status: 500 });

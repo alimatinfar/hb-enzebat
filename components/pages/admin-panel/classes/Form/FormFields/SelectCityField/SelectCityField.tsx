@@ -10,8 +10,12 @@ import {
   AdminCityResponseType
 } from "@/components/pages/admin-panel/classes/AdminPanelClasses.types";
 import APIES from "@/request/constances/apies";
+import hasRole from "@/utils/authentication/hasRole";
 
 function SelectCityField() {
+
+
+
   const requiredErrorMessage = useGetRequiredErrorMessage(selectCityFieldLabel, true);
   const getErrorMessage = useGetFormErrorMessage();
   const errorMessage = getErrorMessage(selectCityFieldName);
@@ -21,10 +25,13 @@ function SelectCityField() {
   } = useFetchData<{ cities: AdminCityResponseType[] }>({
     axiosConfig: {
       url: APIES.ADMIN_CITIES
+    },
+    options: {
+      enabled: hasRole('ADMIN')
     }
   })
 
-  return (
+  return hasRole('ADMIN') ? (
     <SelectForm
       fieldName={selectCityFieldName}
       inputProps={{
@@ -39,7 +46,7 @@ function SelectCityField() {
         options: data?.cities || []
       }}
     />
-  );
+  ) : null;
 }
 
 export default SelectCityField;
