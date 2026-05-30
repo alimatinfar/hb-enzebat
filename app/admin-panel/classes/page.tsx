@@ -5,12 +5,14 @@ import AdminLayout from "@/components/layouts/AdminLayout";
 import AdminClassCard from "@/components/pages/admin-panel/classes/AdminClassCard";
 import PageTitleWithAddButton from "@/components/others/PageTitle/PageTitleWithAddButton";
 import useAdminClassesPage from "@/components/pages/admin-panel/classes/hooks/useAdminClassesPage";
+import FilterSection from "@/components/Form/FilterSection/FilterSection";
 
 
 function AdminClassesPage() {
 
   const {
-    goToAddClassPage, isFetching, error, classesList
+    goToAddClassPage, isFetching, error, classesList,
+    onSubmitFilter, formMethodsFilter
   } = useAdminClassesPage()
 
   return (
@@ -23,6 +25,12 @@ function AdminClassesPage() {
       >
         لیست کلاس‌ها
       </PageTitleWithAddButton>
+
+      <FilterSection
+        onSubmit={onSubmitFilter} formMethods={formMethodsFilter}
+      >
+        <></>
+      </FilterSection>
 
       <RenderLogic
         isLoading={isFetching} error={error}

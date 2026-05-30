@@ -4,8 +4,13 @@ import APIES from "@/request/constances/apies";
 import {useMemo} from "react";
 import {useRouter} from "next/navigation";
 import ROUTER_LINKS from "@/constances/routerLinks";
+import useFilter from "@/components/Form/FilterSection/hooks/useFilter";
 
 function useAdminClassesPage() {
+
+  const {
+    onSubmitFilter, formMethodsFilter
+  } = useFilter({defaultFilterFormData: {}})
 
   //TODO added pagination
   const {
@@ -29,7 +34,9 @@ function useAdminClassesPage() {
   }
 
   return {
-    goToAddClassPage, isFetching, error, classesList
+    goToAddClassPage, isFetching, error, classesList,
+
+    onSubmitFilter, formMethodsFilter
   }
 }
 
