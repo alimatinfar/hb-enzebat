@@ -10,7 +10,7 @@ function EmptyStateIcon({}) {
       viewBox="0 0 150 178"
     >
       <path
-        fill="#DBEAFE"
+        className='fill-primary/10'
         d="M75 167c41.421 0 75-33.579 75-75s-33.579-75-75-75S0 50.579 0 92s33.579 75 75 75"
       ></path>
       <g filter="url(#filter0_d_5223_49443)">
@@ -19,19 +19,19 @@ function EmptyStateIcon({}) {
           d="M118 60H32a5 5 0 0 0-5 5v105a5 5 0 0 0 5 5h86a5 5 0 0 0 5-5V65a5 5 0 0 0-5-5"
         ></path>
       </g>
-      <path fill="#93C5FD" d="M65 75H39a3 3 0 1 0 0 6h26a3 3 0 1 0 0-6"></path>
-      <path fill="#DBEAFE" d="M83 88H39a3 3 0 1 0 0 6h44a3 3 0 1 0 0-6"></path>
-      <path fill="#93C5FD" d="M65 102H39a3 3 0 1 0 0 6h26a3 3 0 1 0 0-6"></path>
-      <path fill="#DBEAFE" d="M83 115H39a3 3 0 1 0 0 6h44a3 3 0 1 0 0-6"></path>
-      <path fill="#93C5FD" d="M65 129H39a3 3 0 1 0 0 6h26a3 3 0 1 0 0-6"></path>
-      <path fill="#DBEAFE" d="M83 142H39a3 3 0 1 0 0 6h44a3 3 0 1 0 0-6"></path>
+      <path className='fill-primary/30' d="M65 75H39a3 3 0 1 0 0 6h26a3 3 0 1 0 0-6"></path>
+      <path className='fill-primary/10' d="M83 88H39a3 3 0 1 0 0 6h44a3 3 0 1 0 0-6"></path>
+      <path className='fill-primary/30' d="M65 102H39a3 3 0 1 0 0 6h26a3 3 0 1 0 0-6"></path>
+      <path className='fill-primary/10' d="M83 115H39a3 3 0 1 0 0 6h44a3 3 0 1 0 0-6"></path>
+      <path className='fill-primary/30' d="M65 129H39a3 3 0 1 0 0 6h26a3 3 0 1 0 0-6"></path>
+      <path className='fill-primary/10' d="M83 142H39a3 3 0 1 0 0 6h44a3 3 0 1 0 0-6"></path>
       <g filter="url(#filter1_d_5223_49443)">
         <path
-          fill="#3B82F6"
+          className='fill-primary'
           d="M118 9H32a5 5 0 0 0-5 5v30a5 5 0 0 0 5 5h86a5 5 0 0 0 5-5V14a5 5 0 0 0-5-5"
         ></path>
       </g>
-      <path fill="#93C5FD" d="M65 20H39a3 3 0 1 0 0 6h26a3 3 0 1 0 0-6"></path>
+      <path className='fill-primary/30' d="M65 20H39a3 3 0 1 0 0 6h26a3 3 0 1 0 0-6"></path>
       <path fill="#fff" d="M83 33H39a3 3 0 1 0 0 6h44a3 3 0 1 0 0-6"></path>
       <defs>
         <filter

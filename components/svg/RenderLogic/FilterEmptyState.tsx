@@ -10,7 +10,7 @@ function FilterEmptyState() {
       viewBox="0 0 187 150"
     >
       <path
-        fill="#E6EBEF"
+        className='fill-primary/10'
         d="M75 150c41.421 0 75-33.579 75-75S116.421 0 75 0 0 33.579 0 75s33.579 75 75 75"
       ></path>
       <g filter="url(#filter0_d_8541_125337)">
@@ -19,10 +19,10 @@ function FilterEmptyState() {
           d="M41 34h135a5 5 0 0 1 5 5v25a5 5 0 0 1-5 5H41a5 5 0 0 1-5-5V39a5 5 0 0 1 5-5"
         ></path>
       </g>
-      <path fill="#9AB2CC" d="M105 42H79a3 3 0 1 0 0 6h26a3 3 0 1 0 0-6"></path>
-      <path fill="#E6EBEF" d="M123 55H79a3 3 0 1 0 0 6h44a3 3 0 1 0 0-6"></path>
+      <path className='fill-primary/30' d="M105 42H79a3 3 0 1 0 0 6h26a3 3 0 1 0 0-6"></path>
+      <path className='fill-primary/10' d="M123 55H79a3 3 0 1 0 0 6h44a3 3 0 1 0 0-6"></path>
       <path
-        fill="#002868"
+        className='fill-primary'
         d="M68 51.5C68 43.492 61.508 37 53.5 37S39 43.492 39 51.5 45.492 66 53.5 66 68 59.508 68 51.5"
       ></path>
       <path
@@ -35,10 +35,10 @@ function FilterEmptyState() {
           d="M161 79H26a5 5 0 0 0-5 5v25a5 5 0 0 0 5 5h135a5 5 0 0 0 5-5V84a5 5 0 0 0-5-5"
         ></path>
       </g>
-      <path fill="#9AB2CC" d="M90 87H64a3 3 0 1 0 0 6h26a3 3 0 1 0 0-6"></path>
-      <path fill="#E6EBEF" d="M108 100H64a3 3 0 1 0 0 6h44a3 3 0 1 0 0-6"></path>
+      <path className='fill-primary/30' d="M90 87H64a3 3 0 1 0 0 6h26a3 3 0 1 0 0-6"></path>
+      <path className='fill-primary/10' d="M108 100H64a3 3 0 1 0 0 6h44a3 3 0 1 0 0-6"></path>
       <path
-        fill="#002868"
+        className='fill-primary'
         d="M53 96.5C53 88.492 46.508 82 38.5 82S24 88.492 24 96.5 30.492 111 38.5 111 53 104.508 53 96.5"
       ></path>
       <path
