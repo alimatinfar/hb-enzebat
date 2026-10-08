@@ -1,4 +1,12 @@
 import {UserRoleType} from "@/components/pages/admin-panel/users/AdminPanelUsers.types";
+import {SelectOptionType} from "@/components/Form/Select/select-exports";
+import {selectCityFieldName} from "@/components/pages/admin-panel/classes/Form/FormFields/SelectCityField/SelectCityField.constances";
+import {searchFieldName} from "@/components/pages/admin-panel/users/FilterFields/SearchField/SearchField.constances";
+
+export type AdminClassesFilterType = {
+  [searchFieldName]?: string;
+  [selectCityFieldName]?: SelectOptionType | '';
+}
 
 export type AdminClassResponseType = {
   id: number,

@@ -14,9 +14,9 @@ import useAdminUsersPage from "@/components/pages/admin-panel/users/hooks/useAdm
 function AdminUsersPage() {
 
   const {
-    usersList, allCount, page, setPage,
-    onSubmitFilter, formMethodsFilter, resetFilters, hasActiveFilter,
-    isFetching, error, isEmpty, hasFilter, goToAddUserPage
+    usersList, allCount, page, setPage, activeFilterCount,
+    onSubmitFilter, formMethodsFilter, resetFilters,
+    isFetching, error, isEmpty, goToAddUserPage
   } = useAdminUsersPage()
 
   return (
@@ -32,7 +32,7 @@ function AdminUsersPage() {
 
       <FilterSection
         onSubmit={onSubmitFilter} formMethods={formMethodsFilter} defaultOpen
-        hasActiveFilter={hasActiveFilter} onResetFilters={resetFilters}
+        activeFilterCount={activeFilterCount} onResetFilters={resetFilters}
       >
         <div className='flex flex-col gap-4'>
           {/* فیلد سرچ متصل به RHF، مثل بقیه فیلدهای فرم */}
@@ -45,7 +45,7 @@ function AdminUsersPage() {
 
       <RenderLogic
         isLoading={isFetching} error={error}
-        isEmpty={isEmpty} hasFilter={hasFilter}
+        isEmpty={isEmpty} hasFilter={!!activeFilterCount}
         emptyText='کاربری ثبت نشده است'
       >
         <ScrollPagination

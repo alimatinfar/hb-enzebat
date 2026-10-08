@@ -6,13 +6,16 @@ import AdminClassCard from "@/components/pages/admin-panel/classes/AdminClassCar
 import PageTitleWithAddButton from "@/components/others/PageTitle/PageTitleWithAddButton";
 import useAdminClassesPage from "@/components/pages/admin-panel/classes/hooks/useAdminClassesPage";
 import FilterSection from "@/components/Form/FilterSection/FilterSection";
+import SearchField from "@/components/pages/admin-panel/users/FilterFields/SearchField/SearchField";
+import SelectCityField from "@/components/pages/admin-panel/classes/Form/FormFields/SelectCityField/SelectCityField";
 
 
 function AdminClassesPage() {
 
   const {
-    goToAddClassPage, isFetching, error, classesList,
-    onSubmitFilter, formMethodsFilter
+    goToAddClassPage, isFetching, error, filteredClassesList,
+    onSubmitFilter, formMethodsFilter, resetFilters,
+    isEmpty, activeFilterCount
   } = useAdminClassesPage()
 
   return (
@@ -27,16 +30,25 @@ function AdminClassesPage() {
       </PageTitleWithAddButton>
 
       <FilterSection
-        onSubmit={onSubmitFilter} formMethods={formMethodsFilter}
+        onSubmit={onSubmitFilter} formMethods={formMethodsFilter} defaultOpen
+        activeFilterCount={activeFilterCount} onResetFilters={resetFilters}
       >
-        <></>
+        <div className='flex flex-col gap-4'>
+          {/* فیلد سرچ متصل به RHF، مثل بقیه فیلدهای فرم */}
+          <SearchField/>
+
+          {/* فیلتر شهر فقط برای ادمین کل نمایش داده می‌شود */}
+          <SelectCityField required={false}/>
+        </div>
       </FilterSection>
 
       <RenderLogic
         isLoading={isFetching} error={error}
+        isEmpty={isEmpty} hasFilter={!!activeFilterCount}
+        emptyText='کلاسی ثبت نشده است'
       >
         <div className='flex flex-col gap-4'>
-          {classesList.map(item => {
+          {filteredClassesList.map(item => {
             return (
               <AdminClassCard
                 key={item.id} id={item.id} name={item.name} cityName={item.city?.name}

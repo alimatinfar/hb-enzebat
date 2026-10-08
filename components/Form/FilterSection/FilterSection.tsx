@@ -9,15 +9,17 @@ import useModalOpen from "@/hooks/modal/useModalOpen";
 import Button from "@/components/Form/Button/Button";
 
 
-type Props = Pick<ReactHookFormWrapperProps, 'formMethods' | 'onSubmit'> &
-  Pick<ChildrenAndClassNamePropsType, 'children'> & {
-    defaultOpen?: boolean;
-    hasActiveFilter?: boolean;
-    onResetFilters?: () => void;
-  }
+type Props = {
+  defaultOpen?: boolean;
+  onResetFilters?: () => void;
+  activeFilterCount: number;
+} & Pick<ReactHookFormWrapperProps, 'formMethods' | 'onSubmit'> &
+  Pick<ChildrenAndClassNamePropsType, 'children'>
 
 function FilterSection(
-  {children, onSubmit, formMethods, defaultOpen, hasActiveFilter, onResetFilters}: Props
+  {
+    children, onSubmit, formMethods, defaultOpen, onResetFilters, activeFilterCount
+  }: Props
 ) {
 
 
@@ -36,22 +38,30 @@ function FilterSection(
           className='flex items-center justify-between gap-x-4 cursor-pointer w-full'
           onClick={toggleOpenHandler}
         >
-          <p>
-            فیلترها
-          </p>
+          <div className='flex items-center gap-x-1'>
+            <p>
+              فیلترها
+            </p>
 
-          <ArrowIcon className={`${open ? 'rotate-180' : ''} duration-200`} />
+            {!!activeFilterCount && (
+              <span className='bg-primary/10 p-1 rounded-full text-primary font-medium text-xs aspect-square min-w-6 text-center'>
+                {activeFilterCount}
+              </span>
+            )}
+          </div>
+
+          <ArrowIcon className={`${open ? 'rotate-180' : ''} duration-200`}/>
         </div>
 
         <DisplayWithAnimation show={open} expandMode>
           <div className='pt-4'>
             {children}
 
-            <Button size='sm' type='submit' fullWidth>
+            <Button size='sm' type='submit' fullWidth variant='default' color='white'>
               جستجو
             </Button>
 
-            {(hasActiveFilter && onResetFilters) && (
+            {(!!activeFilterCount && onResetFilters) && (
               <Button
                 type='button' variant='link' size='sm' fullWidth
                 onClick={onResetFilters} className={{extra: 'mt-2'}}

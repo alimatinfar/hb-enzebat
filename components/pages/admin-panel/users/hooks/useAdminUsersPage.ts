@@ -86,10 +86,9 @@ function useAdminUsersPage() {
   return {
     usersList: visibleUsersList, allCount: filteredUsersList.length,
     page, setPage,
-    onSubmitFilter, formMethodsFilter, resetFilters, hasActiveFilter: activeFilterCount > 0,
-    isFetching, error,
+    onSubmitFilter, formMethodsFilter, resetFilters,
+    isFetching, error, activeFilterCount,
     isEmpty: !isFetching && !error && filteredUsersList.length === 0,
-    hasFilter: Boolean(searchQuery.trim()) || Boolean(selectedCityId),
     goToAddUserPage
   }
 }
