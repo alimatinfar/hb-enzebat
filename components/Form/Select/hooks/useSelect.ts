@@ -1,9 +1,5 @@
 import {useEffect, useRef, useState} from "react";
-import useOutsideClicked from "../../../../hooks/useOutsideClicked";
 import {SelectOptionType, SelectProps, SelectOptionOnClickType} from "../select-exports";
-import {multiSelectInputWrapperId} from "../InputForMultiSelectMode";
-import {inputWrapperId} from "../../Input/Input";
-import elementIsVisibleInViewport from "../../../../utils/elementIsVisibleInViewport";
 import useSelectOptionsList from "./useSelectOptionsList";
 
 
@@ -24,8 +20,6 @@ function useSelect(
   const [dropDownOpen, setDropDownOpen] = useState<boolean>(false)
 
   const inputWrapperRef = useRef<HTMLDivElement | null>(null)
-
-  useOutsideClicked(inputWrapperRef, closeDropDown, [value])
 
   function toggleDropDown() {
     if (inputProps?.disabled || loadingFromParent) return
@@ -62,6 +56,13 @@ function useSelect(
     setQuery('')
     mode === 'single' && setDropDownOpen(false)
     e.stopPropagation()
+  }
+
+  // ثبت انتخاب‌های موقت مدال (حالت چندتایی، بعد از دکمه ثبت)
+  function submitDraftHandler(draft: SelectOptionType[]) {
+    onSelect(draft)
+    setInputValue('')
+    closeDropDown()
   }
 
   function getInputElement() {
@@ -122,57 +123,6 @@ function useSelect(
     }
   }
 
-  const [dropDownStyle, setDropDownStyle] = useState<Object>({})
-  const dropDownRef = useRef<HTMLDivElement>(null)
-
-  function getInputPosition() {
-    const inputElement = inputWrapperRef?.current?.querySelector(mode === 'multiple' ? `#${multiSelectInputWrapperId}` : `#${inputWrapperId}`)
-    const position = inputElement?.getBoundingClientRect()
-    return position
-  }
-
-  function calculateDropDownStyle() {
-    const inputWrapperPosition = inputWrapperRef?.current?.getBoundingClientRect()
-    const inputPosition = getInputPosition()
-    const bodyWidth = document?.body?.clientWidth
-
-    if (!inputWrapperPosition || !inputPosition) return {}
-    setDropDownStyle({
-      top: inputPosition.bottom + 1,
-      right: bodyWidth - inputWrapperPosition?.right,
-      width: inputWrapperPosition?.width,
-    })
-  }
-
-  useEffect(() => {
-    if (mode !== 'multiple') return
-    setTimeout(calculateDropDownStyle, 200)
-  }, [value])
-
-  useEffect(function () {
-    calculateDropDownStyle()
-  }, [dropDownOpen])
-
-  useEffect(() => {
-    if (!dropDownStyle || !dropDownOpen) return
-
-    setTimeout(function () {
-      if (!dropDownRef.current) return
-      const dropDownIsVisible = elementIsVisibleInViewport(dropDownRef.current)
-
-      const inputPosition = getInputPosition()
-
-      if (dropDownIsVisible || !inputPosition) return
-
-      setDropDownStyle((prev:any) => ({
-        top: inputPosition.top - 1,
-        right: prev?.right,
-        width: prev?.width,
-        transform: 'translateY(-100%)'
-      }))
-    }, 300)
-  }, [dropDownStyle]);
-
   //add label to current value when has not label
   useEffect(() => {
     if (mode !== 'multiple' && value && value?.id !== null && !value?.name && optionsList.length > 0) {
@@ -182,10 +132,10 @@ function useSelect(
   }, [value, optionsList]);
 
   return {
-    inputWrapperRef, toggleDropDown, dropDownOpen, optionsList, optionOnClick,
-    onQuery, filteredOptions, onRemoveHandler, clearInput, dropDownStyle, dropDownRef,
+    inputWrapperRef, toggleDropDown, dropDownOpen, closeDropDown, optionsList, optionOnClick,
+    onQuery, filteredOptions, onRemoveHandler, clearInput, submitDraftHandler,
     currentPage, rowsPerPage, allCount, setPage, loading, overlayLoading, selectDropDownRef
   }
 }
 
-export default useSelect
+export default useSelect;

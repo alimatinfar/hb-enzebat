@@ -1,7 +1,7 @@
 import React from "react";
 import useSelect from "./hooks/useSelect";
 import InputForMultiSelectMode from "./InputForMultiSelectMode";
-import SelectDropDown from "./SelectDropDown";
+import SelectOptionsModal from "./SelectOptionsModal";
 import {SelectProps} from "./select-exports";
 import SelectInput from "./SelectInput";
 
@@ -13,8 +13,8 @@ function Select(props: SelectProps) {
   } = props;
 
   const {
-    inputWrapperRef, toggleDropDown, dropDownOpen, optionOnClick, onQuery, filteredOptions, onRemoveHandler,
-    clearInput, dropDownStyle, dropDownRef, selectDropDownRef,
+    inputWrapperRef, toggleDropDown, dropDownOpen, closeDropDown, optionOnClick, onQuery, filteredOptions,
+    onRemoveHandler, clearInput, submitDraftHandler, selectDropDownRef,
     currentPage, rowsPerPage, allCount, setPage, loading, overlayLoading
   } = useSelect(props);
 
@@ -40,10 +40,11 @@ function Select(props: SelectProps) {
         />
       )}
 
-      <SelectDropDown
+      <SelectOptionsModal
         {...{
-          ref: selectDropDownRef, optionStartAdornment, optionEndAdornment,
-          dropDownRef, dropDownStyle, dropDownOpen, filteredOptions, mode, value, optionOnClick,
+          modalRef: selectDropDownRef, open: dropDownOpen, onClose: closeDropDown,
+          title: inputProps?.label, optionStartAdornment, optionEndAdornment,
+          filteredOptions, mode, value, optionOnClick, onSubmitDraft: submitDraftHandler, onQuery,
           setPage, currentPage, loading, rowsPerPage, overlayLoading, allCount,
         }}
       />
