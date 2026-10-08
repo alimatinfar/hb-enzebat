@@ -10,8 +10,9 @@ import SelectCityField from "@/components/pages/admin-panel/classes/Form/FormFie
 import ScrollPagination from "@/components/others/ScrollPagination/ScrollPagination";
 import {USERS_ROWS_PER_PAGE} from "@/components/pages/admin-panel/users/AdminPanelUsers.constances";
 import useAdminUsersPage from "@/components/pages/admin-panel/users/hooks/useAdminUsersPage";
+import SuspenseLoading from "@/components/others/Loading/SuspenseLoading";
 
-function AdminUsersPage() {
+function AdminUsersPageContent() {
 
   const {
     usersList, allCount, page, setPage, activeFilterCount,
@@ -66,6 +67,15 @@ function AdminUsersPage() {
         </ScrollPagination>
       </RenderLogic>
     </AdminLayout>
+  )
+}
+
+// useSearchParams (داخل useFilter) حین prerender باید داخل مرز Suspense باشد
+function AdminUsersPage() {
+  return (
+    <SuspenseLoading>
+      <AdminUsersPageContent/>
+    </SuspenseLoading>
   )
 }
 

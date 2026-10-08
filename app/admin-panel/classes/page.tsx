@@ -8,9 +8,10 @@ import useAdminClassesPage from "@/components/pages/admin-panel/classes/hooks/us
 import FilterSection from "@/components/Form/FilterSection/FilterSection";
 import SearchField from "@/components/pages/admin-panel/users/FilterFields/SearchField/SearchField";
 import SelectCityField from "@/components/pages/admin-panel/classes/Form/FormFields/SelectCityField/SelectCityField";
+import SuspenseLoading from "@/components/others/Loading/SuspenseLoading";
 
 
-function AdminClassesPage() {
+function AdminClassesPageContent() {
 
   const {
     goToAddClassPage, isFetching, error, filteredClassesList,
@@ -59,6 +60,15 @@ function AdminClassesPage() {
       </RenderLogic>
     </AdminLayout>
   );
+}
+
+// useSearchParams (داخل useFilter) حین prerender باید داخل مرز Suspense باشد
+function AdminClassesPage() {
+  return (
+    <SuspenseLoading>
+      <AdminClassesPageContent/>
+    </SuspenseLoading>
+  )
 }
 
 export default AdminClassesPage;
