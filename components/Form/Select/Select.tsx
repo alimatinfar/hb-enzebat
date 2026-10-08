@@ -1,9 +1,10 @@
-import React from "react";
+import React, {lazy} from "react";
 import useSelect from "./hooks/useSelect";
 import InputForMultiSelectMode from "./InputForMultiSelectMode";
-import SelectOptionsModal from "./SelectOptionsModal";
 import {SelectProps} from "./select-exports";
 import SelectInput from "./SelectInput";
+
+const SelectOptionsModal = lazy(() => import("./SelectOptionsModal"));
 
 
 function Select(props: SelectProps) {
@@ -40,14 +41,16 @@ function Select(props: SelectProps) {
         />
       )}
 
-      <SelectOptionsModal
-        {...{
-          modalRef: selectDropDownRef, open: dropDownOpen, onClose: closeDropDown,
-          title: inputProps?.label, optionStartAdornment, optionEndAdornment,
-          filteredOptions, mode, value, optionOnClick, onSubmitDraft: submitDraftHandler, onQuery,
-          setPage, currentPage, loading, rowsPerPage, overlayLoading, allCount,
-        }}
-      />
+      {dropDownOpen && (
+        <SelectOptionsModal
+          {...{
+            modalRef: selectDropDownRef, open: dropDownOpen, onClose: closeDropDown,
+            title: inputProps?.label, optionStartAdornment, optionEndAdornment,
+            filteredOptions, mode, value, optionOnClick, onSubmitDraft: submitDraftHandler, onQuery,
+            setPage, currentPage, loading, rowsPerPage, overlayLoading, allCount,
+          }}
+        />
+      )}
     </div>
   );
 }

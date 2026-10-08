@@ -45,6 +45,9 @@ const SelectOptionsModal = (
     if (!open) return
     // با هر بار باز شدن مدال، انتخاب فعلی به عنوان مقدار اولیه در نظر گرفته می‌شود
     setDraft(Array.isArray(value) ? [...value] : [])
+    setTimeout(function () {
+      if (document.activeElement instanceof HTMLElement) document.activeElement.blur()
+    }, 100)
   }, [open]);
 
   function scrollToTop() {
