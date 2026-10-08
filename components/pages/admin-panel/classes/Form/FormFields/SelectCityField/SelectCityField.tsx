@@ -12,7 +12,12 @@ import {
 import APIES from "@/request/constances/apies";
 import hasRole from "@/utils/authentication/hasRole";
 
-function SelectCityField() {
+export type SelectCityFieldProps = {
+  // در فرم‌ها required است؛ در فیلترها می‌توان false گذاشت
+  required?: boolean;
+}
+
+function SelectCityField({required = true}: SelectCityFieldProps) {
 
 
 
@@ -38,9 +43,9 @@ function SelectCityField() {
         errorMessage,
         label: selectCityFieldLabel
       }}
-      rules={{
+      rules={required ? {
         required: requiredErrorMessage
-      }}
+      } : {}}
       selectProps={{
         loading: isFetching,
         options: data?.cities || []

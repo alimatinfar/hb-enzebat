@@ -4,7 +4,9 @@ import AdminLayout from "@/components/layouts/AdminLayout";
 import RenderLogic from "@/components/others/RenderLogic/RenderLogic";
 import AdminUserCard from "@/components/pages/admin-panel/users/AdminUserCard";
 import PageTitleWithAddButton from "@/components/others/PageTitle/PageTitleWithAddButton";
-import SearchInput from "@/components/Form/Input/inheritedInputs/SearchInput/SearchInput";
+import FilterSection from "@/components/Form/FilterSection/FilterSection";
+import SearchField from "@/components/pages/admin-panel/users/FilterFields/SearchField/SearchField";
+import SelectCityField from "@/components/pages/admin-panel/classes/Form/FormFields/SelectCityField/SelectCityField";
 import ScrollPagination from "@/components/others/ScrollPagination/ScrollPagination";
 import {USERS_ROWS_PER_PAGE} from "@/components/pages/admin-panel/users/AdminPanelUsers.constances";
 import useAdminUsersPage from "@/components/pages/admin-panel/users/hooks/useAdminUsersPage";
@@ -12,8 +14,9 @@ import useAdminUsersPage from "@/components/pages/admin-panel/users/hooks/useAdm
 function AdminUsersPage() {
 
   const {
-    usersList, allCount, page, setPage, searchQuery, changeSearchQuery,
-    isFetching, error, isEmpty, goToAddUserPage
+    usersList, allCount, page, setPage,
+    onSubmitFilter, formMethodsFilter, resetFilters, hasActiveFilter,
+    isFetching, error, isEmpty, hasFilter, goToAddUserPage
   } = useAdminUsersPage()
 
   return (
@@ -27,20 +30,22 @@ function AdminUsersPage() {
         لیست کاربران
       </PageTitleWithAddButton>
 
-      <div className='mb-4'>
-        <SearchInput
-          // سرچ کلاینت‌ساید و لحظه‌ای هنگام تایپ
-          inputProps={{
-            value: searchQuery,
-            onChange: (e:any) => changeSearchQuery(e.target.value)
-          }}
-          searchHandler={changeSearchQuery}
-        />
-      </div>
+      <FilterSection
+        onSubmit={onSubmitFilter} formMethods={formMethodsFilter} defaultOpen
+        hasActiveFilter={hasActiveFilter} onResetFilters={resetFilters}
+      >
+        <div className='flex flex-col gap-4'>
+          {/* فیلد سرچ متصل به RHF، مثل بقیه فیلدهای فرم */}
+          <SearchField/>
+
+          {/* فیلتر شهر فقط برای ادمین کل نمایش داده می‌شود */}
+          <SelectCityField required={false}/>
+        </div>
+      </FilterSection>
 
       <RenderLogic
         isLoading={isFetching} error={error}
-        isEmpty={isEmpty} hasFilter={Boolean(searchQuery.trim())}
+        isEmpty={isEmpty} hasFilter={hasFilter}
         emptyText='کاربری ثبت نشده است'
       >
         <ScrollPagination

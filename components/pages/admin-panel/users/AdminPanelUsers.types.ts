@@ -1,4 +1,7 @@
 import {Role} from "@/app/generated/prisma/enums";
+import {SelectOptionType} from "@/components/Form/Select/select-exports";
+import {selectCityFieldName} from "@/components/pages/admin-panel/classes/Form/FormFields/SelectCityField/SelectCityField.constances";
+import {searchFieldName} from "@/components/pages/admin-panel/users/FilterFields/SearchField/SearchField.constances";
 
 export type UserRoleType = typeof Role[keyof typeof Role]
 
@@ -25,6 +28,11 @@ export type AdminUserResponseType = {
 }
 
 export type AdminUserResponseStructureType = {users: AdminUserResponseType[]}
+
+export type AdminUsersFilterType = {
+  [searchFieldName]?: string;
+  [selectCityFieldName]?: SelectOptionType | '';
+}
 
 export type AdminUserDetailResponseStructureType = {
   user: AdminUserResponseType;

@@ -6,17 +6,22 @@ import Card from "@/components/others/Card/Card";
 import ArrowIcon from "@/components/svg/ArrowIcon";
 import DisplayWithAnimation from "@/components/others/DisplayWithAnimation/DisplayWithAnimation";
 import useModalOpen from "@/hooks/modal/useModalOpen";
+import Button from "@/components/Form/Button/Button";
 
 
 type Props = Pick<ReactHookFormWrapperProps, 'formMethods' | 'onSubmit'> &
-  Pick<ChildrenAndClassNamePropsType, 'children'>
+  Pick<ChildrenAndClassNamePropsType, 'children'> & {
+    defaultOpen?: boolean;
+    hasActiveFilter?: boolean;
+    onResetFilters?: () => void;
+  }
 
 function FilterSection(
-  {children, onSubmit, formMethods}: Props
+  {children, onSubmit, formMethods, defaultOpen, hasActiveFilter, onResetFilters}: Props
 ) {
 
 
-  const {open, setModalState: setOpen} = useModalOpen<boolean>(false)
+  const {open, setModalState: setOpen} = useModalOpen<boolean>(Boolean(defaultOpen))
 
   function toggleOpenHandler() {
     setOpen(prev => !prev);
@@ -39,8 +44,21 @@ function FilterSection(
         </div>
 
         <DisplayWithAnimation show={open} expandMode>
-          <div className='pt-2'>
+          <div className='pt-4'>
             {children}
+
+            <Button size='sm' type='submit' fullWidth>
+              جستجو
+            </Button>
+
+            {(hasActiveFilter && onResetFilters) && (
+              <Button
+                type='button' variant='link' size='sm' fullWidth
+                onClick={onResetFilters} className={{extra: 'mt-2'}}
+              >
+                حذف فیلتر
+              </Button>
+            )}
           </div>
         </DisplayWithAnimation>
       </Card>
