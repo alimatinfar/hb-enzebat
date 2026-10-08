@@ -6,3 +6,5 @@ export const USER_ROLE_LABELS = {
   [Role.TEACHER]: 'معلم',
   [Role.STUDENT]: 'دانش آموز',
 }
+
+export const USERS_ROWS_PER_PAGE = 20

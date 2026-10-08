@@ -42,7 +42,7 @@ function ScrollPagination(
         </div>
       )}
 
-      <div className={`${(hasUnFetchedPage && !overlayLoading) ? 'w-full' : 'h-0'}`}>
+      <div className={`${(hasUnFetchedPage && !overlayLoading) ? 'flex-center w-full pt-2' : 'h-0'}`}>
         {(loading && !overlayLoading) && (paginationLoadingComponent || <Loading/>)}
       </div>
     </>
