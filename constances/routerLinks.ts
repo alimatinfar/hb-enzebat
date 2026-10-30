@@ -6,6 +6,8 @@ const TEACHER_PANEL_CLASSES = `${TEACHER_PANEL}/classes`
 const TEACHER_PANEL_CLASSES_ATTENDANCES = (classId: string) => `${TEACHER_PANEL_CLASSES}/${classId}/attendances`
 
 const STUDENT_PANEL = '/student-panel'
+const STUDENT_PANEL_CLASSES = `${STUDENT_PANEL}/classes`
+const STUDENT_PANEL_CLASS_DETAIL = (classId: number | string) => `${STUDENT_PANEL_CLASSES}/${classId}`
 
 const ADMIN_PANEL = '/admin-panel'
 const ADMIN_PANEL_USERS = `${ADMIN_PANEL}/users`
@@ -33,6 +35,8 @@ const ROUTER_LINKS = {
 
   //student panel routes
   STUDENT_PANEL,
+  STUDENT_PANEL_CLASSES,
+  STUDENT_PANEL_CLASS_DETAIL,
 
 
   //admin panel routes

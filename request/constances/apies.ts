@@ -8,6 +8,9 @@ const ADMIN_CLASSES = '/admin/classes'
 const ADMIN_CLASS_DETAIL = (classId: string) => `${ADMIN_CLASSES}/${classId}`
 const ADMIN_CLASS_DETAIL_ATTENDANCES = (classId: string) => `${ADMIN_CLASS_DETAIL(classId)}/attendances`
 
+const STUDENT_PANEL_CLASSES = '/student/classes'
+const STUDENT_PANEL_CLASS_DETAIL = (classId: string) => `${STUDENT_PANEL_CLASSES}/${classId}`
+
 const APIES = {
   //admin
   ADMIN_USERS,
@@ -31,6 +34,10 @@ const APIES = {
 
   //authentication
   LOGIN: '/auth/login',
+
+  //student panel
+  STUDENT_PANEL_CLASSES,
+  STUDENT_PANEL_CLASS_DETAIL,
 
   //teacher panel
   TEACHER_PANEL_CLASSES: '/teacher/classes',
