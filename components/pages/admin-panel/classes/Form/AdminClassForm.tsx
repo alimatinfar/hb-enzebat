@@ -34,7 +34,9 @@ function AdminClassForm() {
         >
           <ClassNameField/>
 
-          <VirtualClassField/>
+          <div className='mb-2'>
+            <VirtualClassField/>
+          </div>
 
           <SelectCityField/>
 
