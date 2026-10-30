@@ -152,12 +152,17 @@ ssh root@171.22.26.118 "pg_dump '$DATABASE_URL' -Fc" > hb-enzebat-$(date +%F).du
 
 | مشکل | راه‌حل |
 | --- | --- |
+| `pg_dump: could not translate host name "..."` | رمز دیتابیس کاراکتر خاص (مثل `@`) دارد. اسکریپت آدرس را خودش نرمال می‌کند (نسخه جدید را pull کنید). اگر باز هم تکرار شد، ساختار آدرس را با این دستور ببینید و برایم بفرستید: `grep '^DATABASE_URL' .env \| sed -E 's#(://[^:/@]*):[^@]*@#\1:***@#'` |
 | `git merge` شکست خورد | روی سرور تغییرات محلی مانده است: `git status` ببینید؛ اگر همه تولیدشده Prisma است، `git restore --worktree app/generated/prisma` و دوباره اجرا کنید. |
 | `pg_dump: server version mismatch` | نسخه client باید با سرور هم‌خوان باشد: `apt-get install -y postgresql-client-<نسخه>` |
 | `pg_dump` نصب نیست | `apt-get install -y postgresql-client` |
 | بررسی سلامت شکست خورد | `HEALTH_URL` را در `.deploy.env` درست کنید یا خالی بگذارید؛ بعد `pm2 logs $PM2_APP` را ببینید. |
 | مایگریشن شکست خورد | دیپلوی متوقف شده و سرویس قبلی بالاست. خطا را بخوانید، بکاپ را برگردانید: `pg_restore -d "$DATABASE_URL" --clean --if-exists backups/db-....dump` |
 | می‌خواهم فقط بیلد کنم | `.\scripts\deploy.ps1 -SkipPull` یا `SKIP_PULL=1 bash scripts/deploy.sh` |
+
+> اگر رمز دیتابیس شامل `@`، `:`، `/`، `#` یا `?` است، بهتر است در `.env` آن را percent-encode کنید (مثلاً `@` → `%40`). اسکریپت خودش آدرس را نرمال می‌کند، اما اصلاح `.env` همه ابزارهای دیگر (psql، pg_restore، pgAdmin) را هم سالم می‌کند.
+
+> ⚠️ اگر دیپلوی در مرحله بکاپ متوقف شد، **دستی `pm2 restart` نزنید**: کد جدید (که ستون `isVirtual` را می‌خواهد) قبل از مایگریشن بالا می‌آید و خطا می‌دهد. فقط دوباره `deploy.ps1` را اجرا کنید تا اول مایگریشن انجام شود.
 
 ## نکته امنیتی مهم
 

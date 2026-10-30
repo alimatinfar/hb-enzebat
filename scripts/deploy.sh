@@ -84,23 +84,33 @@ fi
 ok "پکیج‌ها نصب شدند"
 
 # --------------------- ۳) بکاپ دیتابیس قبل از مایگریشن ---------------------
-# DATABASE_URL را از محیط یا فایل .env می‌خوانیم (بدون source کردن .env، چون
-# کاراکترهایی مثل & و ? در URL می‌توانند دستور شل را بشکنند)
-DATABASE_URL="$(
+# آدرس اتصال را با Node می‌خوانیم و نرمال می‌کنیم. اگر رمز دیتابیس کاراکتر
+# خاصی مثل @ داشته باشد، libpq آن را اشتباه تفسیر می‌کند و خطای
+# «could not translate host name ...» می‌دهد؛ percent-encode کردن رمز حلش می‌کند.
+mask_url() { printf '%s' "$1" | sed -E 's#(://[^:/@]*):[^@]*@#\1:***@#'; }
+
+PG_DUMP_URL="$(
   node -e '
     const fs = require("fs");
-    if (process.env.DATABASE_URL) { process.stdout.write(process.env.DATABASE_URL); process.exit(0); }
-    const txt = fs.existsSync(".env") ? fs.readFileSync(".env", "utf8") : "";
-    const m = txt.match(/^[ \t]*DATABASE_URL[ \t]*=[ \t]*(.*)$/m);
-    let v = m ? m[1].trim() : "";
-    if ((v.startsWith("\"") && v.endsWith("\"")) || (v.startsWith("\x27") && v.endsWith("\x27"))) v = v.slice(1, -1);
-    process.stdout.write(v);
+    let raw = process.env.DATABASE_URL || "";
+    if (!raw) {
+      const txt = fs.existsSync(".env") ? fs.readFileSync(".env", "utf8") : "";
+      const m = txt.match(/^[ \t]*DATABASE_URL[ \t]*=[ \t]*(.*)$/m);
+      raw = m ? m[1].trim() : "";
+      if ((raw.startsWith("\"") && raw.endsWith("\"")) || (raw.startsWith("\x27") && raw.endsWith("\x27"))) raw = raw.slice(1, -1);
+    }
+    if (!raw) { process.stderr.write("DATABASE_URL not found\n"); process.exit(2); }
+    let u;
+    try { u = new URL(raw); } catch (e) { process.stderr.write("invalid DATABASE_URL: " + e.message + "\n"); process.exit(3); }
+    const dec = function (s) { try { return decodeURIComponent(s); } catch (e) { return s; } };
+    u.username = encodeURIComponent(dec(u.username));
+    u.password = encodeURIComponent(dec(u.password));
+    const ssl = u.searchParams.get("sslmode");
+    u.search = "";
+    if (ssl) u.searchParams.set("sslmode", ssl);
+    process.stdout.write(u.toString());
   '
-)"
-[ -n "$DATABASE_URL" ] || fail "DATABASE_URL پیدا نشد (فایل .env سرور را بررسی کنید)"
-
-# libpq پارامتر ?schema=... را نمی‌شناسد؛ pg_dump کل دیتابیس را دامپ می‌کند
-PG_DUMP_URL="$(printf '%s' "$DATABASE_URL" | sed -E 's/([?&])schema=[^&]*&?/\1/; s/[?&]$//')"
+)" || fail "DATABASE_URL پیدا نشد یا نامعتبر است (فایل .env سرور را بررسی کنید)"
 
 BACKUP_FILE=""
 if [ "$SKIP_BACKUP" = "1" ]; then
@@ -109,7 +119,10 @@ else
   command -v pg_dump >/dev/null 2>&1 || fail "pg_dump نصب نیست. نصب کنید: apt-get install -y postgresql-client (یا SKIP_BACKUP=1 بدهید)"
   BACKUP_FILE="$BACKUP_DIR/db-$(date +%Y%m%d-%H%M%S).dump"
   log "بکاپ دیتابیس → $BACKUP_FILE"
-  pg_dump "$PG_DUMP_URL" -Fc -f "$BACKUP_FILE" || fail "بکاپ دیتابیس ناموفق بود → مایگریشن اجرا نشد"
+  if ! pg_dump "$PG_DUMP_URL" -Fc -f "$BACKUP_FILE"; then
+    rm -f "$BACKUP_FILE"
+    fail "بکاپ دیتابیس ناموفق بود → مایگریشن اجرا نشد (آدرس اتصال: $(mask_url "$PG_DUMP_URL"))"
+  fi
   ls -1t "$BACKUP_DIR"/db-*.dump 2>/dev/null | tail -n +$((BACKUP_KEEP + 1)) | xargs -r rm -f
   ok "بکاپ گرفته شد ($(du -h "$BACKUP_FILE" | cut -f1))"
 fi
