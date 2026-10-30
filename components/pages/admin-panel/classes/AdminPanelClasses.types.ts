@@ -11,6 +11,7 @@ export type AdminClassesFilterType = {
 export type AdminClassResponseType = {
   id: number,
   name: string,
+  isVirtual: boolean,
   cityId: number | null,
   teacher: {
     id: number,
@@ -36,6 +37,7 @@ export type AdminCityResponseType = {
 export type AdminClassDetailResponseType = {
   id: number;
   name: string;
+  isVirtual: boolean;
   teacherId: number;
   cityId: number;
   city: {

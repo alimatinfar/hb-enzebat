@@ -39,6 +39,7 @@ function useAdminClassDetailPage() {
       {title: 'شناسه', value: classInfo?.id},
       {title: 'شهر', value: classInfo?.city?.name},
       {title: 'نام کلاس', value: classInfo?.name},
+      {title: 'نوع کلاس', value: classInfo?.isVirtual ? 'مجازی' : 'حضوری'},
       {title: 'تعداد دانش آموزان', value: classInfo?.students?.length},
     ]
   }, [classInfo])

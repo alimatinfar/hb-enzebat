@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "cbm": {
+      "type": "stdio",
+      "command": "codebase-memory-mcp",
+      "args": [],
+      "env": {}
+    }
+  }
+}

@@ -41,6 +41,7 @@ export type ClassSumAggregateOutputType = {
 export type ClassMinAggregateOutputType = {
   id: number | null
   name: string | null
+  isVirtual: boolean | null
   teacherId: number | null
   cityId: number | null
 }
@@ -48,6 +49,7 @@ export type ClassMinAggregateOutputType = {
 export type ClassMaxAggregateOutputType = {
   id: number | null
   name: string | null
+  isVirtual: boolean | null
   teacherId: number | null
   cityId: number | null
 }
@@ -55,6 +57,7 @@ export type ClassMaxAggregateOutputType = {
 export type ClassCountAggregateOutputType = {
   id: number
   name: number
+  isVirtual: number
   teacherId: number
   cityId: number
   _all: number
@@ -76,6 +79,7 @@ export type ClassSumAggregateInputType = {
 export type ClassMinAggregateInputType = {
   id?: true
   name?: true
+  isVirtual?: true
   teacherId?: true
   cityId?: true
 }
@@ -83,6 +87,7 @@ export type ClassMinAggregateInputType = {
 export type ClassMaxAggregateInputType = {
   id?: true
   name?: true
+  isVirtual?: true
   teacherId?: true
   cityId?: true
 }
@@ -90,6 +95,7 @@ export type ClassMaxAggregateInputType = {
 export type ClassCountAggregateInputType = {
   id?: true
   name?: true
+  isVirtual?: true
   teacherId?: true
   cityId?: true
   _all?: true
@@ -184,6 +190,7 @@ export type ClassGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 export type ClassGroupByOutputType = {
   id: number
   name: string
+  isVirtual: boolean
   teacherId: number
   cityId: number | null
   _count: ClassCountAggregateOutputType | null
@@ -214,6 +221,7 @@ export type ClassWhereInput = {
   NOT?: Prisma.ClassWhereInput | Prisma.ClassWhereInput[]
   id?: Prisma.IntFilter<"Class"> | number
   name?: Prisma.StringFilter<"Class"> | string
+  isVirtual?: Prisma.BoolFilter<"Class"> | boolean
   teacherId?: Prisma.IntFilter<"Class"> | number
   cityId?: Prisma.IntNullableFilter<"Class"> | number | null
   teacher?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -225,6 +233,7 @@ export type ClassWhereInput = {
 export type ClassOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  isVirtual?: Prisma.SortOrder
   teacherId?: Prisma.SortOrder
   cityId?: Prisma.SortOrderInput | Prisma.SortOrder
   teacher?: Prisma.UserOrderByWithRelationInput
@@ -239,6 +248,7 @@ export type ClassWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.ClassWhereInput[]
   NOT?: Prisma.ClassWhereInput | Prisma.ClassWhereInput[]
   name?: Prisma.StringFilter<"Class"> | string
+  isVirtual?: Prisma.BoolFilter<"Class"> | boolean
   teacherId?: Prisma.IntFilter<"Class"> | number
   cityId?: Prisma.IntNullableFilter<"Class"> | number | null
   teacher?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -250,6 +260,7 @@ export type ClassWhereUniqueInput = Prisma.AtLeast<{
 export type ClassOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  isVirtual?: Prisma.SortOrder
   teacherId?: Prisma.SortOrder
   cityId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ClassCountOrderByAggregateInput
@@ -265,12 +276,14 @@ export type ClassScalarWhereWithAggregatesInput = {
   NOT?: Prisma.ClassScalarWhereWithAggregatesInput | Prisma.ClassScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Class"> | number
   name?: Prisma.StringWithAggregatesFilter<"Class"> | string
+  isVirtual?: Prisma.BoolWithAggregatesFilter<"Class"> | boolean
   teacherId?: Prisma.IntWithAggregatesFilter<"Class"> | number
   cityId?: Prisma.IntNullableWithAggregatesFilter<"Class"> | number | null
 }
 
 export type ClassCreateInput = {
   name: string
+  isVirtual?: boolean
   teacher: Prisma.UserCreateNestedOneWithoutTeacherClassesInput
   students?: Prisma.UserCreateNestedManyWithoutStudentClassesInput
   attendance?: Prisma.AttendanceCreateNestedManyWithoutClassInput
@@ -280,6 +293,7 @@ export type ClassCreateInput = {
 export type ClassUncheckedCreateInput = {
   id?: number
   name: string
+  isVirtual?: boolean
   teacherId: number
   cityId?: number | null
   students?: Prisma.UserUncheckedCreateNestedManyWithoutStudentClassesInput
@@ -288,6 +302,7 @@ export type ClassUncheckedCreateInput = {
 
 export type ClassUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  isVirtual?: Prisma.BoolFieldUpdateOperationsInput | boolean
   teacher?: Prisma.UserUpdateOneRequiredWithoutTeacherClassesNestedInput
   students?: Prisma.UserUpdateManyWithoutStudentClassesNestedInput
   attendance?: Prisma.AttendanceUpdateManyWithoutClassNestedInput
@@ -297,6 +312,7 @@ export type ClassUpdateInput = {
 export type ClassUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  isVirtual?: Prisma.BoolFieldUpdateOperationsInput | boolean
   teacherId?: Prisma.IntFieldUpdateOperationsInput | number
   cityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   students?: Prisma.UserUncheckedUpdateManyWithoutStudentClassesNestedInput
@@ -306,17 +322,20 @@ export type ClassUncheckedUpdateInput = {
 export type ClassCreateManyInput = {
   id?: number
   name: string
+  isVirtual?: boolean
   teacherId: number
   cityId?: number | null
 }
 
 export type ClassUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  isVirtual?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type ClassUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  isVirtual?: Prisma.BoolFieldUpdateOperationsInput | boolean
   teacherId?: Prisma.IntFieldUpdateOperationsInput | number
   cityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -334,6 +353,7 @@ export type ClassOrderByRelationAggregateInput = {
 export type ClassCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  isVirtual?: Prisma.SortOrder
   teacherId?: Prisma.SortOrder
   cityId?: Prisma.SortOrder
 }
@@ -347,6 +367,7 @@ export type ClassAvgOrderByAggregateInput = {
 export type ClassMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  isVirtual?: Prisma.SortOrder
   teacherId?: Prisma.SortOrder
   cityId?: Prisma.SortOrder
 }
@@ -354,6 +375,7 @@ export type ClassMaxOrderByAggregateInput = {
 export type ClassMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  isVirtual?: Prisma.SortOrder
   teacherId?: Prisma.SortOrder
   cityId?: Prisma.SortOrder
 }
@@ -449,6 +471,10 @@ export type ClassUncheckedUpdateManyWithoutStudentsNestedInput = {
   deleteMany?: Prisma.ClassScalarWhereInput | Prisma.ClassScalarWhereInput[]
 }
 
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
+}
+
 export type ClassCreateNestedOneWithoutAttendanceInput = {
   create?: Prisma.XOR<Prisma.ClassCreateWithoutAttendanceInput, Prisma.ClassUncheckedCreateWithoutAttendanceInput>
   connectOrCreate?: Prisma.ClassCreateOrConnectWithoutAttendanceInput
@@ -507,6 +533,7 @@ export type ClassUncheckedUpdateManyWithoutCityNestedInput = {
 
 export type ClassCreateWithoutTeacherInput = {
   name: string
+  isVirtual?: boolean
   students?: Prisma.UserCreateNestedManyWithoutStudentClassesInput
   attendance?: Prisma.AttendanceCreateNestedManyWithoutClassInput
   city?: Prisma.CityCreateNestedOneWithoutClassesInput
@@ -515,6 +542,7 @@ export type ClassCreateWithoutTeacherInput = {
 export type ClassUncheckedCreateWithoutTeacherInput = {
   id?: number
   name: string
+  isVirtual?: boolean
   cityId?: number | null
   students?: Prisma.UserUncheckedCreateNestedManyWithoutStudentClassesInput
   attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutClassInput
@@ -532,6 +560,7 @@ export type ClassCreateManyTeacherInputEnvelope = {
 
 export type ClassCreateWithoutStudentsInput = {
   name: string
+  isVirtual?: boolean
   teacher: Prisma.UserCreateNestedOneWithoutTeacherClassesInput
   attendance?: Prisma.AttendanceCreateNestedManyWithoutClassInput
   city?: Prisma.CityCreateNestedOneWithoutClassesInput
@@ -540,6 +569,7 @@ export type ClassCreateWithoutStudentsInput = {
 export type ClassUncheckedCreateWithoutStudentsInput = {
   id?: number
   name: string
+  isVirtual?: boolean
   teacherId: number
   cityId?: number | null
   attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutClassInput
@@ -572,6 +602,7 @@ export type ClassScalarWhereInput = {
   NOT?: Prisma.ClassScalarWhereInput | Prisma.ClassScalarWhereInput[]
   id?: Prisma.IntFilter<"Class"> | number
   name?: Prisma.StringFilter<"Class"> | string
+  isVirtual?: Prisma.BoolFilter<"Class"> | boolean
   teacherId?: Prisma.IntFilter<"Class"> | number
   cityId?: Prisma.IntNullableFilter<"Class"> | number | null
 }
@@ -594,6 +625,7 @@ export type ClassUpdateManyWithWhereWithoutStudentsInput = {
 
 export type ClassCreateWithoutAttendanceInput = {
   name: string
+  isVirtual?: boolean
   teacher: Prisma.UserCreateNestedOneWithoutTeacherClassesInput
   students?: Prisma.UserCreateNestedManyWithoutStudentClassesInput
   city?: Prisma.CityCreateNestedOneWithoutClassesInput
@@ -602,6 +634,7 @@ export type ClassCreateWithoutAttendanceInput = {
 export type ClassUncheckedCreateWithoutAttendanceInput = {
   id?: number
   name: string
+  isVirtual?: boolean
   teacherId: number
   cityId?: number | null
   students?: Prisma.UserUncheckedCreateNestedManyWithoutStudentClassesInput
@@ -625,6 +658,7 @@ export type ClassUpdateToOneWithWhereWithoutAttendanceInput = {
 
 export type ClassUpdateWithoutAttendanceInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  isVirtual?: Prisma.BoolFieldUpdateOperationsInput | boolean
   teacher?: Prisma.UserUpdateOneRequiredWithoutTeacherClassesNestedInput
   students?: Prisma.UserUpdateManyWithoutStudentClassesNestedInput
   city?: Prisma.CityUpdateOneWithoutClassesNestedInput
@@ -633,6 +667,7 @@ export type ClassUpdateWithoutAttendanceInput = {
 export type ClassUncheckedUpdateWithoutAttendanceInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  isVirtual?: Prisma.BoolFieldUpdateOperationsInput | boolean
   teacherId?: Prisma.IntFieldUpdateOperationsInput | number
   cityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   students?: Prisma.UserUncheckedUpdateManyWithoutStudentClassesNestedInput
@@ -640,6 +675,7 @@ export type ClassUncheckedUpdateWithoutAttendanceInput = {
 
 export type ClassCreateWithoutCityInput = {
   name: string
+  isVirtual?: boolean
   teacher: Prisma.UserCreateNestedOneWithoutTeacherClassesInput
   students?: Prisma.UserCreateNestedManyWithoutStudentClassesInput
   attendance?: Prisma.AttendanceCreateNestedManyWithoutClassInput
@@ -648,6 +684,7 @@ export type ClassCreateWithoutCityInput = {
 export type ClassUncheckedCreateWithoutCityInput = {
   id?: number
   name: string
+  isVirtual?: boolean
   teacherId: number
   students?: Prisma.UserUncheckedCreateNestedManyWithoutStudentClassesInput
   attendance?: Prisma.AttendanceUncheckedCreateNestedManyWithoutClassInput
@@ -682,11 +719,13 @@ export type ClassUpdateManyWithWhereWithoutCityInput = {
 export type ClassCreateManyTeacherInput = {
   id?: number
   name: string
+  isVirtual?: boolean
   cityId?: number | null
 }
 
 export type ClassUpdateWithoutTeacherInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  isVirtual?: Prisma.BoolFieldUpdateOperationsInput | boolean
   students?: Prisma.UserUpdateManyWithoutStudentClassesNestedInput
   attendance?: Prisma.AttendanceUpdateManyWithoutClassNestedInput
   city?: Prisma.CityUpdateOneWithoutClassesNestedInput
@@ -695,6 +734,7 @@ export type ClassUpdateWithoutTeacherInput = {
 export type ClassUncheckedUpdateWithoutTeacherInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  isVirtual?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   students?: Prisma.UserUncheckedUpdateManyWithoutStudentClassesNestedInput
   attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutClassNestedInput
@@ -703,11 +743,13 @@ export type ClassUncheckedUpdateWithoutTeacherInput = {
 export type ClassUncheckedUpdateManyWithoutTeacherInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  isVirtual?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ClassUpdateWithoutStudentsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  isVirtual?: Prisma.BoolFieldUpdateOperationsInput | boolean
   teacher?: Prisma.UserUpdateOneRequiredWithoutTeacherClassesNestedInput
   attendance?: Prisma.AttendanceUpdateManyWithoutClassNestedInput
   city?: Prisma.CityUpdateOneWithoutClassesNestedInput
@@ -716,6 +758,7 @@ export type ClassUpdateWithoutStudentsInput = {
 export type ClassUncheckedUpdateWithoutStudentsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  isVirtual?: Prisma.BoolFieldUpdateOperationsInput | boolean
   teacherId?: Prisma.IntFieldUpdateOperationsInput | number
   cityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutClassNestedInput
@@ -724,6 +767,7 @@ export type ClassUncheckedUpdateWithoutStudentsInput = {
 export type ClassUncheckedUpdateManyWithoutStudentsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  isVirtual?: Prisma.BoolFieldUpdateOperationsInput | boolean
   teacherId?: Prisma.IntFieldUpdateOperationsInput | number
   cityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
@@ -731,11 +775,13 @@ export type ClassUncheckedUpdateManyWithoutStudentsInput = {
 export type ClassCreateManyCityInput = {
   id?: number
   name: string
+  isVirtual?: boolean
   teacherId: number
 }
 
 export type ClassUpdateWithoutCityInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  isVirtual?: Prisma.BoolFieldUpdateOperationsInput | boolean
   teacher?: Prisma.UserUpdateOneRequiredWithoutTeacherClassesNestedInput
   students?: Prisma.UserUpdateManyWithoutStudentClassesNestedInput
   attendance?: Prisma.AttendanceUpdateManyWithoutClassNestedInput
@@ -744,6 +790,7 @@ export type ClassUpdateWithoutCityInput = {
 export type ClassUncheckedUpdateWithoutCityInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  isVirtual?: Prisma.BoolFieldUpdateOperationsInput | boolean
   teacherId?: Prisma.IntFieldUpdateOperationsInput | number
   students?: Prisma.UserUncheckedUpdateManyWithoutStudentClassesNestedInput
   attendance?: Prisma.AttendanceUncheckedUpdateManyWithoutClassNestedInput
@@ -752,6 +799,7 @@ export type ClassUncheckedUpdateWithoutCityInput = {
 export type ClassUncheckedUpdateManyWithoutCityInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  isVirtual?: Prisma.BoolFieldUpdateOperationsInput | boolean
   teacherId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -798,6 +846,7 @@ export type ClassCountOutputTypeCountAttendanceArgs<ExtArgs extends runtime.Type
 export type ClassSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  isVirtual?: boolean
   teacherId?: boolean
   cityId?: boolean
   teacher?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -810,6 +859,7 @@ export type ClassSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 export type ClassSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  isVirtual?: boolean
   teacherId?: boolean
   cityId?: boolean
   teacher?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -819,6 +869,7 @@ export type ClassSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type ClassSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  isVirtual?: boolean
   teacherId?: boolean
   cityId?: boolean
   teacher?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -828,11 +879,12 @@ export type ClassSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type ClassSelectScalar = {
   id?: boolean
   name?: boolean
+  isVirtual?: boolean
   teacherId?: boolean
   cityId?: boolean
 }
 
-export type ClassOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "teacherId" | "cityId", ExtArgs["result"]["class"]>
+export type ClassOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "isVirtual" | "teacherId" | "cityId", ExtArgs["result"]["class"]>
 export type ClassInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   teacher?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   students?: boolean | Prisma.Class$studentsArgs<ExtArgs>
@@ -860,6 +912,7 @@ export type $ClassPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     name: string
+    isVirtual: boolean
     teacherId: number
     cityId: number | null
   }, ExtArgs["result"]["class"]>
@@ -1291,6 +1344,7 @@ export interface Prisma__ClassClient<T, Null = never, ExtArgs extends runtime.Ty
 export interface ClassFieldRefs {
   readonly id: Prisma.FieldRef<"Class", 'Int'>
   readonly name: Prisma.FieldRef<"Class", 'String'>
+  readonly isVirtual: Prisma.FieldRef<"Class", 'Boolean'>
   readonly teacherId: Prisma.FieldRef<"Class", 'Int'>
   readonly cityId: Prisma.FieldRef<"Class", 'Int'>
 }

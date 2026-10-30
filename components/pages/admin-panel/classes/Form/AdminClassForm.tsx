@@ -8,6 +8,8 @@ import SelectTeacherField
 import SelectCityField from "@/components/pages/admin-panel/classes/Form/FormFields/SelectCityField/SelectCityField";
 import SelectStudentsField
   from "@/components/pages/admin-panel/classes/Form/FormFields/SelectStudentsField/SelectStudentsField";
+import VirtualClassField
+  from "@/components/pages/admin-panel/classes/Form/FormFields/VirtualClassField/VirtualClassField";
 import useAdminClassForm from "@/components/pages/admin-panel/classes/Form/hooks/useAdminClassForm";
 import PageTitle from "@/components/others/PageTitle/PageTitle";
 import AdminLayout from "@/components/layouts/AdminLayout";
@@ -31,6 +33,8 @@ function AdminClassForm() {
           formMethods={formMethods} onSubmit={onSubmit}
         >
           <ClassNameField/>
+
+          <VirtualClassField/>
 
           <SelectCityField/>
 

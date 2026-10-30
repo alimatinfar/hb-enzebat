@@ -8,7 +8,7 @@ export const PUT = withRoleAuth(["ADMIN", "CITY_ADMIN"], async (req, adminUser) 
     const classId = Number(req.url.split("/").at(-2));
     const body = await req.json();
 
-    const { name, teacherId, cityId, studentIds } = body;
+    const { name, isVirtual, teacherId, cityId, studentIds } = body;
 
     if (!classId || isNaN(classId)) {
       return NextErrorResponse({ error: "شناسه کلاس نامعتبر است", status: 400 });
@@ -133,6 +133,7 @@ export const PUT = withRoleAuth(["ADMIN", "CITY_ADMIN"], async (req, adminUser) 
       where: { id: classId },
       data: {
         name: name ?? existingClass.name,
+        isVirtual: typeof isVirtual === "boolean" ? isVirtual : existingClass.isVirtual,
         teacher: {
           connect: { id: finalTeacherId },
         },

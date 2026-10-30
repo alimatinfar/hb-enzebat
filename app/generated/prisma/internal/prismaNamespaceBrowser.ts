@@ -98,6 +98,7 @@ export type UserRoleScalarFieldEnum = (typeof UserRoleScalarFieldEnum)[keyof typ
 export const ClassScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  isVirtual: 'isVirtual',
   teacherId: 'teacherId',
   cityId: 'cityId'
 } as const

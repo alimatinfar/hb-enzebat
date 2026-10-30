@@ -17,6 +17,9 @@ import {
 import {
   selectStudentsFieldName
 } from "@/components/pages/admin-panel/classes/Form/FormFields/SelectStudentsField/SelectStudentsField.constances";
+import {
+  virtualClassFieldName
+} from "@/components/pages/admin-panel/classes/Form/FormFields/VirtualClassField/VirtualClassField.constances";
 import {AdminClassFormType} from "@/components/pages/admin-panel/classes/Form/AdminClassForm.types";
 
 type Props = {
@@ -53,6 +56,7 @@ function useAdminClassFormEdit(
 
     const defaultValues: AdminClassFormType = {
       [classNameFieldName]: classInfo?.name,
+      [virtualClassFieldName]: Boolean(classInfo?.isVirtual),
       [selectCityFieldName]: classInfo?.city,
       [selectTeacherFieldName]: {id: teacherInfo.id, name: `${teacherInfo?.firstName} ${teacherInfo?.lastName}`},
       [selectStudentsFieldName]: classInfo.students?.map((student) => ({

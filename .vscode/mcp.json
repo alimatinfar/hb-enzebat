@@ -1,0 +1,9 @@
+{
+  "servers": {
+    "cbm": {
+      "type": "stdio",
+      "command": "codebase-memory-mcp",
+      "args": []
+    }
+  }
+}

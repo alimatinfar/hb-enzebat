@@ -5,7 +5,7 @@ import prisma from "@/lib/prisma";
 
 export const POST = withRoleAuth(["ADMIN", "CITY_ADMIN"], async (req, adminUser) => {
   const body = await req.json();
-  const { name, teacherId, cityId, studentIds = [] } = body;
+  const { name, isVirtual = false, teacherId, cityId, studentIds = [] } = body;
 
   if (!name || !teacherId) {
     return NextErrorResponse({ error: "اطلاعات ناقص است", status: 422 });
@@ -118,6 +118,7 @@ export const POST = withRoleAuth(["ADMIN", "CITY_ADMIN"], async (req, adminUser)
     const newClass = await prisma.class.create({
       data: {
         name,
+        isVirtual: Boolean(isVirtual),
         teacher: {
           connect: { id: teacherId },
         },

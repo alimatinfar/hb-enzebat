@@ -20,6 +20,9 @@ import getSelectIdValue from "@/components/Form/Select/utils/getSelectIdValue";
 import {
   selectStudentsFieldName
 } from "@/components/pages/admin-panel/classes/Form/FormFields/SelectStudentsField/SelectStudentsField.constances";
+import {
+  virtualClassFieldName
+} from "@/components/pages/admin-panel/classes/Form/FormFields/VirtualClassField/VirtualClassField.constances";
 import {useParams, useRouter} from "next/navigation";
 import useAdminClassFormGetUsersBaseCity
   from "@/components/pages/admin-panel/classes/Form/hooks/useAdminClassFormGetUsersBaseCity";
@@ -44,6 +47,7 @@ function useAdminClassForm() {
   const onSubmitHandler = function (formData: AdminClassFormType) {
     const data: AdminClassFormBodyData = {
       name: formData[classNameFieldName],
+      isVirtual: Boolean(formData[virtualClassFieldName]),
       teacherId: Number(getSelectIdValue(formData[selectTeacherFieldName])),
       cityId: Number(getSelectIdValue(formData[selectCityFieldName])),
       studentIds: formData[selectStudentsFieldName] ? formData[selectStudentsFieldName]?.map(item => Number(item.id)) : []
