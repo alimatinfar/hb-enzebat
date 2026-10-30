@@ -10,12 +10,11 @@ import {
   TeacherClassAttendanceResponseType,
   TeacherClassAttendanceType
 } from "@/components/pages/teacher-panel/classDetail/TeacherPanelClassDetailExports";
-import Card from "@/components/others/Card/Card";
 import RenderLogic from "@/components/others/RenderLogic/RenderLogic";
-import KeyValue from "@/components/others/KeyValue/KeyValue";
+import ReportCard from "@/components/others/Card/ReportCard";
+import {KeyValueProps} from "@/components/others/KeyValue/KeyValue";
 import Button from "@/components/Form/Button/Button";
 import BottomFixedButton from "@/components/Form/Button/inherited/BottomFixedButton";
-import getJalaliFormattedDate from "@/components/Form/DatePicker/utils/getJalaliFormattedDate";
 import Link from "next/link";
 import ROUTER_LINKS from "@/constances/routerLinks";
 import useGetQueryParam from "@/hooks/useGetQueryParam";
@@ -44,6 +43,20 @@ function TeacherPanelClassDetailPage() {
     return data?.attendanceList || []
   }, [data])
 
+  const classInfo = data?.class
+
+  const classInfoKeyValues: KeyValueProps[] = useMemo(function () {
+    if (!classInfo) return []
+
+    return [
+      {title: 'شناسه', value: classInfo.id},
+      {title: 'شهر', value: classInfo.city?.name || '—'},
+      {title: 'نام کلاس', value: classInfo.name},
+      {title: 'نوع کلاس', value: classInfo.isVirtual ? 'مجازی' : 'حضوری'},
+      {title: 'تعداد دانش آموزان', value: classInfo._count?.students ?? 0},
+    ]
+  }, [classInfo])
+
   const addAttendanceLinkUrl = useMemo(function () {
     const linkUrl = ROUTER_LINKS.TEACHER_PANEL_CLASSES_ATTENDANCES_ADD(String(classId))
     const linkParams = {
@@ -55,7 +68,17 @@ function TeacherPanelClassDetailPage() {
   return (
     <PanelLayout hasBack hasBottomFixedButton>
       <PageTitle>
-        {`جلسات ${nameOfClass || ''}`}
+        {`${classInfo?.name || nameOfClass || ''}`}
+      </PageTitle>
+
+      {classInfo && (
+        <div className='mb-4'>
+          <ReportCard title='اطلاعات کلاس' keyValues={classInfoKeyValues}/>
+        </div>
+      )}
+
+      <PageTitle small>
+        جلسات
       </PageTitle>
 
       <RenderLogic

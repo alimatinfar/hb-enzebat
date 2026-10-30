@@ -8,7 +8,17 @@ export type TeacherClassAttendanceType = {
   id: number;
 }
 
+export type TeacherClassInfoType = TeacherClassType & {
+  city?: {
+    id: number;
+    name: string;
+  } | null;
+  _count?: {
+    students: number;
+  };
+}
+
 export type TeacherClassAttendanceResponseType = {
   attendanceList: TeacherClassAttendanceType[];
-  class: TeacherClassType;
+  class: TeacherClassInfoType;
 }

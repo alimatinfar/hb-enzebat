@@ -6,9 +6,13 @@ import prisma from "@/lib/prisma";
 export const GET = withRoleAuth(["TEACHER"], async (req, user) => {
   const classId = Number(req.url.split("/").at(-2));
 
-  // چک کلاس و مالکیت معلم
+  // چک کلاس و مالکیت معلم (+ اطلاعات نمایشی کلاس)
   const cls = await prisma.class.findUnique({
-    where: { id: classId }
+    where: { id: classId },
+    include: {
+      city: { select: { id: true, name: true } },
+      _count: { select: { students: true } },
+    }
   });
 
   if (!cls || cls.teacherId !== user.id) {
@@ -16,13 +20,7 @@ export const GET = withRoleAuth(["TEACHER"], async (req, user) => {
   }
 
   // تعداد کل دانش‌آموزان کلاس
-  const totalStudents = await prisma.user.count({
-    where: {
-      studentClasses: {
-        some: { id: classId }
-      }
-    }
-  });
+  const totalStudents = cls._count.students;
 
   // گرفتن لیست attendance با شمارش حاضرین
   const attendanceList = await prisma.attendance.findMany({
