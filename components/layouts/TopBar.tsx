@@ -1,28 +1,31 @@
 'use client'
 
-import React, {useCallback} from 'react';
+import React from 'react';
 import {LAYOUT_MAX_WIDTH, TOP_BAR_HEIGHT} from "@/constances/layout/mainLayoutExports";
 import ArrowBack from "@/components/svg/ArrowBack";
 import IconClickable from "@/components/others/Icon/IconClickable";
-import LogoutIcon from "@/components/svg/LogoutIcon";
-import useLogout from "@/request/hooks/useLogout";
-import {useRouter} from "next/navigation";
+import UserIcon from "@/components/svg/UserIcon";
+import {usePathname, useRouter} from "next/navigation";
+import Link from "next/link";
+import ROUTER_LINKS from "@/constances/routerLinks";
+import {getPanelLabelByPath} from "@/constances/panels";
 import Z_INDEXES from "@/constances/zIndexes";
 
 export type TopBarProps = {
   hasBack?: boolean;
-  hasLogout?: boolean;
+  hasProfile?: boolean;
 }
 
 function TopBar(
-  {hasBack, hasLogout}: TopBarProps
+  {hasBack, hasProfile}: TopBarProps
 ) {
 
-  const {logoutHandler} = useLogout()
-
   const router = useRouter()
+  const pathname = usePathname()
 
-  const onBackRoute = useCallback(function () {
+  const panelLabel = getPanelLabelByPath(pathname)
+
+  const onBackRoute = React.useCallback(function () {
     router.back()
   }, [router])
 
@@ -43,15 +46,25 @@ function TopBar(
         )}
       </div>
 
-      <p className='text-white text-3xl font-black col-span-4 flex-center'>
-        انضباط
-      </p>
+      <div className='col-span-4 flex flex-col items-center justify-center gap-y-1'>
+        <p className='text-white text-3xl font-black'>
+          انضباط
+        </p>
+
+        {panelLabel && (
+          <span className='text-white/90 text-[11px] font-medium bg-white/15 rounded px-1.5 py-0.5 whitespace-nowrap'>
+            {panelLabel}
+          </span>
+        )}
+      </div>
 
       <div className='flex justify-end items-center'>
-        {hasLogout && (
-          <IconClickable primaryMode onClick={logoutHandler}>
-            <LogoutIcon textColor='text-white' className='rotate-180' />
-          </IconClickable>
+        {hasProfile && (
+          <Link href={ROUTER_LINKS.PROFILE}>
+            <IconClickable primaryMode>
+              <UserIcon textColor='text-white' />
+            </IconClickable>
+          </Link>
         )}
       </div>
     </div>

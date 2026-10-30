@@ -1,10 +1,3 @@
-import {Role} from "@/app/generated/prisma/enums";
-
-export const USER_ROLE_LABELS = {
-  [Role.ADMIN]: 'ادمین',
-  [Role.CITY_ADMIN]: 'ادمین شهری',
-  [Role.TEACHER]: 'معلم',
-  [Role.STUDENT]: 'دانش آموز',
-}
+export {USER_ROLE_LABELS} from "@/constances/userRoleLabels";
 
 export const USERS_ROWS_PER_PAGE = 20

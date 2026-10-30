@@ -34,6 +34,7 @@ const APIES = {
 
   //authentication
   LOGIN: '/auth/login',
+  AUTH_ME: '/auth/me',
 
   //student panel
   STUDENT_PANEL_CLASSES,

@@ -24,6 +24,9 @@ const ROUTER_LINKS = {
   LOGIN: `${AUTH_URL}/login`,
   SELECT_PANEL: `${AUTH_URL}/select-panel`,
 
+  //shared routes
+  PROFILE: '/profile',
+
 
   //teacher panel routes
   TEACHER_PANEL,

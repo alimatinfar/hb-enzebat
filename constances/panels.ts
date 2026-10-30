@@ -29,3 +29,18 @@ export const PANELS: Record<string, PanelType> = {
     link: ROUTER_LINKS.TEACHER_PANEL
   }
 }
+
+const PANEL_PATH_LABELS: { prefix: string; label: string }[] = [
+  {prefix: ROUTER_LINKS.ADMIN_PANEL, label: PANELS.ADMIN.label},
+  {prefix: ROUTER_LINKS.TEACHER_PANEL, label: PANELS.TEACHER.label},
+  {prefix: ROUTER_LINKS.STUDENT_PANEL, label: PANELS.STUDENT.label},
+]
+
+// بر اساس آدرس فعلی، عنوان پنلی که کاربر داخلش است را برمی‌گرداند
+export function getPanelLabelByPath(pathname: string | null | undefined) {
+  if (!pathname) return undefined
+
+  return PANEL_PATH_LABELS.find(({prefix}) => {
+    return pathname === prefix || pathname.startsWith(`${prefix}/`)
+  })?.label
+}

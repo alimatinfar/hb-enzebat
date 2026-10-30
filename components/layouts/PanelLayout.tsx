@@ -18,7 +18,7 @@ function PanelLayout(
   return (
     <>
       <TopBar
-        hasBack={hasBack} hasLogout
+        hasBack={hasBack} hasProfile
       />
 
       <div className={`${CONTENT_PADDING_TOP}`}>

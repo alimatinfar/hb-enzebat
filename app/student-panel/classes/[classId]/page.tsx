@@ -1,6 +1,6 @@
 'use client'
 
-import React, {useMemo} from 'react';
+import React, {useMemo, useState} from 'react';
 import {useParams} from "next/navigation";
 import PanelLayout from "@/components/layouts/PanelLayout";
 import PageTitle from "@/components/others/PageTitle/PageTitle";
@@ -12,6 +12,9 @@ import useFetchData from "@/request/hooks/useFetchData";
 import APIES from "@/request/constances/apies";
 import StudentSessionCard
   from "@/components/pages/student-panel/StudentSessionCard";
+import StudentSessionsFilter, {
+  StudentSessionsFilterValue
+} from "@/components/pages/student-panel/StudentSessionsFilter";
 import {
   StudentClassDetailResponseType, StudentSessionType
 } from "@/components/pages/student-panel/StudentPanel.types";
@@ -19,6 +22,8 @@ import {
 function StudentPanelClassDetailPage() {
 
   const {classId} = useParams()
+
+  const [sessionsFilter, setSessionsFilter] = useState<StudentSessionsFilterValue>('ALL')
 
   const {
     data, isFetching, error
@@ -35,6 +40,21 @@ function StudentPanelClassDetailPage() {
   const sessions: StudentSessionType[] = useMemo(function () {
     return data?.sessions || []
   }, [data])
+
+  const sessionsCounts = useMemo(function () {
+    return {
+      ALL: sessions.length,
+      PRESENT: sessions.filter(session => session.status === 'PRESENT').length,
+      EXCUSED: sessions.filter(session => session.status === 'EXCUSED').length,
+      ABSENT: sessions.filter(session => session.status === 'ABSENT').length,
+    }
+  }, [sessions])
+
+  const filteredSessions: StudentSessionType[] = useMemo(function () {
+    if (sessionsFilter === 'ALL') return sessions
+
+    return sessions.filter(session => session.status === sessionsFilter)
+  }, [sessions, sessionsFilter])
 
   const classInfoKeyValues: KeyValueProps[] = useMemo(function () {
     if (!classInfo) return []
